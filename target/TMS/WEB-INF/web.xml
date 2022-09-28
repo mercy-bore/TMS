@@ -4,4 +4,34 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>HomeTMS</servlet-name>
+    <servlet-class>com.TMS.project.Home</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginTMS</servlet-name>
+    <servlet-class>com.TMS.project.Login</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SignupTMS</servlet-name>
+    <servlet-class>com.TMS.project.Signup</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HomeTMS</servlet-name>
+    <url-pattern>/homepage</url-pattern>
+  </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>LoginTMS</servlet-name>
+  <url-pattern>/login</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+  <servlet-name>SignupTMS</servlet-name>
+  <url-pattern>/signup</url-pattern>
+</servlet-mapping>
+  <session-config>
+    <session-timeout>
+      30
+    </session-timeout>
+  </session-config>
 </web-app>
