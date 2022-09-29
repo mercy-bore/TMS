@@ -3,7 +3,7 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Home implements Servlet{
+public class Home extends Servlet {
     public void init(ServletConfig config) throws ServletException {
 
     }

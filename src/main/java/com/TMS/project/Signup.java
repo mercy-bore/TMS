@@ -3,7 +3,7 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Signup implements Servlet{
+public class Signup extends Servlet {
     public void init(ServletConfig servletConfig) throws ServletException {
 
     }
@@ -18,7 +18,7 @@ public class Signup implements Servlet{
         PrintWriter wr = servletResponse.getWriter();
         wr.print("<html lang=\"en\" dir=\"ltr\">");
         wr.print("<head>");
-        wr.print("<title>TMS - Login Page</title>");
+        wr.print("<title>TMS - Signup Page</title>");
         wr.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
         wr.print("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"/>");
         wr.print("</head>");

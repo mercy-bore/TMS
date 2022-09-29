@@ -16,6 +16,10 @@
     <servlet-name>SignupTMS</servlet-name>
     <servlet-class>com.TMS.project.Signup</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ProjectTMS</servlet-name>
+    <servlet-class>com.TMS.project.Servlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>HomeTMS</servlet-name>
@@ -29,6 +33,10 @@
   <servlet-name>SignupTMS</servlet-name>
   <url-pattern>/signup</url-pattern>
 </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProjectTMS</servlet-name>
+    <url-pattern>/project</url-pattern>
+  </servlet-mapping>
   <session-config>
     <session-timeout>
       30
