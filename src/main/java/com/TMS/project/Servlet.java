@@ -41,6 +41,8 @@ public class Servlet extends HttpServlet{
         boolean login = action != null && action.equalsIgnoreCase("login");
         boolean inquiry = action != null && action.equalsIgnoreCase("inquiry");
         boolean inquirySent = action != null && action.equalsIgnoreCase("inquirySent");
+        boolean signin = action != null && action.equalsIgnoreCase("signin");
+
 
 
 
@@ -97,7 +99,8 @@ public class Servlet extends HttpServlet{
             else
                 wr.print(this.inquiry(actionError));
 
-        } else if (inquirySent) {
+        }
+        else if (inquirySent) {
             System.out.println("Inquiry received.");
 
         }
@@ -105,8 +108,7 @@ public class Servlet extends HttpServlet{
 
     public String home(){
         return
-                "<html>" +
-         "<head>"+
+                "<html>" + "<head>"+
         "<title>TMS - Homepage</title>" +
         "<link rel=\"stylesheet\" href=\"webapp/WEB-INF/assets/CSS/style.css\">"+
         "</head>" +
@@ -188,9 +190,7 @@ public class Servlet extends HttpServlet{
                 +"<header>Transport Management System</header>"
                 +"<header>Login Form </header>"
                 + "<form action=\"./project\" method=\"post\">"
-                +"<div class=\"field\">"
-                +"<input type=\"text\" name=\"action\" value=\"signup\">"
-                +"</div>"
+                +"<input type=\"hidden\" name=\"action\" value=\"signup\">"
                 +"<div class=\"field space\">"
                 + "<input type=\"text\" name=\"username\" placeholder=\"Username\">"
                 +"</div>"
@@ -260,9 +260,7 @@ public String inquiry(String actionError){
                 +"<header>Transport Management System</header>"
                 +"<header>Inquiry Form </header>"
                 + "<form action=\"./project\" method=\"post\">"
-                +"<div class=\"field\">"
-                +"<input type=\"text\" name=\"action\" value=\"inquiry\">"
-                +"</div>"
+                +"<input type=\"hidden\" name=\"action\" value=\"inquiry\">"
                 +"<div class=\"field space\">"
                 + "<input type=\"text\" name=\"fname\" required placeholder=\"First Name\">"
                 +"</div>"
@@ -324,9 +322,7 @@ public String inquiry(String actionError){
                 +"<header>Transport Management System</header>"
                 +"<header>Login Form </header>"
                 + "<form action=\"./project\" method=\"post\">"
-                +"<div class=\"field\">"
-                + "<input type=\"text\" name=\"action\" value=\"login\">"
-                +"</div>"
+                + "<input type=\"hidden\" name=\"action\" value=\"login\">"
                 +"<div class=\"field space\">"
                 + "<input type=\"text\" name=\"username\" placeholder=\"Username/Email\">"
                 +"</div>"
@@ -348,7 +344,7 @@ public String inquiry(String actionError){
         return
                 "<html>" +
                         "<head>"+
-                        "<title>TMS - Homepage</title>" +
+                        "<title>TMS - Looged In</title>" +
                         "<link rel=\"stylesheet\" href=\"webapp/WEB-INF/assets/CSS/style.css\">"+
                         "</head>" +
                         "<style>"+
@@ -393,7 +389,7 @@ public String inquiry(String actionError){
         return
         "<html>" +
                 "<head>"+
-                "<title>TMS - Homepage</title>" +
+                "<title>TMS - Inquiry Sent</title>" +
                 "<link rel=\"stylesheet\" href=\"webapp/WEB-INF/assets/CSS/style.css\">"+
                 "</head>" +
                 "<style>"+

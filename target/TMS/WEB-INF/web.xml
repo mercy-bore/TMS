@@ -20,6 +20,11 @@
     <servlet-name>ProjectTMS</servlet-name>
     <servlet-class>com.TMS.project.Servlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>HttpResponse</servlet-name>
+    <servlet-class>com.TMS.project.ResponseExample</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>HomeTMS</servlet-name>
@@ -36,6 +41,10 @@
   <servlet-mapping>
     <servlet-name>ProjectTMS</servlet-name>
     <url-pattern>/project</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HttpResponse</servlet-name>
+    <url-pattern>/display</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>
