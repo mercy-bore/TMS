@@ -32,17 +32,12 @@ ServletConfig config = null;
             rd.forward(request, response);
         }
         else{
-            out.print("Sorry only Mercy can access thi data!");
             RequestDispatcher rd=request.getRequestDispatcher("./index.html");
             rd.include(request, response);}
-    //Using response object to reset
-    response.reset();
+
 
     //Using response object to set character encoding
     response.setCharacterEncoding("UTF-8");
-
-    //Using response object to set a date header
-    response.setDateHeader("Expires", 27012029);
 
 
     //Using response object to set the ContentType.
@@ -100,8 +95,6 @@ ServletConfig config = null;
                     +"<div class=\"bg-img\">"
                     +"<div class=\"content\">"
                     +"<header> ");
-
-
             out.println("<h2>Using HttpServletResponse</h2>");
 
     //Using PrintWriter created by ServletResponse object to write back to the user
