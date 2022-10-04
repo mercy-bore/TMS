@@ -1,5 +1,6 @@
 package com.TMS.project;
 import javax.servlet.*;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -14,7 +15,6 @@ public class Home extends Servlet {
 
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         res.setContentType("text/html");
-
         PrintWriter wr = res.getWriter();
         wr.print("<html>");
         wr.print("<head>");

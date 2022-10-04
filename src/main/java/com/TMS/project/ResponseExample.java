@@ -25,9 +25,13 @@ ServletConfig config = null;
 
         //Using response object to create a PrintWriter object to write back to client.
         PrintWriter out = response.getWriter();
-        String name = request.getParameter("name");
+        String n = request.getParameter("name");
+        HttpSession session=request.getSession();
+        session.setAttribute("uname",n);
 
-        if(!Objects.equals(name, "Mercy")){
+
+
+        if(!Objects.equals(n, "Mercy")){
             RequestDispatcher rd=request.getRequestDispatcher("./project");
             rd.forward(request, response);
         }
@@ -53,13 +57,14 @@ ServletConfig config = null;
     response.setHeader("Connection", "Keep-Alive");
 
     //Using response object to set the buffer size of response body
-    response.setBufferSize(30000);
+//    response.setBufferSize(30000);
 
     //Using response object to set a cookie that will expire in three months
     Cookie c = new Cookie("user", "mercy");
     c.setMaxAge(3 * 30 * 24 * 60 * 60); // 3 months
     c.setPath("/");
     response.addCookie(c);
+
     out.println("<!DOCTYPE html>"
             +"<html> "
             + "<head> "
@@ -67,8 +72,6 @@ ServletConfig config = null;
             + "</head>"+
             "<style>"+
             "*{color:#ececec; background-color: #142d4c}"+
-            "h2{text-align:center}"+
-            "h5{text-align:center}"+
             "import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');"+
             "*{margin: 0;padding: 0;box-sizing: border-box;user-select: none;}"+
             ".bg-img{background: url('bg.jpg');height: 100vh;background-size: cover;background-position: center;}"+
@@ -99,13 +102,12 @@ ServletConfig config = null;
 
     //Using PrintWriter created by ServletResponse object to write back to the user
     out.println("Hey "  +"<span style=\"color:yellow\">" + request.getParameter("name") + ", " + "</span>"  + "<span style=\"color:yellow\">" + request.getParameter("lang") + "</span> " + " is a good choice." + "<br/>" + "<br/>");
-    out.println("So you come from  " +"<span style=\"color:yellow\">" + request.getParameter("location")  + "</span> " + "?" + " That's great!" + "<br/>" + "<br/>");
 
+    out.println("So you come from  " +"<span style=\"color:yellow\">" + request.getParameter("location")  + "</span> " + "?" + " That's great!" + "<br/>" + "<br/>");
     out.println("Response Locale :  " + "<span style=\"color:yellow\">" + response.getLocale()  + "</span> " +"<br/>" + "<br/>");
     out.println("Response  ContentType :  " + "<span style=\"color:yellow\">" + response.getContentType()  + "</span> " + "<br/>" + "<br/>");
     out.println("Response Character Encoding :  " + "<span style=\"color:yellow\">" + response.getCharacterEncoding()  + "</span> " + "<br/>" + "<br/>");
     out.println("Response Buffer Size :  " + "<span style=\"color:yellow\">" + response.getBufferSize()  + "</span> "+ "KB" + "<br/>" + "<br/>");
-    out.println("Response Request URI:  " + "<span style=\"color:yellow\">" + request.getRequestURI() + "</span> " + "<br/>" + "<br/>");
     out.println("Response Protocol:  " + "<span style=\"color:yellow\">" + request.getProtocol()  + "</span> "+ "<br/>" + "<br/>");
     out.println("Response Remote Address:  " + "<span style=\"color:yellow\">" + request.getRemoteAddr()  + "</span> " + "<br/>" + "<br/>");
     out.println("Response Context Path:  " + "<span style=\"color:yellow\">" + request.getContextPath()  + "</span> " + "<br/>" + "<br/>");
@@ -123,7 +125,8 @@ ServletConfig config = null;
             out.println("    <TD>" + request.getHeader(headerName));
         }
         out.println("</TABLE>");
-    response.flushBuffer();
+        out.close();
+        response.flushBuffer();
     out.println("</header>"+ "</div>"
             +"</div>"
             + "</body>"
