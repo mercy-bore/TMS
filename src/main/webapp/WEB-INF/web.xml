@@ -2,53 +2,7 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
+
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>HomeTMS</servlet-name>
-    <servlet-class>com.TMS.project.Home</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>LoginTMS</servlet-name>
-    <servlet-class>com.TMS.project.Login</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>SignupTMS</servlet-name>
-    <servlet-class>com.TMS.project.Signup</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>ProjectTMS</servlet-name>
-    <servlet-class>com.TMS.project.Servlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>HttpResponse</servlet-name>
-    <servlet-class>com.TMS.project.ResponseExample</servlet-class>
-  </servlet>
-
-
-  <servlet-mapping>
-    <servlet-name>HomeTMS</servlet-name>
-    <url-pattern>/homepage</url-pattern>
-  </servlet-mapping>
-<servlet-mapping>
-  <servlet-name>LoginTMS</servlet-name>
-  <url-pattern>/login</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-  <servlet-name>SignupTMS</servlet-name>
-  <url-pattern>/signup</url-pattern>
-</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ProjectTMS</servlet-name>
-    <url-pattern>/project</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>HttpResponse</servlet-name>
-    <url-pattern>/display</url-pattern>
-  </servlet-mapping>
-  <session-config>
-    <session-timeout>
-      30
-    </session-timeout>
-  </session-config>
 </web-app>
