@@ -23,6 +23,14 @@ public class SessionFilter implements Filter {
         System.out.println("===========================");
 
         HttpServletRequest httpReq = (HttpServletRequest)  request;
+        System.out.println(httpReq.getRequestURI());
+        if(httpReq.getRequestURI().matches(".*[css|jpg|png|gif|js].*")){
+            System.out.println("Skipping styles");
+            chain.doFilter(request, response);
+            return;
+        }
+
+
         HttpServletResponse httpRes = (HttpServletResponse)  response;
         HttpSession session = httpReq.getSession(); //returns existing session or creates if not existing
 
