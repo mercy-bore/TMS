@@ -18,28 +18,23 @@ import java.util.Objects;
 
 @WebServlet("/deletevehicle")
 
-public class DeleteVehicle extends HttpServlet {
+public class DeleteVehicle extends HttpServlet{
+    @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        PrintWriter wr = res.getWriter();
+        String plateNo = req.getParameter("plateNo");
+
         HttpSession session = req.getSession();
-
-        Vehicle vehicle= new Vehicle();
         List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-        Iterator<Vehicle> itr = vehicles.iterator();
 
-        if (session.isNew()) {
-            while (itr.hasNext()) {
-                Vehicle v = itr.next();
-                if (Objects.equals(v, req.getAttribute("vehicle"))) {
-                    vehicles.remove(v);
-                    session.removeAttribute("vehicle");
-                }
+        for (Vehicle vehicle: vehicles){
+            if (Objects.equals(vehicle.getPlateNo(), plateNo)) {
+                vehicles.remove(vehicle);
+                System.out.println("remove " + vehicle);
+                break;
             }
         }
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
-
     }
 }
 

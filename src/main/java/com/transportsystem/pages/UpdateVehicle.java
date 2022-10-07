@@ -18,35 +18,41 @@ import java.util.Objects;
 @WebServlet("/updatevehicle")
 
 public class UpdateVehicle extends HttpServlet {
+    @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        res.getWriter().print(this.updatevehicle(null));
+        HttpSession session = req.getSession();
+        HomePage.vehicles = (List<Vehicle>) session.getAttribute("vehicles");
+        String plateNo = req.getParameter("plateNo");
+        System.out.println("PlateNo : " + plateNo);
+        for (Vehicle vehicle :  HomePage.vehicles){
+            if(Objects.equals(vehicle.getPlateNo(), plateNo)){
+                res.getWriter().print(this.updatevehicle(null,vehicle));
+                break;
+            }
+        }
     }
 
         public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-            PrintWriter wr = res.getWriter();
-            Vehicle vehicle = new Vehicle();
-        try {
-            BeanUtils.getArrayProperty(vehicle, req.getParameter("vehicle"));
+            String type = req.getParameter("type");
+            String plateNo = req.getParameter("plateNo");
+            String prevPlateNo = req.getParameter("prevPlateNo");
 
-        } catch (Exception ex){
-            System.out.println(ex.getMessage());
-        }
+            HttpSession session = req.getSession();
 
-        HttpSession session = req.getSession();
-        List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-        for (Vehicle e : vehicles) {
-            if (Objects.equals(e.getType(), req.getParameter("type"))) {
-                vehicle.setPlateNo("plateNo");
-                vehicle.setType("type");
-                session.setAttribute("vehicles", vehicles);
+            HomePage.vehicles = (List<Vehicle>) session.getAttribute("vehicles");
+
+            for (Vehicle vehicle: HomePage.vehicles){
+                if (Objects.equals(vehicle.getPlateNo(), prevPlateNo)) {
+                    vehicle.setPlateNo(plateNo);
+                    vehicle.setType(type);
+                }
             }
             RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
             dispatcher.forward(req, res);
         }
-    }
 
-    public String updatevehicle(String actionError){
+
+    public String updatevehicle(String actionError, Vehicle vehicle){
         return "<!DOCTYPE html>"
                 + "<html> "
                 + "<head> "
@@ -58,12 +64,12 @@ public class UpdateVehicle extends HttpServlet {
                 +"<div class=\"content\">"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<h2> Vehicle Form</h2>"
-                + "<form action=\"./updatevehicle\" method=\"post\">"
+                + "<form action=\"./updatevehicle?prevPlateNo=" + vehicle.getPlateNo() + "\" method=\"post\">"
                 + "<table> "
                 +"<input type=\"hidden\" name=\"action\" value=\"updatevehicle\">"
-                + "<tr> <td>Vehicle Type: </td> <td> <input type=\"text\" name=\"type\" > </td> </tr> "
-                + "<tr> <td> Vehicle Plate Number: </td> <td> <input type=\"text\" name=\"plateNo\"> </td> </tr> "
-                + "<tr> <td> <input class=\"button\" type=\"submit\" value=\"Submit\"></tr> "
+                + "<tr> <td> Vehicle Type: </td> <td> <input type=\"text\" name=\"type\" value="+ vehicle.getType() + "> </td> </tr>"
+                + "<tr> <td>Vehicle Plate Number: </td> <td> <input type=\"text\" name=\"plateNo\" value=" + vehicle.getPlateNo() + "> </td> </tr>"
+                + "<tr> <td> <input class=\"button\" type=\"submit\" value=\"Submit\"></tr>"
                 + "</table>"
                 + "</form>"
                 + "<span style=\"color:red\">" + (actionError != null? actionError : "") + "</span><br/>"

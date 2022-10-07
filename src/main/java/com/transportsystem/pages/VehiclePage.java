@@ -17,11 +17,10 @@ import java.util.*;
 
 @WebServlet("/addvehicle")
 public class VehiclePage extends HttpServlet {
-
-
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        res.getWriter().print(this.addvehicle(null));
+        HttpSession session = req.getSession();
+        res.getWriter().print(this.addvehicle((String) session.getAttribute("type")));
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +56,9 @@ public class VehiclePage extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
+        System.out.println("*******************");
+        System.out.println(vehicles);
+        System.out.println("*******************");
 
         }
 

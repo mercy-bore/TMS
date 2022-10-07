@@ -17,6 +17,7 @@ import java.util.List;
 @WebServlet("/home")
 public class HomePage extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    public static List<Vehicle> vehicles;
 
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -81,7 +82,7 @@ public class HomePage extends HttpServlet {
             vehicleTable +=  "<tr>"
                     + "<td>" + vehicle.getType() + "</td>"
                     + "<td>" + vehicle.getPlateNo() + "</td>"
-                    + "<td><a href='./updatevehicle'><button class=\"button\">Edit</button></a>   | <a href='./deletevehicle'><button class=\"button\">Delete</button></a> </td>"
+                    + "<td><a href=\"./updatevehicle?plateNo=" + vehicle.getPlateNo()+ "\"><button class=\"button\">Edit</button></a>   | <a href=\"./deletevehicle?plateNo=" + vehicle.getPlateNo() +"\">Delete </td>"
                     + "</tr>";
 
         vehicleTable += "</table>" ;

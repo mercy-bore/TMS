@@ -3,14 +3,28 @@ package com.transportsystem.model;
 import java.io.Serializable;
 
 public class Vehicle implements Serializable {
+    static int maxId = 0;
+    private int id;
+    private String plateNo;
+    private String route;
+    private String weight;
+    private String type;
 
-    int id;
-    String plateNo;
-    String route;
-    String weight;
-    String type;
+    public Vehicle() {
+        maxId = maxId + 1;
+        id = maxId;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", plateNo='" + plateNo + '\'' +
+                ", route='" + route + '\'' +
+                ", weight='" + weight + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 
     public int getId() {
         return id;
