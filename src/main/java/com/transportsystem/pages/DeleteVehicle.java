@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,32 +20,27 @@ import java.util.Objects;
 
 public class DeleteVehicle extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        res.getWriter().print(this.deletevehicle(null));
-    }
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter wr = res.getWriter();
-        Vehicle vehicle = new Vehicle();
-
-        try {
-            BeanUtils.getArrayProperty(vehicle, req.getParameter("vehicle"));
-
-        } catch (Exception ex){
-            System.out.println(ex.getMessage());
-        }
-
         HttpSession session = req.getSession();
+
+        Vehicle vehicle= new Vehicle();
         List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-        for (Vehicle e : vehicles) {
-            if (Objects.equals(e.getType(), req.getParameter("vehicle"))) {
-                session.removeAttribute("vehicle");
+        Iterator<Vehicle> itr = vehicles.iterator();
+
+        if (session.isNew()) {
+            while (itr.hasNext()) {
+                Vehicle v = itr.next();
+                if (Objects.equals(v, req.getAttribute("vehicle"))) {
+                    vehicles.remove(v);
+                    session.removeAttribute("vehicle");
+                }
             }
-            RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
-            dispatcher.forward(req, res);
         }
-    }
-    public String deletevehicle(String actionError){
-        return
-                "<input type=\"hidden\" name=\"action\" value=\"deletevehicle\">";
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
+        dispatcher.forward(req, res);
+
     }
 }
+
+

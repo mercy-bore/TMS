@@ -24,11 +24,16 @@ public class HomePage extends HttpServlet {
         res.getWriter().print("<!DOCTYPE html>"
                 + "<html> "
                 + "<head> "
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"./assets/CSS/style.css\"/>"
                 + "</head>"
                 + "<body>"
+                +"<div class=\"bg-img\">"
+                +"<div class=\"content\">"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<br/>" + vehicleTable((List<Vehicle>) session.getAttribute("vehicles"))
-                + "<br/>Logout <a href='./logout'>Logout</a><br/>"
+                +  "<p><a href='./logout'><button class=\"button\">Logout</button></a></p>"
+                +"</div>"
+                +"</div>"
                 + "</body>"
                 + "</html>");
     }
@@ -51,7 +56,7 @@ public class HomePage extends HttpServlet {
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<h2> Welcome " + req.getParameter("username") + "</h2>" + "<p> You Logged In At: " + session.getAttribute("loggedInTime") + "</p>"
                 + "<br/>" + vehicleTable((List<Vehicle>) session.getAttribute("vehicles"))
-                +  "<p><a href='./addvehicle'><button class=\"button\">Add Vehicle</button></a>         <a href='./logout'><button class=\"button\">Logout</button></a></p>"
+                +  "<p><a href='./addvehicle'><button class=\"button\">Add Vehicle</button></a> <a href='./logout'><button class=\"button\">Logout</button></a></p>"
                 +"</div>"
                 +"</div>"
                 + "</body>"
@@ -64,42 +69,22 @@ public class HomePage extends HttpServlet {
             vehicles = new ArrayList<Vehicle>();
 
         String vehicleTable =
-                "<!DOCTYPE html>"
-                        + "<html> "
-                        + "<head> "
-                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"./assets/CSS/style.css\"/>"
-                        + "</head>"
-                        + "<body>"
-                        +"<div class=\"bg-img\">"
-                        +"<div class=\"content\">"+
+
                  "<table >" +
                 "<tr>" +
                 "<th>Vehicle Type</th>" +
                 "<th>Vehicle Number Plate</th>" +
                 "<th></th>" +
-                "</tr>"+ "</div>"
-                        +"</div>"
-                        + "</body>"
-                        + "</html>";
+                "</tr>";
 
         for (Vehicle vehicle : vehicles)
-            vehicleTable += "<!DOCTYPE html>"
-                    + "<html> "
-                    + "<head> "
-                    + "<link rel=\"stylesheet\" type=\"text/css\" href=\"./assets/CSS/style.css\"/>"
-                    + "</head>"
-                    + "<body>"
-                    +"<div class=\"bg-img\">"
-                    +"<div class=\"content\">"+ "<tr>"
+            vehicleTable +=  "<tr>"
                     + "<td>" + vehicle.getType() + "</td>"
                     + "<td>" + vehicle.getPlateNo() + "</td>"
                     + "<td><a href='./updatevehicle'><button class=\"button\">Edit</button></a>   | <a href='./deletevehicle'><button class=\"button\">Delete</button></a> </td>"
                     + "</tr>";
 
-        vehicleTable += "</table>" + "</div>"
-                +"</div>"
-                + "</body>"
-                + "</html>";
+        vehicleTable += "</table>" ;
 
         return vehicleTable;
 
