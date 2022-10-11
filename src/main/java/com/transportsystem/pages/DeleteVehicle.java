@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+
+import static com.transportsystem.pages.HomePage.vehicles;
 
 @WebServlet("/deletevehicle")
 
@@ -24,7 +24,8 @@ public class DeleteVehicle extends HttpServlet{
         String plateNo = req.getParameter("plateNo");
 
         HttpSession session = req.getSession();
-        List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
+
+        vehicles = (List<Vehicle>) session.getAttribute("vehicles");
 
         for (Vehicle vehicle: vehicles){
             if (Objects.equals(vehicle.getPlateNo(), plateNo)) {

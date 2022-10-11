@@ -44,6 +44,15 @@ public class VehiclePage extends HttpServlet {
             wr.print(this.addvehicle("Number plate is required<br/>"));
             return;
         }
+        if (StringUtils.isBlank(vehicle.getWeight())) {
+            wr.print(this.addvehicle("Weight is required<br/>"));
+            return;
+        }
+        if (StringUtils.isBlank(vehicle.getRoute())) {
+            wr.print(this.addvehicle("Route is required<br/>"));
+            return;
+        }
+
 
         HttpSession session = req.getSession();
         List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
@@ -82,6 +91,9 @@ public class VehiclePage extends HttpServlet {
                 + "<table> "
                 + "<tr> <td>Vehicle Type: </td> <td> <input type=\"text\" name=\"type\"> </td> </tr> "
                 + "<tr> <td> Vehicle Plate Number: </td> <td> <input type=\"text\" name=\"plateNo\"> </td> </tr> "
+                + "<tr> <td> Vehicle Weight: </td> <td> <input type=\"text\" name=\"weight\"> </td> </tr> "
+                + "<tr> <td> Vehicle Route: </td> <td> <input type=\"text\" name=\"route\"> </td> </tr> "
+
                 + "<tr> <td> <input class=\"button\" type=\"submit\" value=\"Submit\"></tr> "
                 + "</table>"
                 + "</form>"

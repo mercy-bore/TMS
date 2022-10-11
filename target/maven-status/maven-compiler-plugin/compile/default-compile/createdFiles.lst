@@ -8,6 +8,7 @@ com/transportsystem/pages/SignupPage.class
 com/transportsystem/pages/UpdateVehicle.class
 com/transportsystem/listeners/ContextAttributeListener.class
 com/transportsystem/pages/DeleteVehicle.class
+com/transportsystem/model/Customer.class
 com/transportsystem/listeners/AppContextListener.class
 com/transportsystem/model/Vehicle.class
 com/transportsystem/pages/VehiclePage.class

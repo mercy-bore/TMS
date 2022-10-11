@@ -1,5 +1,6 @@
 package com.transportsystem.pages;
 
+import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
 
 import javax.servlet.ServletContext;
@@ -16,8 +17,10 @@ import java.util.List;
 
 @WebServlet("/home")
 public class HomePage extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     public static List<Vehicle> vehicles;
+    public static List<Customer> customers;
+
+
 
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -73,16 +76,22 @@ public class HomePage extends HttpServlet {
 
                  "<table >" +
                 "<tr>" +
-                "<th>Vehicle Type</th>" +
-                "<th>Vehicle Number Plate</th>" +
-                "<th></th>" +
+                        "<th>Vehicle Type</th>" +
+                        "<th>Vehicle Number Plate</th>" +
+                         "<th>Vehicle Weight</th>" +
+                         "<th>Vehicle Route</th>" +
+
+                         "<th></th>" +
                 "</tr>";
 
         for (Vehicle vehicle : vehicles)
             vehicleTable +=  "<tr>"
                     + "<td>" + vehicle.getType() + "</td>"
                     + "<td>" + vehicle.getPlateNo() + "</td>"
-                    + "<td><a href=\"./updatevehicle?plateNo=" + vehicle.getPlateNo()+ "\"><button class=\"button\">Edit</button></a>   | <a href=\"./deletevehicle?plateNo=" + vehicle.getPlateNo() +"\">Delete </td>"
+                    + "<td>" + vehicle.getWeight() + "</td>"
+                    + "<td>" + vehicle.getRoute() + "</td>"
+
+                    + "<td><a href=\"./updatevehicle?plateNo=" + vehicle.getPlateNo()+ "\">Edit</a>   | <a href=\"./deletevehicle?plateNo=" + vehicle.getPlateNo() +"\">Delete </td>"
                     + "</tr>";
 
         vehicleTable += "</table>" ;
