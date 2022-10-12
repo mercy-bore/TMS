@@ -1,5 +1,6 @@
 package com.transportsystem.pages;
 
+import com.transportsystem.jdbc.DBConnection;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -14,26 +15,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import static com.transportsystem.pages.HomePage.vehicles;
 
 @WebServlet("/deletevehicle")
 
 public class DeleteVehicle extends HttpServlet{
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String plateNo = req.getParameter("plateNo");
-
-        HttpSession session = req.getSession();
-
-        vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-
-        for (Vehicle vehicle: vehicles){
-            if (Objects.equals(vehicle.getPlateNo(), plateNo)) {
-                vehicles.remove(vehicle);
-                System.out.println("remove " + vehicle);
-                break;
-            }
-        }
+//        String plateNo = req.getParameter("plateNo");
+//
+//        HttpSession session = req.getSession();
+//
+//        vehicles = (List<Vehicle>) session.getAttribute("vehicles");
+//
+//        for (Vehicle vehicle: vehicles){
+//            if (Objects.equals(vehicle.getPlateNo(), plateNo)) {
+//                vehicles.remove(vehicle);
+//                System.out.println("remove " + vehicle);
+//                break;
+//            }
+//        }
+        String sid=req.getParameter("id");
+        int id1=Integer.parseInt(sid);
+        DBConnection.delete(id1);
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
     }

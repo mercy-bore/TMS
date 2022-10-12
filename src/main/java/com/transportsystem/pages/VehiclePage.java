@@ -1,9 +1,12 @@
 package com.transportsystem.pages;
+import com.transportsystem.jdbc.DBConnection;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Date;
 
 
 @WebServlet("/addvehicle")
 public class VehiclePage extends HttpServlet {
+    ServletContext servletCtx = null;
+
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+
+    }
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-        res.getWriter().print(this.addvehicle((String) session.getAttribute("type")));
+        res.getWriter().print(this.addvehicle(null));
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +47,8 @@ public class VehiclePage extends HttpServlet {
         } catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+        res.setContentType("text/html");
+
 
         if (StringUtils.isBlank(vehicle.getType())) {
             wr.print(this.addvehicle("Type is required<br/>"));
@@ -52,22 +67,10 @@ public class VehiclePage extends HttpServlet {
             wr.print(this.addvehicle("Route is required<br/>"));
             return;
         }
-
-
-        HttpSession session = req.getSession();
-        List<Vehicle> vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-
-        if (vehicles == null)
-            vehicles = new ArrayList<>();
-
-        vehicles.add(vehicle);
-        session.setAttribute("vehicles", vehicles);
+        this.insert(vehicle);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
-        System.out.println("*******************");
-        System.out.println(vehicles);
-        System.out.println("*******************");
 
         }
 
@@ -104,6 +107,23 @@ public class VehiclePage extends HttpServlet {
                 +"</div>"
                 + "</html>";
     }
+    public void insert(Vehicle vehicle) {
+        if (vehicle == null)
+            return;
 
+        try {
+            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("insert into vehicle(type, plateNo, route, weight) " +
+                    "values('" + vehicle.getType() + "','" + vehicle.getPlateNo() + "'," +
+                    "'" + vehicle.getRoute() + "','" + vehicle.getWeight() + "')");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+
+    }
 
 }

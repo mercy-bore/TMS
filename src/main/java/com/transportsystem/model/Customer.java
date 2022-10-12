@@ -1,7 +1,7 @@
 package com.transportsystem.model;
 
-public class Customer {
-    int id;
+public class Customer  extends  BaseEntity{
+    Long id;
     int pk =0;
     String firstName;
     String lastName;
@@ -11,7 +11,7 @@ public class Customer {
     String cargo;
     String deliveryType;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -30,7 +30,7 @@ public class Customer {
                 '}';
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -102,7 +102,7 @@ public class Customer {
 
     public Customer() {
         pk = pk + 1;
-        id = pk;
+        id = (long) pk;
     }
 
 }

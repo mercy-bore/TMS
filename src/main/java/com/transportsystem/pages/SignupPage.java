@@ -1,15 +1,28 @@
 package com.transportsystem.pages;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/signup")
 public class SignupPage extends HttpServlet {
+    ServletContext servletCtx = null;
+
+    public void init(ServletConfig config) throws ServletException{
+        super.init(config);
+
+        servletCtx = config.getServletContext();
+    }
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.getWriter().print(this.signup(null));
     }
@@ -35,9 +48,10 @@ public class SignupPage extends HttpServlet {
         if (password != null && confirmPassword != null && !password.equals(confirmPassword))
             actionError += "Password & confirm password do not match<br/>";
 
-        if (actionError.equals(""))
+        if (actionError.equals("")) {
+            this.insert(email, password);
             res.sendRedirect("./login");
-        else
+        } else
             wr.print(this.signup(actionError));
     }
     public String signup(String actionError){
@@ -84,5 +98,24 @@ public class SignupPage extends HttpServlet {
                 +"</div>"
                 + "</body>"
                 + "</html>";
+    }
+
+
+    public void insert(String username, String password) {
+        try {
+            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+            System.out.println("creating new user ");
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("insert into users(username,password) " +
+                    "values('" + username.trim() + "','" + password + "')");
+            System.out.println("username :: " + username);
+            System.out.println("password :: " + password);
+            System.out.println("hashed password :: " + DigestUtils.md5Hex(password));
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+
     }
 }

@@ -34,6 +34,17 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.12.0</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.18</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.15</version>
+
+    </dependency>
   </dependencies>
   <build>
     <finalName>TMS</finalName>
