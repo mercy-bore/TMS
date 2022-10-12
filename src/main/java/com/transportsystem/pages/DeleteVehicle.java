@@ -34,9 +34,9 @@ public class DeleteVehicle extends HttpServlet{
 //                break;
 //            }
 //        }
-        String sid=req.getParameter("id");
-        int id1=Integer.parseInt(sid);
-        DBConnection.delete(id1);
+        String sid=req.getParameter("plateNo");
+//        int id1=Integer.parseInt(sid);
+        DBConnection.delete(sid);
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
         dispatcher.forward(req, res);
     }

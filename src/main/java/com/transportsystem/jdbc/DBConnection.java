@@ -65,12 +65,12 @@ public class DBConnection {
         {ex1.printStackTrace();}
 
     }
-    public static int delete(int id){
+    public static int delete(String plateNo){
         int status=0;
         try{
             Connection con=DBConnection.getConnection();
-            PreparedStatement ps=con.prepareStatement("delete from vehicle where id=?");
-            ps.setInt(1,id);
+            PreparedStatement ps=con.prepareStatement("delete from vehicle where plateNo=?");
+            ps.setString(1,plateNo);
             status=ps.executeUpdate();
 
             con.close();
