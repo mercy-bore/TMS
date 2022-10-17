@@ -23,9 +23,6 @@ public class SignupPage extends HttpServlet {
 
         servletCtx = config.getServletContext();
     }
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.signup(null));
-    }
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter wr = res.getWriter();
@@ -33,7 +30,6 @@ public class SignupPage extends HttpServlet {
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
         String email = req.getParameter("email");
-        String username = req.getParameter("username");
 
         String actionError = "";
         if (email == null || email.equalsIgnoreCase(""))
@@ -48,56 +44,12 @@ public class SignupPage extends HttpServlet {
         if (password != null && confirmPassword != null && !password.equals(confirmPassword))
             actionError += "Password & confirm password do not match<br/>";
 
+        servletCtx.setAttribute("registerError" , actionError);
         if (actionError.equals("")) {
             this.insert(email, password);
-            res.sendRedirect("./login");
+            res.sendRedirect("./login.jsp");
         } else
-            wr.print(this.signup(actionError));
-    }
-    public String signup(String actionError){
-        return "<!DOCTYPE html>"
-                + "<html> "
-                + "<head> "
-                + "<title>TMS - Signup Page</title>"
-                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"./assets/CSS/style.css\"/>"
-                + "</head>"
-                + "<body>"
-                +"<div class=\"bg-img\">"
-                +"<div class=\"content\">"
-                +"<header>Transport Management System</header>"
-                +"<header>Signup Form </header>"
-                + "<form action=\"./signup\" method=\"post\">"
-                +"<input type=\"hidden\" name=\"action\" value=\"signup\">"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"username\" placeholder=\"Username\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"fname\" required placeholder=\"First Name\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"lname\" required placeholder=\"Last Name\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"phone\" required placeholder=\"Phone No\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"email\" name=\"email\" placeholder=\"Email\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"password\" name=\"password\"  placeholder=\"Password\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"password\" name=\"confirmPassword\"  placeholder=\"Confirm Password\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<tr> <td> <input type=\"submit\" value=\"Signup\"></tr> "
-                +"</div>"
-                + "</form>"
-                + "<span style=\"color:yellow\">" + (actionError != null? actionError : "") + "</span>"
-                +"</div>"
-                +"</div>"
-                + "</body>"
-                + "</html>";
+            res.sendRedirect("./signup.jsp");
     }
 
 
@@ -111,6 +63,7 @@ public class SignupPage extends HttpServlet {
             System.out.println("username :: " + username);
             System.out.println("password :: " + password);
             System.out.println("hashed password :: " + DigestUtils.md5Hex(password));
+            System.out.println("**************** SIGNING UP *****************");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

@@ -1,24 +1,34 @@
 package com.transportsystem.model;
 
 public class Vehicle extends  BaseEntity {
+    private Long id;
+    private String type;
+
     private String plateNo;
     private String route;
     private String weight;
-    private String type;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     @Override
     public String toString() {
         return "Vehicle{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 ", plateNo='" + plateNo + '\'' +
                 ", route='" + route + '\'' +
                 ", weight='" + weight + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
-
-
 
     public String getPlateNo() {
         return plateNo;

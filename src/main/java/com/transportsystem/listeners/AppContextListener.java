@@ -1,9 +1,13 @@
 package com.transportsystem.listeners;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -20,11 +24,14 @@ public class AppContextListener implements ServletContextListener {
         ctx.setAttribute("applicationLabel", "Transport Management System");
 
         try {
-            System.out.print("Establishing connections....");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TMS",
-                    "root", "@root123");
+            System.out.print("Establishing connection....");
+            MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource.setUrl("jdbc:mysql://localhost:3306/TMS");
+            dataSource.setUser("root");
+            dataSource.setPassword("@root123");
+            Connection connection = dataSource.getConnection();
             ctx.setAttribute("dbConnection", connection);
-            System.out.print("Connection Established....");
+            System.out.println("****************** CONNECTED TO DB ******************");
         } catch (Exception ex) {
             System.out.println("Sorry, Connection Not Established....: " + ex.getMessage());
 

@@ -2,14 +2,12 @@ package com.transportsystem.pages;
 
 
 import com.transportsystem.model.User;
-import com.transportsystem.model.Vehicle;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,48 +18,35 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@WebServlet(urlPatterns = "/login",initParams = {
-        @WebInitParam(name = "username", value = "mercy"),
-        @WebInitParam(name = "password", value = "chero")
-})
+@WebServlet(urlPatterns = "/login")
 public class LoginPage extends HttpServlet {
-
-
     ServletContext servletCtx = null;
-
     public void init(ServletConfig config) throws ServletException{
         super.init(config);
-
         servletCtx = config.getServletContext();
-    }
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.getWriter().print(this.login(null));
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        PrintWriter wr = res.getWriter();
-
         String password = req.getParameter("password");
         String username = req.getParameter("username");
-        System.out.println(username);
         if (username == null || username.equalsIgnoreCase("")) {
-            wr.print(this.login("Username is required<br/>"));
+            servletCtx.setAttribute("loginError" , "Username is required<br/>");
+            res.sendRedirect("./login.jsp");
             return;
         }
 
         if (password == null || password.equalsIgnoreCase("")) {
-            wr.print(this.login("Password is required<br/>"));
+            servletCtx.setAttribute("loginError" , "Password is required<br/>");
+            res.sendRedirect("./login.jsp");
             return;
         }
 
         User user = this.login(username, password);
-        if (user == null ) {
-            wr.print(this.login("Invalid username & password combination<br/>"));
+        if (user == null) {
+            servletCtx.setAttribute("loginError" , "Invalid  username & password combination<br/>");
+            res.sendRedirect("./login.jsp");
             return;
         }
 
@@ -77,36 +62,7 @@ public class LoginPage extends HttpServlet {
         dispatcher.forward(req, res);
 
     }
-    public String login(String actionError){
-        return  "<!DOCTYPE html>"
-                + "<html> "
-                + "<head> "
-                + "<title>TMS - Login Page</title>"
-                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"./assets/CSS/style.css\"/>"
-                + "</head>"
-                + "<body>"
-                +"<div class=\"bg-img\">"
-                +"<div class=\"content\">"
-                +"<header>Transport Management System</header>"
-                +"<header>Login Form </header>"
-                + "<form action=\"./login\" method=\"post\">"
-                + "<input type=\"hidden\" name=\"action\" value=\"login\">"
-                +"<div class=\"field space\">"
-                + "<input type=\"text\" name=\"username\" placeholder=\"Username/Email\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<input type=\"Password\" name=\"password\" placeholder=\"Password\">"
-                +"</div>"
-                +"<div class=\"field space\">"
-                + "<tr> <td> <input type=\"submit\" value=\"Login\"></tr> "
-                +"</div>"
-                + "</form>"
-                + "<span style=\"color:yellow\">" + (actionError != null? actionError : "") + "</span>"
-                +"</div>"
-                +"</div>"
-                + "</body>"
-                + "</html>";
-    }
+
     public User login(String username, String password) {
 
         User user = null;
@@ -123,7 +79,6 @@ public class LoginPage extends HttpServlet {
                 System.out.println("username :: " + username);
                 System.out.println("password ::  " + password);
                 System.out.println("Hashed password :: " + DigestUtils.md5Hex(password));
-
             }
 
         }catch (Exception ex) {

@@ -22,31 +22,13 @@ import java.util.Objects;
 public class UpdateVehicle extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-//        HttpSession session = req.getSession();
-//
-//        vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-//
-//        String plateNo = req.getParameter("plateNo");
-//        System.out.println("PlateNo : " + plateNo);
-//
-//        for (Vehicle vehicle : vehicles){
-//            if(Objects.equals(vehicle.getPlateNo(), plateNo)){
-//                res.getWriter().print(this.updatevehicle(null,vehicle));
-//                break;
-//        }
-//    }
-
-
-
         res.setContentType("text/html");
-
-        String sid=req.getParameter("plateNo");
-//        int id1=Integer.parseInt(sid);
+        String plateNo=req.getParameter("plateNo");
         System.out.println("777777777777777777");
-        System.out.println(sid);
-        Vehicle vehicle= DBConnection.getVehicleById(sid);
+        System.out.println(plateNo);
+        Vehicle vehicle= DBConnection.getVehicleById(plateNo);
         System.out.println(vehicle.getPlateNo());
+        System.out.println("vehicle to be updated: " + vehicle);
         PrintWriter out=res.getWriter();
         out.println(
                 "<!DOCTYPE html>"
@@ -60,7 +42,7 @@ public class UpdateVehicle extends HttpServlet {
                         +"<div class=\"content\">"
                         + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                         + "<h2> Update Vehicle Form</h2>"
-                        + "<form action=\"./updatevehicle?sid=" + vehicle.getPlateNo() + "\" method=\"post\">"
+                        + "<form action=\"./updatevehicle?plateNo=" + vehicle.getPlateNo() + "\" method=\"post\">"
                         + "<table> "
                         + "<tr> <td> Vehicle ID: </td> <td> <input type=\"text\" name=\"id\" value="+ vehicle.getId() + "> </td> </tr>"
                         + "<tr> <td> Vehicle Type: </td> <td> <input type=\"text\" name=\"type\" value="+ vehicle.getType() + "> </td> </tr>"
@@ -80,26 +62,6 @@ public class UpdateVehicle extends HttpServlet {
 
 
         public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//            String type = req.getParameter("type");
-//            String plateNo = req.getParameter("plateNo");
-//            String weight = req.getParameter("weight");
-//            String route = req.getParameter("route");
-//
-//            String prevPlateNo = req.getParameter("prevPlateNo");
-//
-//            HttpSession session = req.getSession();
-//
-//            vehicles = (List<Vehicle>) session.getAttribute("vehicles");
-//
-//            for (Vehicle vehicle: vehicles){
-//                if (Objects.equals(vehicle.getPlateNo(), prevPlateNo)) {
-//                    vehicle.setPlateNo(plateNo);
-//                    vehicle.setType(type);
-//                    vehicle.setWeight(weight);
-//                    vehicle.setRoute(route);
-//
-//                }
-//            }
             response.setContentType("text/html");
             PrintWriter out=response.getWriter();
 
@@ -115,8 +77,11 @@ public class UpdateVehicle extends HttpServlet {
             e1.setPlateNo(plateNo);
             e1.setRoute(route);
             e1.setWeight(weight);
-
+            System.out.println("before...");
+            System.out.println(e1);
             DBConnection.update(e1);
+            System.out.println("updated....");
+            System.out.println(e1);
             response.sendRedirect("./home");
             out.close();
         }

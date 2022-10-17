@@ -28,11 +28,12 @@ public class DBConnection {
         try{
             Connection con=DBConnection.getConnection();
             PreparedStatement ps=con.prepareStatement(
-                    "insert into vehicle (type, plateNo, route, weight) values (?,?,?,?)");
-            ps.setString(1,vehicle.getType());
-            ps.setString(2,vehicle.getPlateNo());
-            ps.setString(3,vehicle.getRoute());
-            ps.setString(4,vehicle.getWeight());
+                    "insert into vehicle (id, type, plateNo, route, weight) values (?,?,?,?,?)");
+            ps.setLong(1,vehicle.getId());
+            ps.setString(2,vehicle.getType());
+            ps.setString(3,vehicle.getPlateNo());
+            ps.setString(4,vehicle.getRoute());
+            ps.setString(5,vehicle.getWeight());
 
             status=ps.executeUpdate();
 
@@ -49,17 +50,19 @@ public class DBConnection {
         try{
             Connection con=DBConnection.getConnection();
             PreparedStatement ps=con.prepareStatement(
-                    "update vehicle set id=?, type=?,plateNo=?,route=?,weight=? where plateNo=?");
-            ps.setLong(1,vehicle.getId());
-            ps.setString(2,vehicle.getType());
-            ps.setString(3,vehicle.getPlateNo());
-            ps.setString(4,vehicle.getRoute());
-            ps.setString(5,vehicle.getWeight());
+                    "update vehicle set id=?, type=?, plateNo=?, route=?, weight=? where plateNo=?");
+            String plateNo= vehicle.getPlateNo();
+            ps.setLong(2,vehicle.getId());
+            ps.setString(3,vehicle.getType());
+            ps.setString(4,vehicle.getPlateNo());
+            ps.setString(5,vehicle.getRoute());
+            ps.setString(6,vehicle.getWeight());
 
 
             ps.executeUpdate();
             System.out.println(ps.executeUpdate());
             con.close();
+            System.out.println("vehicle has been updated");
         }
         catch(Exception ex1)
         {ex1.printStackTrace();}
@@ -87,10 +90,11 @@ public class DBConnection {
             ps.setString(1,plateNo);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
-                vehicle.setType(rs.getString(1));
-                vehicle.setPlateNo(rs.getString(2));
-                vehicle.setRoute(rs.getString(3));
-                vehicle.setWeight(rs.getString(4));
+                vehicle.setId(rs.getLong(1));
+                vehicle.setType(rs.getString(2));
+                vehicle.setPlateNo(rs.getString(3));
+                vehicle.setRoute(rs.getString(4));
+                vehicle.setWeight(rs.getString(5));
             }
             con.close();
         }catch(Exception ex1){ex1.printStackTrace();}

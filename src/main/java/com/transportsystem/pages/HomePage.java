@@ -1,7 +1,5 @@
 package com.transportsystem.pages;
 
-import com.transportsystem.jdbc.DBConnection;
-import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
 
 import javax.servlet.ServletConfig;
@@ -13,7 +11,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -45,7 +42,7 @@ public class HomePage extends HttpServlet {
                 +"<div class=\"content\">"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
                 + "<br/>" +  vehicleTable(new Vehicle())
-        +  "<p><a href='./logout'><button class=\"button\">Logout</button></a></p>"
+        +  "<p><a href='./addvehicle'><button class=\"button\">Add Vehicle</button></a><a href='./logout'><button class=\"button\">Logout</button></a></p>"
                 +"</div>"
                 +"</div>"
                 + "</body>"
@@ -65,7 +62,7 @@ public class HomePage extends HttpServlet {
                 +"<div class=\"bg-img\">"
                 +"<div class=\"content\">"
                 + "<h1>" + getServletContext().getAttribute("applicationLabel") + "</h1>"
-                + "<h2> Welcome: " + session.getAttribute("username") + "  Logged In At: " + session.getAttribute("loggedInTime") + "</h2>"
+                + "<h2> Welcome: " + session.getAttribute("username") + " You  Logged In At: " + session.getAttribute("loggedInTime") + "</h2>"
                 + "<br/>" +  vehicleTable(new Vehicle())
 
         +  "<p><a href='./addvehicle'><button class=\"button\">Add Vehicle</button></a> <a href='./logout'><button class=\"button\">Logout</button></a></p>"
@@ -116,7 +113,7 @@ public class HomePage extends HttpServlet {
                     + "<td>" + vehicle.getWeight() + "</td>"
                     + "<td>" + vehicle.getRoute() + "</td>"
 
-                    + "<td><a href=\"./updatevehicle?plateNo=" + vehicle.getPlateNo()+ "\">Edit</a>   | <a href=\"./deletevehicle?plateNo=" + vehicle.getPlateNo() +"\">Delete </td>"
+                    + "<td><a href=\"./updatevehicle?plateNo=" + vehicle.getPlateNo()+ "\">Edit</a>   | <a href=\"./deletevehicle?plateNo=" + vehicle.getPlateNo() +"\">Delete</a> </td>"
                     + "</tr>";
 
         vehicleTable += "</table>" ;
