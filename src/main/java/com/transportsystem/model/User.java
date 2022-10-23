@@ -3,10 +3,45 @@ package com.transportsystem.model;
 public class User extends BaseEntity{
 
         private String username;
-
-        private String profile;
-
+         private String firstName;
+    private  String lastName;
+    private String confirmPassword;
+    private String phone;
         private String email;
+        private String password;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     public String getPassword() {
         return password;
@@ -16,7 +51,6 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-    private String password;
 
         public String getUsername() {
             return username;
@@ -24,14 +58,6 @@ public class User extends BaseEntity{
 
         public void setUsername(String username) {
             this.username = username;
-        }
-
-        public String getProfile() {
-            return profile;
-        }
-
-        public void setProfile(String profile) {
-            this.profile = profile;
         }
 
         public String getEmail() {

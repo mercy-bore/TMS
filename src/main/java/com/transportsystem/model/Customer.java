@@ -6,8 +6,8 @@ public class Customer  extends  BaseEntity{
     String firstName;
     String lastName;
     String  email;
-    int phoneNo;
-    String Location;
+    String phone;
+    String location;
     String cargo;
     String deliveryType;
 
@@ -19,12 +19,11 @@ public class Customer  extends  BaseEntity{
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", pk=" + pk +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNo=" + phoneNo +
-                ", Location='" + Location + '\'' +
+                ", phone=" + phone +
+                ", location='" + location + '\'' +
                 ", cargo='" + cargo + '\'' +
                 ", deliveryType='" + deliveryType + '\'' +
                 '}';
@@ -66,20 +65,18 @@ public class Customer  extends  BaseEntity{
         this.email = email;
     }
 
-    public int getPhoneNo() {
-        return phoneNo;
+    public String  getPhone() {
+        return phone;
     }
 
-    public void setPhoneNo(int phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setPhone(String phone) { this.phone = phone;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
-
     public void setLocation(String location) {
-        Location = location;
+        location = location;
     }
 
     public String getCargo() {

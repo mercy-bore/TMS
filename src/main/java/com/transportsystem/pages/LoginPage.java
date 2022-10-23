@@ -54,11 +54,10 @@ public class LoginPage extends HttpServlet {
         HttpSession session = req.getSession(true);
 
         session.setAttribute("username", user.getUsername());
-        session.setAttribute("profile", user.getProfile());
         session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("./home.jsp");
         dispatcher.forward(req, res);
 
     }

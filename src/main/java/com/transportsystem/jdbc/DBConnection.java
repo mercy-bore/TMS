@@ -1,5 +1,6 @@
 package com.transportsystem.jdbc;
 
+import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
 
 import java.awt.*;
@@ -100,6 +101,28 @@ public class DBConnection {
         }catch(Exception ex1){ex1.printStackTrace();}
 
         return vehicle;
+    }
+    public static Customer getCustomerbyEmail(String email){
+Customer customer = new Customer();
+        try{
+            Connection con=DBConnection.getConnection();
+            PreparedStatement ps=con.prepareStatement("select * from customer where email=?");
+            ps.setString(1,email);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                customer.setId(rs.getLong(1));
+                customer.setFirstName(rs.getString(2));
+                customer.setLastName(rs.getString(3));
+                customer.setEmail(rs.getString(3));
+                customer.setPhone(rs.getString(3));
+                customer.setLocation(rs.getString(3));
+                customer.setCargo(rs.getString(3));
+                customer.setDeliveryType(rs.getString(3));
+            }
+            con.close();
+        }catch(Exception ex1){ex1.printStackTrace();}
+
+        return customer;
     }
     public static List getAllVehicles(List vehicles){
         List list= new List();
