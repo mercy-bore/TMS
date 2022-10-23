@@ -33,13 +33,16 @@ public class CustomerController implements Serializable {
         try{
             Statement sqlStmt = connection.createStatement();
             sqlStmt.executeUpdate(
-                    "update customer set id='" + customer.getId() + "', firstName='" + customer.getFirstName() +
+                    "update customer set firstName='" + customer.getFirstName() +
                             "', lastName='" + customer.getLastName() + "', email='" + customer.getEmail() + "', phone='"
-                            + customer.getPhone() + "',  cargo='" + customer.getCargo() + "',   location='" + customer.getLocation() + "' ,  deliveryType='" + customer.getDeliveryType() + "'");
+                            + customer.getPhone() + "',  cargo='" + customer.getCargo() + "',   location='" + customer.getLocation() +
+                            "' ,  deliveryType='" + customer.getDeliveryType() + "' where email='" + customer.getEmail()+ "'");
 
         }
         catch(Exception ex1)
-        {ex1.printStackTrace();}
+        {ex1.printStackTrace();
+            System.out.println(ex1.getMessage());
+        }
 
     }
 

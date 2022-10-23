@@ -34,9 +34,9 @@ public class VehicleController implements Serializable {
         try{
             Statement sqlStmt = connection.createStatement();
             sqlStmt.executeUpdate(
-                    "update vehicle set id='" + vehicle.getId() + "', type='" + vehicle.getType() +
-                            "', plateNo='" + vehicle.getPlateNo() + "', route='" + vehicle.getRoute() + "', weight='"
-                            + vehicle.getPlateNo() + "' where plateNo='" + vehicle.getPlateNo() + "'");
+                    "update vehicle set  type='" + vehicle.getType() +
+                            "', plateNo='" + vehicle.getPlateNo() + "',  weight='"
+                            + vehicle.getWeight() + "', route='" + vehicle.getRoute() + "' where plateNo='" + vehicle.getPlateNo() + "'");
 
         }
         catch(Exception ex1)

@@ -33,6 +33,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">Id</th>
             <th scope="col">Type</th>
             <th scope="col">Plate No</th>
             <th scope="col">Weight in KG</th>
@@ -53,7 +54,7 @@
             route = vehicle.getRoute();
 
 %>
-
+    <td scope="row"><%=id%></td>
     <td scope="row"><%=type%></td>
     <td scope="row"><%=plate%></td>
     <td scope="row"><%=weight%></td>

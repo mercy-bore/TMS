@@ -1,9 +1,11 @@
 package com.transportsystem.pages;
 
 import com.transportsystem.controllers.CustomerController;
+import com.transportsystem.controllers.VehicleController;
 import com.transportsystem.jdbc.DBConnection;
 import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -28,31 +30,19 @@ public class UpdateCustomer extends HttpServlet {
 
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Customer customer = new Customer();
+        try {
+            BeanUtils.populate(customer, request.getParameterMap());
+
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
         response.setContentType("text/html");
-
-        Long id= Long.valueOf(request.getParameter("id"));
-        String firstName=request.getParameter("firstName");
-        String lastName=request.getParameter("lastName");
-        String email=request.getParameter("email");
-        String phone=request.getParameter("phone");
-        String location=request.getParameter("location");
-        String cargo=request.getParameter("cargo");
-        String deliveryType=request.getParameter("deliveryType");
-
-        Customer e1 = new Customer();
-        e1.setId(id);
-        e1.setFirstName(firstName);
-        e1.setLastName(lastName);
-        e1.setEmail(email);
-        e1.setPhone(phone);
-        e1.setLocation(location);
-        e1.setCargo(cargo);
-        e1.setDeliveryType(deliveryType);
-
         CustomerController cc = new CustomerController();
-        cc.update((Connection) servletCtx.getAttribute("dbConnection"), e1);
-        System.out.println("updated customer " + e1);
+        Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+        cc.update(connection,customer);
         response.sendRedirect("./clients.jsp");
+    }
 
     }
-}
+

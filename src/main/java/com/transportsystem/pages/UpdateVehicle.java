@@ -4,6 +4,7 @@ import com.transportsystem.controllers.VehicleController;
 import com.transportsystem.jdbc.DBConnection;
 import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
+import org.apache.commons.beanutils.BeanUtils;
 
 
 import javax.servlet.RequestDispatcher;
@@ -33,23 +34,17 @@ public class UpdateVehicle extends HttpServlet {
 
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            response.setContentType("text/html");
+        Vehicle vehicle = new Vehicle();
+    try {
+            BeanUtils.populate(vehicle, request.getParameterMap());
 
-            Long id= Long.valueOf(request.getParameter("id"));
-            String type=request.getParameter("type");
-            String plateNo=request.getParameter("plateNo");
-            String route=request.getParameter("route");
-            String weight=request.getParameter("weight");
-
-            Vehicle e1=new Vehicle();
-            e1.setId(id);
-            e1.setType(type);
-            e1.setPlateNo(plateNo);
-            e1.setRoute(route);
-            e1.setWeight(weight);
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        response.setContentType("text/html");
             VehicleController vc = new VehicleController();
-            vc.update((Connection) servletCtx.getAttribute("dbConnection"), e1);
-
+            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+            vc.update(connection,vehicle);
             response.sendRedirect("./vehicles.jsp");
 
         }

@@ -36,6 +36,7 @@
 </div> <table class="table">
    <thead>
      <tr>
+     <th scope="col">Id</th>
     <th scope="col">First Name</th>
     <th scope="col">Last Name</th>
     <th scope="col">Email</th>
@@ -51,6 +52,7 @@
    <%
     List<Customer> customers = cc.list((Connection) application.getAttribute("dbConnection"), new Customer());
     for (Customer customer : customers) {
+        id = customer.getId();
         fn = customer.getFirstName();
         ln = customer.getLastName();
         loc = customer.getLocation();
@@ -60,6 +62,7 @@
         dt = customer.getDeliveryType();
 
     %>
+        <td><%=id%></td>
         <td><%=fn%></td>
         <td><%=ln%></td>
         <td><%=email%></td>

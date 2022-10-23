@@ -11,39 +11,48 @@
 <jsp:include page="header.jsp" />
 <div class="container-fluid">
 <h2> Update Customer Details Form</h2>
-<form action="./updatecustomer.jsp?email=${customer.getEmail()}" method="post">
+<form action="./updatecustomer" method="post">
+ <%
+     List<Customer> customers = cc.list((Connection) application.getAttribute("dbConnection"), new Customer());
+    for (Customer customer : customers) {
+  %>
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
+                  <div class="form-floating mb-3">
+                       <input type="text" class="form-control" id="floatingInput"placeholder="Id" name="id" value="<%=customer.getId()%>">
+                       <label for="floatingInput">Id</label>
+                  </div>
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="First Name" name="firstName" value=${customer.getFirstName()}>
+                      <input type="text" class="form-control" id="floatingInput"placeholder="First Name" name="firstName" value="<%=customer.getFirstName()%>">
                       <label for="floatingInput">First Name</label>
                  </div>
                  <div class="form-floating mb-3">
-                       <input type="text" class="form-control" id="floatingInput"placeholder="Last Name" name="lastName" value=${customer.getLastName()}>
+                       <input type="text" class="form-control" id="floatingInput"placeholder="Last Name" name="lastName" value="<%=customer.getLastName()%>">
                        <label for="floatingInput">Last Name</label>
                  </div>
                  <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput"placeholder="Email" name="email" value=${customer.getEmail()}>
+                        <input type="text" class="form-control" id="floatingInput"placeholder="Email" name="email" value="<%=customer.getEmail()%>">
                         <label for="floatingInput">Email</label>
                  </div>
                  <div class="form-floating mb-3">
-                         <input type="text" class="form-control" id="floatingInput"placeholder="Phone" name="phone" value=${customer.getPhone()}>
+                         <input type="text" class="form-control" id="floatingInput"placeholder="Phone" name="phone" value="<%=customer.getPhone()%>">
                          <label for="floatingInput"> Phone</label>
                  </div>
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="Location" name="firstName" value=${customer.getLocation()}>
+                      <input type="text" class="form-control" id="floatingInput"placeholder="Location" name="location" value="<%=customer.getLocation()%>">
                       <label for="floatingInput">Location</label>
                  </div>
                  <div class="form-floating mb-3">
-                   <input type="text" class="form-control" id="floatingInput"placeholder="Cargo" name="cargo" value=${customer.getCargo()}>
+                   <input type="text" class="form-control" id="floatingInput"placeholder="Cargo" name="cargo" value="<%=customer.getCargo()%>">
                    <label for="floatingInput">Cargo</label>
                  </div>
                  <div class="form-floating mb-3">
-                   <input type="text" class="form-control" id="floatingInput"placeholder="Delivery Type" name="firstName" value=${customer.getDeliveryType()}>
+                   <input type="text" class="form-control" id="floatingInput"placeholder="Delivery Type" name="deliveryType" value="<%=customer.getDeliveryType()%>">
                    <label for="floatingInput">Delivery Type</label>
                  </div>
  </div>
     <button type="submit" class="btn btn-success">Submit</button>
  </form>
+<% } %>
 
 
 <%

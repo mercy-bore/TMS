@@ -3,7 +3,6 @@ package com.transportsystem.model;
 public class Vehicle extends  BaseEntity {
     private Long id;
     private String type;
-
     private String plateNo;
     private String route;
     private String weight;

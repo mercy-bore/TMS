@@ -20,7 +20,6 @@
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
                     <a href="home.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Home</a>
-                    <a href="contactus.jsp" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Send Message</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Vehicle pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -39,6 +38,7 @@
                             <a href="orders.jsp" class="dropdown-item">View orders</a>
                         </div>
                     </div>
+                    <a href="contactus.jsp" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Send Message</a>
                     <a href="./logout" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Logout</a>
 
                 </div>

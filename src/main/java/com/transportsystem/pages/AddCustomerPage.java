@@ -29,7 +29,7 @@ public class AddCustomerPage extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        Customer customer= new Customer();
+        Customer customer = new Customer();
         try {
             BeanUtils.populate(customer, req.getParameterMap());
 
@@ -60,8 +60,13 @@ public class AddCustomerPage extends HttpServlet {
         if (StringUtils.isBlank(customer.getLocation())) {
             servletCtx.setAttribute("addCustomerError" , "Location is required<br/>");
             return;
-        } if (StringUtils.isBlank(customer.getCargo())) {
+        }
+        if (StringUtils.isBlank(customer.getCargo())) {
             servletCtx.setAttribute("addCustomerError" , "Cargo is required<br/>");
+            return;
+        }
+        if (StringUtils.isBlank(customer.getDeliveryType())) {
+            servletCtx.setAttribute("addCustomerError" , "Delivery Type is required<br/>");
             return;
         }
         CustomerController cc = new CustomerController();
