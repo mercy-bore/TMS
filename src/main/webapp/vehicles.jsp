@@ -44,16 +44,16 @@
             pageContext.setAttribute("vehicles", vehicles);
 %> 
 <tbody>
-<c:foreach items="${vehicles}" var="vehicle">
+<c:forEach items="${vehicles}" var="vehicle">
     <tr>
     <td scope="row">${vehicle.id}</td>
     <td scope="row">${vehicle.type}</td>
     <td scope="row">${vehicle.plateNo}</td>
     <td scope="row">${vehicle.weight}</td>
     <td scope="row">${vehicle.route}</td>
-    <td scope="row"> <a href="./updatevehicle.jsp"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+    <td scope="row"> <a href="./updatevehicle.jsp?plateNo=${vehicle.plateNo}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?plateNo=${vehicle.plateNo}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
     </tr>
-    </c:foreach>
+    </c:forEach>
 </tbody>
 </table>
 
