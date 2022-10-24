@@ -11,7 +11,7 @@
     Long id;
     String fn;
     String ln;
-    String loc;
+    String location;
     String email;
     String phone;
     String cargo;
@@ -55,7 +55,7 @@
         id = customer.getId();
         fn = customer.getFirstName();
         ln = customer.getLastName();
-        loc = customer.getLocation();
+        location = customer.getLocation();
         email = customer.getEmail();
         phone = customer.getPhone();
         cargo = customer.getCargo();
@@ -67,10 +67,10 @@
         <td><%=ln%></td>
         <td><%=email%></td>
         <td><%=phone%></td>
-        <td><%=loc%></td>
+        <td><%=location%></td>
         <td><%=cargo%></td>
         <td><%=dt%></td>
-        <td><a href="./updatecustomer.jsp?email=<%=customer.getEmail()%>"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?email=<%=customer.getEmail()%>"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
+        <td><a href="./updatecustomer.jsp?email=<%=customer.getEmail()%>"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?id=<%=customer.getId()%>"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
             </tr>
 
 <% } %>

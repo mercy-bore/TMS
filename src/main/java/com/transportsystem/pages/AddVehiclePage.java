@@ -41,24 +41,28 @@ public class AddVehiclePage extends HttpServlet {
 
         if (StringUtils.isBlank(vehicle.getType())) {
             servletCtx.setAttribute("addVehicleError" , "Type is required<br/>");
+            res.sendRedirect("./addvehicle.jsp");
             return;
         }
 
         if (StringUtils.isBlank(vehicle.getPlateNo())) {
             servletCtx.setAttribute("addVehicleError" , "Plate No is required<br/>");
+            res.sendRedirect("./addvehicle.jsp");
             return;
         }
         if (StringUtils.isBlank(vehicle.getWeight())) {
             servletCtx.setAttribute("addVehicleError" , "Weight is required<br/>");
+            res.sendRedirect("./addvehicle.jsp");
             return;
         }
         if (StringUtils.isBlank(vehicle.getRoute())) {
             servletCtx.setAttribute("addVehicleError" , "Route is required<br/>");
+            res.sendRedirect("./addvehicle.jsp");
             return;
         }
         VehicleController vc = new VehicleController();
         vc.add((Connection) servletCtx.getAttribute("dbConnection"), vehicle);
-
+        System.out.println(vehicle + "         added        ");
         res.sendRedirect("./vehicles.jsp");
 
         }

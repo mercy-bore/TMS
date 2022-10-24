@@ -5,8 +5,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 
-<%! VehicleController vc = new VehicleController(); %>
-<%! CustomerController cc = new CustomerController(); %>
+<jsp:useBean id="vc" class="com.transportsystem.controllers.VehicleController" />
+<jsp:useBean id="cc" class="com.transportsystem.controllers.CustomerController" />
 
 <jsp:include page="header.jsp" />
 <div class="container-fluid">

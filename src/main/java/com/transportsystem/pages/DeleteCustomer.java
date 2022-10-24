@@ -26,8 +26,8 @@ public class DeleteCustomer extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        String sid=req.getParameter("email");
-        DBConnection.delete(sid);
+        Long sid= Long.valueOf(req.getParameter("id"));
+        DBConnection.delete(String.valueOf(sid));
         res.sendRedirect("./clients.jsp");
 
     }
