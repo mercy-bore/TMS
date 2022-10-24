@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -54,7 +53,7 @@ public class LoginPage extends HttpServlet {
         HttpSession session = req.getSession(true);
 
         session.setAttribute("username", user.getUsername());
-        session.setAttribute("loggedInTime", "Logged In Time:" + new Date());
+        session.setAttribute("loggedInTime", "You Logged in At:" + new Date());
 
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home.jsp");

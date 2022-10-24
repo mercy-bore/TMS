@@ -20,9 +20,11 @@
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/listeners/RequestListener.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/controllers/CustomerController.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/util/DatabaseConnection.java
+/home/mercy/Desktop/TMS/src/main/java/com/transportsystem/customtags/headertag.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/pages/DeleteCustomer.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/pages/AddCustomerPage.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/model/ContactUs.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/pages/IndexPage.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/listeners/AppContextListener.java
+/home/mercy/Desktop/TMS/src/main/java/com/transportsystem/customtags/footertag.java
 /home/mercy/Desktop/TMS/src/main/java/com/transportsystem/pages/AddVehiclePage.java

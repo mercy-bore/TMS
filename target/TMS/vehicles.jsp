@@ -1,19 +1,14 @@
 <%@ page isELIgnored="false" %>
-<%@ page import="com.transportsystem.controllers.*" %>
 <%@ page import="com.transportsystem.model.*" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="header.jsp" />
 
 <jsp:useBean id="vc" class="com.transportsystem.controllers.VehicleController" />
-<%!
-    Long id;
-    String type;
-    String plate;
-    String weight;
-    String route;
-%>
+
 <div class="container-fluid">
 <div class="container-xxl position-relative bg-white d-flex p-0">
         <jsp:include page="sidebar.jsp"/>
@@ -42,26 +37,23 @@
 
         </tr>
     </thead>
-    <tbody>
-      <tr>
+
+   
 <%
     List<Vehicle> vehicles = vc.list((Connection) application.getAttribute("dbConnection"), new Vehicle());
-    for (Vehicle vehicle : vehicles) {
-            id = vehicle.getId();
-            type = vehicle.getType();
-            plate = vehicle.getPlateNo();
-            weight = vehicle.getWeight();
-            route = vehicle.getRoute();
-
-%>
-    <td scope="row"><%=id%></td>
-    <td scope="row"><%=type%></td>
-    <td scope="row"><%=plate%></td>
-    <td scope="row"><%=weight%></td>
-    <td scope="row"><%=route%></td>
-    <td scope="row"> <a href="./updatevehicle.jsp?plateNo=<%=vehicle.getPlateNo()%>"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?plateNo=<%=vehicle.getPlateNo()%>"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+            pageContext.setAttribute("vehicles", vehicles);
+%> 
+<tbody>
+<c:foreach items="${vehicles}" var="vehicle">
+    <tr>
+    <td scope="row">${vehicle.id}</td>
+    <td scope="row">${vehicle.type}</td>
+    <td scope="row">${vehicle.plateNo}</td>
+    <td scope="row">${vehicle.weight}</td>
+    <td scope="row">${vehicle.route}</td>
+    <td scope="row"> <a href="./updatevehicle.jsp"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
     </tr>
-<% } %>
+    </c:foreach>
 </tbody>
 </table>
 

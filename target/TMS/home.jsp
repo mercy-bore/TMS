@@ -21,7 +21,7 @@
             <br/><br/><br/><br/><br/>
 
  <div class="col-sm-12 col-xl-12">
- <h2 style="text-align:center;color:"> Hello ${sessionScope.username},<br/>Welcome To Transport Management System. <br/>You  Logged In At <br/> ${sessionScope.loggedInTime}</h2>
+ <h2 style="text-align:center;"> Hello ${sessionScope.username},<br/>Welcome To Transport Management System. <br/> ${sessionScope.loggedInTime}</h2>
  <c:set var="String" value="Welcome to Transport Management System"/>
 
      <c:if test="${fn:contains(String, 'Transport')}">
@@ -44,8 +44,7 @@
            <p align="center">
              <b>
                <font color="#000000" size="6">Formatting:
-               <fmt:formatDate value="${str}" type="both"
-               timeStyle="long" dateStyle="long" />
+               <fmt:formatDate value="${str}" type="both" timeStyle="long" dateStyle="long" />
                </font>
              </b>
            </p>

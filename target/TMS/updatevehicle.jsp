@@ -14,10 +14,8 @@
 <jsp:include page="header.jsp" />
 <div class="container-fluid">
 <h2> Update Vehicle Form</h2>
- <%
-    for (Vehicle vehicle : vehicles) {
-  %>
-<form action="./updatevehicle?plateNo=<%=vehicle.getPlateNo()%>" method="post">
+
+<form action="./updatevehicle" method="post">
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
                        <input type="hidden" class="form-control" id="floatingInput"placeholder="Id" name="id" value="<%=vehicle.getId()%>">
@@ -42,7 +40,7 @@
  </div>
      <button type="submit" class="btn btn-success">Submit</button>
   </form>
-<% } %>
+
 
 
  <%

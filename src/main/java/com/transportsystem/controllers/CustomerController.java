@@ -49,7 +49,17 @@ public class CustomerController implements Serializable {
     public void delete(Connection connection, Customer customer) {
         try{
             Statement sqlStmt = connection.createStatement();
-            sqlStmt.executeUpdate("delete from  customer  where id=" + customer.getId() );
+            sqlStmt.executeUpdate("delete from  customer  where id='" + customer.getId() + "'");
+            System.out.println(customer.getEmail());
+        }
+        catch(Exception ex1)
+        {ex1.printStackTrace();}
+
+    }
+    public void getCustomerById(Connection connection, Customer customer) {
+        try{
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("select *  from  customer  where id='" + customer.getId() + "'" );
             System.out.println(customer.getEmail());
         }
         catch(Exception ex1)

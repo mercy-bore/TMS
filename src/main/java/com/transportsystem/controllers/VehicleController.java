@@ -1,6 +1,7 @@
 package com.transportsystem.controllers;
 
 import com.transportsystem.jdbc.DBConnection;
+import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,6 +55,14 @@ public class VehicleController implements Serializable {
         {ex1.printStackTrace();}
 
     }
+    public void getVehicleById(Connection connection, Vehicle vehicle) {
+        try{
+            Statement sqlStmt = connection.createStatement();
+            sqlStmt.executeUpdate("select * from  vehicle  where id='" + vehicle.getId() + "'");
+        }
+        catch(Exception ex1)
+        {ex1.printStackTrace();}
+    }
 
 
 
@@ -83,5 +92,6 @@ public class VehicleController implements Serializable {
         return vehicles;
 
     }
+
 
 }

@@ -1,5 +1,12 @@
 <%@ page isELIgnored="false" %>
-<jsp:include page="header.jsp" />
+<%@ taglib prefix="jc" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %><%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<cht:Header></cht:Header>
 <div class="container-fluid">
 
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
@@ -19,5 +26,5 @@ ${param.invalidAccessWarn}
 
 </div>
 </div>
-</body>
-</html>
+<cft:Footer> Proudly Built By Mercy Bore. Copyright &copy; 2022 Terms and Conditions Apply.
+     </cft:Footer>

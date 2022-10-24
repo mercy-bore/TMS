@@ -3,6 +3,7 @@ com/transportsystem/common/Gender.class
 com/transportsystem/pages/AddVehiclePage.class
 com/transportsystem/pages/AddCustomerPage.class
 com/transportsystem/model/Order.class
+com/transportsystem/customtags/footertag.class
 com/transportsystem/pages/DeleteVehicle.class
 com/transportsystem/listeners/AppContextListener.class
 com/transportsystem/model/User.class
@@ -21,6 +22,7 @@ com/transportsystem/pages/SignupPage.class
 com/transportsystem/pages/UpdateVehicle.class
 com/transportsystem/listeners/ContextAttributeListener.class
 com/transportsystem/model/ContactUs.class
+com/transportsystem/customtags/headertag.class
 com/transportsystem/model/Customer.class
 com/transportsystem/pages/UpdateCustomer.class
 com/transportsystem/controllers/VehicleController.class
