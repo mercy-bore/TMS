@@ -66,6 +66,7 @@ public class VehicleController implements Serializable {
             ResultSet result = sqlStmt.executeQuery("select * from vehicle");
             while (result.next()) {
                 Vehicle vehicle = new Vehicle();
+                vehicle.setId(result.getLong("id"));
                 vehicle.setType(result.getString("type"));
                 vehicle.setPlateNo(result.getString("plateNo"));
                 vehicle.setRoute(result.getString("route"));

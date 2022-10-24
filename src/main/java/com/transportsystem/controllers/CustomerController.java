@@ -66,6 +66,7 @@ public class CustomerController implements Serializable {
             ResultSet result = sqlStmt.executeQuery("select * from customer");
             while (result.next()) {
                 Customer customer = new Customer();
+                customer.setId(result.getLong("id"));
                 customer.setFirstName(result.getString("firstName"));
                 customer.setLastName(result.getString("lastName"));
                 customer.setLocation(result.getString("location"));

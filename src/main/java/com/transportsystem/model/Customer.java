@@ -76,7 +76,7 @@ public class Customer  extends  BaseEntity{
         return location;
     }
     public void setLocation(String location) {
-        location = location;
+        this.location = location;
     }
 
     public String getCargo() {
