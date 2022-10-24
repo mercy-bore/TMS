@@ -47,7 +47,6 @@ public class VehicleController implements Serializable {
         try{
             Statement sqlStmt = connection.createStatement();
             sqlStmt.executeUpdate("delete from  vehicle  where plateNo='" + vehicle.getPlateNo() + "'");
-
         }
         catch(Exception ex1)
         {ex1.printStackTrace();}

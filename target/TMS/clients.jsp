@@ -1,24 +1,19 @@
 <%@ page isELIgnored="false" %>
-<%@ page import="com.transportsystem.controllers.*" %>
 <%@ page import="com.transportsystem.model.*" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %><%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<cht:Header></cht:Header>
 
 <jsp:useBean id="cc" class="com.transportsystem.controllers.CustomerController" />
-<%!
-    Long id;
-    String fn;
-    String ln;
-    String location;
-    String email;
-    String phone;
-    String cargo;
-    String dt;
 
-
-%>
 <div class="container-fluid">
 <div class="container-xxl position-relative bg-white d-flex p-0">
         <jsp:include page="sidebar.jsp"/>
@@ -47,33 +42,26 @@
     <th scope="col"></th>
     </tr>
    </thead>
-<tbody>
-  <tr>
+
    <%
     List<Customer> customers = cc.list((Connection) application.getAttribute("dbConnection"), new Customer());
-    for (Customer customer : customers) {
-        id = customer.getId();
-        fn = customer.getFirstName();
-        ln = customer.getLastName();
-        location = customer.getLocation();
-        email = customer.getEmail();
-        phone = customer.getPhone();
-        cargo = customer.getCargo();
-        dt = customer.getDeliveryType();
-
+    pageContext.setAttribute("customers", customers);
     %>
-        <td><%=id%></td>
-        <td><%=fn%></td>
-        <td><%=ln%></td>
-        <td><%=email%></td>
-        <td><%=phone%></td>
-        <td><%=location%></td>
-        <td><%=cargo%></td>
-        <td><%=dt%></td>
-        <td><a href="./updatecustomer.jsp?email=<%=customer.getEmail()%>"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?id=<%=customer.getId()%>"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
+<tbody>
+    <c:forEach items="${customers}" var="customer">
+  <tr>
+        <td>${customer.id}</td>
+        <td>${customer.firstName}</td>
+        <td>${customer.lastName}</td>
+        <td>${customer.email}</td>
+        <td>${customer.phone}</td>
+        <td>${customer.location}</td>
+        <td>${customer.cargo}</td>
+        <td>${customer.deliveryType}</td>
+        <td><a href="./updatecustomer.jsp?id=${customer.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?id=${customer.id}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
             </tr>
-
-<% } %>
+            </c:forEach>
+            
         </tbody>
 </table>
 
