@@ -70,5 +70,5 @@
 </div>
 
 <jsp:include page="javascriptlibs.jsp"/>
-</body>
-</html>
+<cft:Footer> 
+     </cft:Footer>

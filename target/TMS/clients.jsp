@@ -58,7 +58,7 @@
         <td>${customer.location}</td>
         <td>${customer.cargo}</td>
         <td>${customer.deliveryType}</td>
-        <td><a href="./updatecustomer.jsp?id=${customer.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?id=${customer.id}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
+        <td><a href="./updatecustomer.jsp?id=${customer.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?email=${customer.email}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
             </tr>
             </c:forEach>
             

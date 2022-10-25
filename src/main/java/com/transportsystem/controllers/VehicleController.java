@@ -62,7 +62,6 @@ public class VehicleController implements Serializable {
     }
 
 
-
     public List<Vehicle> list(Connection connection, Vehicle filter) {
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
 

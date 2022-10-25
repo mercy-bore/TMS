@@ -55,5 +55,5 @@
                 </div>
                 </div>
 
-                </body>
-                </html>
+            <cft:Footer> 
+     </cft:Footer>  

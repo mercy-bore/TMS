@@ -50,14 +50,14 @@
            </p>
          </td>
        </tr>
-
+ <font color="#000000" size="2">
        <c:forEach var="zone"
        items="<%=java.util.TimeZone.getAvailableIDs()%>">
          <tr>
-           <td width="50%"  bgcolor="#a6c1f5">
+           <td width="50%" color="#000000" bgcolor="#a6c1f5">
              <c:out value="${zone}" />
            </td>
-           <td width="50%" bgcolor="#91a2c4">
+           <td width="50%"color="#000000" bgcolor="#91a2c4">
              <fmt:timeZone value="${zone}">
                <fmt:formatDate value="${str}" timeZone="${zn}"
                type="both"/>
@@ -65,6 +65,7 @@
            </td>
          </tr>
        </c:forEach>
+       </font>
      </table>
 
 </div>
