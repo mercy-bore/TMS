@@ -1,11 +1,11 @@
 package com.transportsystem.pages;
 
-import com.transportsystem.controllers.CustomerController;
-import com.transportsystem.controllers.VehicleController;
+import com.transportsystem.controllers.CustomerBean;
 import com.transportsystem.model.Customer;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 
 @WebServlet("/addcustomer")
 public class AddCustomerPage extends HttpServlet {
+    @Inject
+    CustomerBean cc;
     ServletContext servletCtx = null;
-
+    @Inject
+    public AddCustomerPage(CustomerBean cc){
+        this.cc = cc;
+    }
     public void init(ServletConfig config) throws ServletException{
         super.init(config);
 
@@ -62,21 +66,8 @@ public class AddCustomerPage extends HttpServlet {
             return;
         }
 
-        if (StringUtils.isBlank(customer.getCargo())) {
-            servletCtx.setAttribute("addCustomerError" , "Cargo is required<br/>");
-            res.sendRedirect("./addcustomer.jsp");
-            return;
-        }
-        if (StringUtils.isBlank(customer.getDeliveryType())) {
-            servletCtx.setAttribute("addCustomerError" , "Delivery Type is required<br/>");
-            res.sendRedirect("./addcustomer.jsp");
-            return;
-        }
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&");
-        CustomerController cc = new CustomerController();
-        System.out.println("^^^^^^^^^^^^^^^^^^");
-        cc.add((Connection) servletCtx.getAttribute("dbConnection"), customer);
-        System.out.println(customer + " added!");
+       
+        cc.add(customer);
         res.sendRedirect("./clients.jsp");
 
     }

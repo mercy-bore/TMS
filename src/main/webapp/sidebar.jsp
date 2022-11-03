@@ -21,19 +21,19 @@
 
                     <a href="home.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Vehicle pages</a>
+                        <a href="vehicles.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Vehicle pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="vehicles.jsp" class="dropdown-item">View Vehicles</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Client Pages</a>
+                        <a href="clients.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Client Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="clients.jsp" class="dropdown-item">View Clients</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Order pages</a>
+                        <a href="orders.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Order pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="orders.jsp" class="dropdown-item">View orders</a>
                         </div>

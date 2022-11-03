@@ -62,14 +62,13 @@ public class SignupPage extends HttpServlet {
             user.setPassword(password);
             user.setConfirmPassword(confirmPassword);
 
-
-
             this.insertUsers(firstName, lastName, username, email, phone, password, confirmPassword);
 
             User newuser = new User();
             System.out.println("===============++++++++++++++");
             newuser.setUsername(username);
         }
+        
         servletCtx.setAttribute("registerError" , actionError);
         if (actionError.equals("")) {
             this.insertUsers(firstName, lastName, username, email, phone,  password, confirmPassword);

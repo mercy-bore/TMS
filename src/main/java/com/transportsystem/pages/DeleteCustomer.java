@@ -1,8 +1,8 @@
 package com.transportsystem.pages;
-
+import com.transportsystem.controllers.CustomerBean;
 import com.transportsystem.jdbc.DBConnection;
+import javax.inject.Inject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,7 +14,8 @@ import java.io.IOException;
 @WebServlet("/deletecustomer")
 
 public class DeleteCustomer extends HttpServlet {
-
+ @Inject
+ CustomerBean cc;
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException{
@@ -26,7 +27,7 @@ public class DeleteCustomer extends HttpServlet {
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        String sid= req.getParameter("email");
+        String sid= req.getParameter("id");
         DBConnection.delete(sid);
         res.sendRedirect("./clients.jsp");
 

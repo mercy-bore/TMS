@@ -1,9 +1,12 @@
 package com.transportsystem.pages;
 
 
+import com.transportsystem.controllers.AuthBean;
 import com.transportsystem.model.User;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -13,14 +16,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
+
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginPage extends HttpServlet {
+    @Resource(lookup = "java:jboss/datasources/TMS")
+    DataSource dataSource;
+    @Inject
+    AuthBean authController;
+
     ServletContext servletCtx = null;
     public void init(ServletConfig config) throws ServletException{
         super.init(config);
@@ -42,7 +51,8 @@ public class LoginPage extends HttpServlet {
             return;
         }
 
-        User user = this.login(username, password);
+//         User user = this.login(username, password);
+        User user = authController.login(username, password);
         if (user == null) {
             servletCtx.setAttribute("loginError" , "Invalid  username & password combination<br/>");
             res.sendRedirect("./login.jsp");
@@ -53,7 +63,7 @@ public class LoginPage extends HttpServlet {
         HttpSession session = req.getSession(true);
 
         session.setAttribute("username", user.getUsername());
-        session.setAttribute("loggedInTime", "You Logged in At:" + new Date());
+        session.setAttribute("loggedInTime", "You Logged in On: " + new Date());
 
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("./home.jsp");
@@ -61,31 +71,32 @@ public class LoginPage extends HttpServlet {
 
     }
 
-    public User login(String username, String password) {
+     public User login(String username, String password) {
 
-        User user = null;
+         User user = null;
 
-        try {
-            Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
-            Statement sqlStmt = connection.createStatement();
-            ResultSet result = sqlStmt.executeQuery("select * from users where username='" + username + "' and " +
-                    "password='" + password + "'");
-            while (result.next()) {
-                user = new User();
-                user.setUsername(result.getString("username"));
-                user.setPassword(result.getString("password"));
-                System.out.println("username :: " + username);
-                System.out.println("password ::  " + password);
-                System.out.println("Hashed password :: " + DigestUtils.md5Hex(password));
-            }
+         try {
+            //  Connection connection = (Connection) servletCtx.getAttribute("dbConnection");
+             // Statement sqlStmt = connection.createStatement();
+             Statement sqlStmt = dataSource.getConnection().createStatement();
+             ResultSet result = sqlStmt.executeQuery("select * from users where username='" + username + "' and " +
+                     "password='" + password + "'");
+             while (result.next()) {
+                 user = new User();
+                 user.setUsername(result.getString("username"));
+                 user.setPassword(result.getString("password"));
+                 System.out.println("username :: " + username);
+                 System.out.println("password ::  " + password);
+                 System.out.println("Hashed password :: " + DigestUtils.md5Hex(password));
+             }
 
-        }catch (Exception ex) {
-            System.out.println("Log In Error: " + ex.getMessage());
-        }
+         }catch (Exception ex) {
+             System.out.println("Log In Error: " + ex.getMessage());
+         }
 
-        return user;
+         return user;
 
-    }
+     }
 
 
 }

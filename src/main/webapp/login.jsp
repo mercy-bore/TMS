@@ -1,5 +1,11 @@
 <%@ page isELIgnored="false" %>
-<jsp:include page="header.jsp" />
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
+<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">

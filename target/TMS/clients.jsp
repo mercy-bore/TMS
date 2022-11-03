@@ -8,11 +8,9 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
-<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %><%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cht:Header></cht:Header>
 
-<jsp:useBean id="cc" class="com.transportsystem.controllers.CustomerController" />
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <div class="container-fluid">
 <div class="container-xxl position-relative bg-white d-flex p-0">
@@ -36,31 +34,20 @@
     <th scope="col">Last Name</th>
     <th scope="col">Email</th>
     <th scope="col">Phone</th>
-    <th scope="col">Location</th>
-    <th scope="col">Cargo</th>
-    <th scope="col">Delivery Type</th>
     <th scope="col"></th>
     </tr>
    </thead>
-
-   <%
-    List<Customer> customers = cc.list((Connection) application.getAttribute("dbConnection"), new Customer());
-    pageContext.setAttribute("customers", customers);
-    %>
 <tbody>
-    <c:forEach items="${customers}" var="customer">
+    <c:forEach items="${cc.list}" var="customer">
   <tr>
         <td>${customer.id}</td>
         <td>${customer.firstName}</td>
         <td>${customer.lastName}</td>
         <td>${customer.email}</td>
         <td>${customer.phone}</td>
-        <td>${customer.location}</td>
-        <td>${customer.cargo}</td>
-        <td>${customer.deliveryType}</td>
-        <td><a href="./updatecustomer.jsp?id=${customer.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?email=${customer.email}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
-            </tr>
-            </c:forEach>
+        <td><a href="./updatecustomer.jsp?id=${customer.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletecustomer?id=${customer.id}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
+   </tr>
+    </c:forEach>
             
         </tbody>
 </table>

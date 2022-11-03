@@ -1,7 +1,12 @@
 package com.transportsystem.model;
 
 public class Order extends BaseEntity {
-    private String name;
+    String name;
+    String startLocation;
+    String destination;
+    String cargo;
+    String deliveryTime;
+
 
     public String getName() {
         return name;

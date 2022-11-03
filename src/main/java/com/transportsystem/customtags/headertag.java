@@ -1,14 +1,20 @@
 package com.transportsystem.customtags;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
+import java.util.Date;
+import java.text.DateFormat;
 
-public class headertag extends SimpleTagSupport {
 
-    public void doTag() throws JspException, IOException {
-        JspWriter out = getJspContext().getOut();
+public class headertag extends TagSupport {
+    private String applicationLabel;
+    private Date date = new Date();
+
+
+    public int doStartTag() {
+        try{
+        JspWriter out = pageContext.getOut();
         out.println("<!DOCTYPE html>"+
         "<html>"+
     "<head>"+
@@ -33,7 +39,37 @@ public class headertag extends SimpleTagSupport {
 
        "<link href=\"css/style.css\" rel=\"stylesheet\">"+
        "</head>"+
+        "    <body><h1 class=\"text-primary\"style=\"text-align:center;\">" + applicationLabel + "<br/>"  + DateFormat.getDateInstance().format(date) + "<br/> " + "</h1>");
+}
+ catch(IOException ioe) {
+            System.out.println("Error in HeadingTag: " + ioe);
+        }
 
-    "<body>");
+        return(EVAL_BODY_INCLUDE); // Include tag body
+    }
+
+    public int doEndTag() {
+        try {
+            JspWriter out = pageContext.getOut();
+            out.print("</SPAN></TABLE>");
+        } catch(IOException ioe) {
+            System.out.println("Error in HeadingTag: " + ioe);
+        }
+        return(EVAL_PAGE); // Continue with rest of JSP page
+    }
+
+    public String getApplicationLabel() {
+        return applicationLabel;
+    }
+
+    public void setApplicationLabel(String applicationLabel) {
+        this.applicationLabel = applicationLabel;
+    }
+     public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

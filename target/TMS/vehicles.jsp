@@ -3,16 +3,15 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
-<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %><%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cht:Header></cht:Header>
 
-<jsp:useBean id="vc" class="com.transportsystem.controllers.VehicleController" />
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <div class="container-fluid">
 <div class="container-xxl position-relative bg-white d-flex p-0">
@@ -42,14 +41,8 @@
 
         </tr>
     </thead>
-
-   
-<%
-    List<Vehicle> vehicles = vc.list((Connection) application.getAttribute("dbConnection"), new Vehicle());
-            pageContext.setAttribute("vehicles", vehicles);
-%> 
 <tbody>
-<c:forEach items="${vehicles}" var="vehicle">
+<c:forEach items="${vc.list}" var="vehicle">
     <tr>
     <td scope="row">${vehicle.id}</td>
     <td scope="row">${vehicle.type}</td>
@@ -70,5 +63,4 @@
 </div>
 
 <jsp:include page="javascriptlibs.jsp"/>
-<cft:Footer> 
-     </cft:Footer>
+</body></html>

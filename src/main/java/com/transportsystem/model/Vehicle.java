@@ -1,11 +1,17 @@
 package com.transportsystem.model;
 
+import javax.inject.Inject;
+
 public class Vehicle extends  BaseEntity {
-    private Long id;
-    private String type;
-    private String plateNo;
-    private String route;
-    private String weight;
+    static public Long id;
+    static public String type;
+    static  public String plateNo;
+    static public String route;
+    static public String weight;
+    @Inject
+    public Vehicle() {
+        
+    }
 
     @Override
     public Long getId() {
@@ -14,7 +20,7 @@ public class Vehicle extends  BaseEntity {
 
     @Override
     public void setId(Long id) {
-        this.id = id;
+        Vehicle.id = id;
     }
 
 
@@ -34,7 +40,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setPlateNo(String plateNo) {
-        this.plateNo = plateNo;
+        Vehicle.plateNo = plateNo;
     }
 
     public String getRoute() {
@@ -42,7 +48,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setRoute(String route) {
-        this.route = route;
+        Vehicle.route = route;
     }
 
     public String getWeight() {
@@ -50,7 +56,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setWeight(String weight) {
-        this.weight = weight;
+        Vehicle.weight = weight;
     }
 
     public String getType() {
@@ -58,6 +64,6 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setType(String type) {
-        this.type = type;
+        Vehicle.type = type;
     }
 }

@@ -7,9 +7,7 @@ public class Customer  extends  BaseEntity{
     String lastName;
     String  email;
     String phone;
-    String location;
-    String cargo;
-    String deliveryType;
+   
 
     public Long getId() {
         return id;
@@ -22,10 +20,7 @@ public class Customer  extends  BaseEntity{
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", phone=" + phone +
-                ", location='" + location + '\'' +
-                ", cargo='" + cargo + '\'' +
-                ", deliveryType='" + deliveryType + '\'' +
+                ", phone=" + phone + '\'' +
                 '}';
     }
 
@@ -71,30 +66,6 @@ public class Customer  extends  BaseEntity{
 
     public void setPhone(String phone) { this.phone = phone;
     }
-
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public String getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(String deliveryType) {
-        this.deliveryType = deliveryType;
-    }
-
 
 
     public Customer() {

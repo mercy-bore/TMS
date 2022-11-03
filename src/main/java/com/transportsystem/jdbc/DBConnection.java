@@ -3,8 +3,9 @@ package com.transportsystem.jdbc;
 import com.transportsystem.model.Customer;
 import com.transportsystem.model.Vehicle;
 
-import java.awt.*;
 import java.sql.*;
+
+import static com.transportsystem.model.Vehicle.*;
 
 // This class can be used to initialize the database connection
 public class DBConnection {
@@ -115,33 +116,10 @@ Customer customer = new Customer();
                 customer.setLastName(rs.getString(3));
                 customer.setEmail(rs.getString(3));
                 customer.setPhone(rs.getString(3));
-                customer.setLocation(rs.getString(3));
-                customer.setCargo(rs.getString(3));
-                customer.setDeliveryType(rs.getString(3));
             }
             con.close();
         }catch(Exception ex1){ex1.printStackTrace();}
 
         return customer;
-    }
-    public static List getAllVehicles(List vehicles){
-        List list= new List();
-
-        try{
-            Connection con1=DBConnection.getConnection();
-            PreparedStatement ps1=con1.prepareStatement("select * from vehicle");
-            ResultSet rs1=ps1.executeQuery();
-            while(rs1.next()){
-                Vehicle e1=new Vehicle();
-                e1.setType(rs1.getString(1));
-                e1.setPlateNo(rs1.getString(2));
-                e1.setRoute(rs1.getString(3));
-                e1.setWeight(rs1.getString(4));
-                list.add(String.valueOf(e1));
-            }
-            con1.close();
-        }catch(Exception e1){e1.printStackTrace();}
-
-        return list;
     }
 }

@@ -1,9 +1,10 @@
 package com.transportsystem.pages;
-import com.transportsystem.controllers.VehicleController;
+import com.transportsystem.controllers.VehicleBean;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,31 +13,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
+
 
 @WebServlet("/addvehicle")
 public class AddVehiclePage extends HttpServlet {
+    VehicleBean vehicleBean;
+    Vehicle vehicle = new Vehicle();
+
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException{
         super.init(config);
-
         servletCtx = config.getServletContext();
-
     }
 
 
     @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        Vehicle vehicle = new Vehicle();
         try {
             BeanUtils.populate(vehicle, req.getParameterMap());
 
         } catch (Exception ex){
             System.out.println(ex.getMessage());
         }
-        res.setContentType("text/html");
 
 
         if (StringUtils.isBlank(vehicle.getType())) {
@@ -60,12 +60,15 @@ public class AddVehiclePage extends HttpServlet {
             res.sendRedirect("./addvehicle.jsp");
             return;
         }
-        VehicleController vc = new VehicleController();
-        vc.add((Connection) servletCtx.getAttribute("dbConnection"), vehicle);
-        System.out.println(vehicle + "         added        ");
+        addVehicle(vehicleBean);
         res.sendRedirect("./vehicles.jsp");
 
         }
+    @Inject
+    public void addVehicle(VehicleBean vehicleBean){
+        vehicleBean.add(vehicle);
 
+
+}
 
 }

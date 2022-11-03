@@ -10,23 +10,15 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
-<%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %><%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-<cht:Header></cht:Header>
-
-<jsp:useBean id="vc" class="com.transportsystem.controllers.VehicleController" />
-
+<cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 <%
-    List<Vehicle> vehicles = vc.list((Connection) application.getAttribute("dbConnection"), new Vehicle());
-    pageContext.setAttribute("vehicles", vehicles);
-%>
-
+            Vehicle vehicle = vc.list.getVehicle(Long.parseLong(request.getParameter("id")), (Connection) application.getAttribute("dbConnection"));
+            pageContext.setAttribute("vehicle", vehicle);
+     %>
 <div class="container-fluid">
 <h2> Update Vehicle Form</h2>
-
-<c:forEach items="${vehicles}" var="vehicle">
-<form action="./updatevehicle?plateNo=${vehicle.plateNo}" method="post">
-
+<form action="./updatevehicle" method="post">
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
                        <input type="hidden" class="form-control" id="floatingInput"placeholder="Id" name="id" value="${vehicle.id}">
@@ -52,7 +44,6 @@
      <button type="submit" class="btn btn-success">Submit</button>
 
   </form>
-    </c:forEach>
 
 
  <%

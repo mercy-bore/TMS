@@ -1,9 +1,7 @@
 package com.transportsystem.listeners;
 
-import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
-
 
 public class BindingListener implements HttpSessionBindingListener {
 

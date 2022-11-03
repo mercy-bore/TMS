@@ -1,5 +1,7 @@
+com/transportsystem/controllers/OrderController.class
 com/transportsystem/util/DatabaseConnection.class
 com/transportsystem/common/Gender.class
+com/transportsystem/controllers/CustomerController$1.class
 com/transportsystem/pages/AddVehiclePage.class
 com/transportsystem/pages/AddCustomerPage.class
 com/transportsystem/model/Order.class
@@ -15,9 +17,13 @@ com/transportsystem/listeners/SessionListener.class
 com/transportsystem/filters/SessionFilter.class
 com/transportsystem/pages/LoginPage.class
 com/transportsystem/listeners/BindingListener.class
+com/transportsystem/controllers/AuthController.class
+com/transportsystem/controllers/NameValidationUtility.class
+com/transportsystem/controllers/VehicleController$1.class
 com/transportsystem/controllers/CustomerController.class
 com/transportsystem/model/BaseEntity.class
 com/transportsystem/listeners/RequestListener.class
+com/transportsystem/TestJunit.class
 com/transportsystem/pages/SignupPage.class
 com/transportsystem/pages/UpdateVehicle.class
 com/transportsystem/listeners/ContextAttributeListener.class
