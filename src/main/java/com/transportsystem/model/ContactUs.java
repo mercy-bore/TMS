@@ -2,14 +2,38 @@ package com.transportsystem.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ContactUs extends BaseEntity {
-    private String contactEmail;
+import javax.persistence.*;
 
-    private String phoneNumber;
 
-    private String message;
+    @Entity
+    @Table(name = "contact_us")
+    public class ContactUs extends BaseEntity{
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "id", nullable = false)
+        private Long id;
 
-    public String getContactEmail() {
+        @Column(name = "contact_email")
+        private String contactEmail;
+
+        @Column(name = "phone_number")
+        private String phoneNumber;
+
+        @Column
+        private String message;
+
+        @Transient
+        private boolean messageAvailable;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getContactEmail() {
         return contactEmail;
     }
 

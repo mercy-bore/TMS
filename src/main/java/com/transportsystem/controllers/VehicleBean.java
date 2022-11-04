@@ -32,7 +32,7 @@ public class VehicleBean implements Serializable {
     }
     
     public void delete( Vehicle vehicle) {
-        em.detach(vehicle);
+        em.remove(vehicle);
     }
     
      public Vehicle getVehicle(Long id) throws SQLException {
@@ -46,7 +46,7 @@ public class VehicleBean implements Serializable {
     }
    
     public void getVehicleById(Vehicle vehicle) {
-        em.merge(vehicle);
+        em.contains(vehicle);
     }
    
 

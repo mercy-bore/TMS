@@ -1,14 +1,42 @@
 package com.transportsystem.model;
 
-public class User extends BaseEntity{
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-        private String username;
-         private String firstName;
+@Entity
+@Table(name = "users")
+public class User extends BaseEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column
+    private String username;
+    @Column
+    private String firstName;
+    @Column
     private  String lastName;
+    @Transient
+    private String password;
+    @Transient
     private String confirmPassword;
+    @Column
     private String phone;
-        private String email;
-        private String password;
+    @Column
+    private String email;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Auth> auths = new ArrayList<Auth>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -67,6 +95,18 @@ public class User extends BaseEntity{
         public void setEmail(String email) {
             this.email = email;
         }
+    public List<Auth> getAuths() {
+        return auths;
+    }
+
+    public void setAuths(List<Auth> auths) {
+        this.auths = auths;
+    }
+
+    public void addAuth(Auth auth){
+        auth.setUser(this);
+        getAuths().add(auth);
+    }
     }
 
 
