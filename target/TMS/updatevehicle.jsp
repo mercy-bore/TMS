@@ -12,20 +12,21 @@
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
-<%
-            Vehicle vehicle = vc.list.getVehicle(Long.parseLong(request.getParameter("id")), (Connection) application.getAttribute("dbConnection"));
-            pageContext.setAttribute("vehicle", vehicle);
-     %>
+
 <div class="container-fluid">
 <h2> Update Vehicle Form</h2>
 <form action="./updatevehicle" method="post">
+    <% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
+     pageContext.setAttribute("id", a);
+    %>
+   <c:set var="vehicle" value = "${vc.getVehicle(id)}" />
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
                        <input type="hidden" class="form-control" id="floatingInput"placeholder="Id" name="id" value="${vehicle.id}">
                        <label for="floatingInput">Id</label>
                  </div>
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="Type" name="type" value=${vehicle.type}>
+                      <input type="text" class="form-control" id="floatingInput"placeholder="Type" name="type" value="${vehicle.type}">
                       <label for="floatingInput">Type</label>
                  </div><tr>
                  <div class="form-floating mb-3">

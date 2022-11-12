@@ -1,43 +1,56 @@
 package com.transportsystem.controllers;
 
 
-import com.transportsystem.model.Auth;
-import com.transportsystem.model.Status;
 import com.transportsystem.model.User;
 
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 @Remote
-public class UserBean implements UserBeanI{
+@TransactionManagement(TransactionManagementType.CONTAINER)
+
+public class UserBean implements UserBeanI {
 
     @PersistenceContext
     EntityManager em;
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
 
-    public User register(User user) throws Exception{
+    public User register(User user) throws Exception {
         if (user == null)
             throw new Exception("Invalid details");
-
+        if (user.getFirstName() == null)
+            throw new Exception("First name is required");
+        if (user.getLastName() == null)
+            throw new Exception("Last name is required");
         if (user.getEmail() == null)
             throw new Exception("Email is required");
+        if (user.getPhone() == null)
+            throw new Exception("Phone is required");
+        if (user.getPassword() == null)
+            throw new Exception("Password is required");
 
-        Auth auth = new Auth();
-        auth.setUsername(user.getEmail());
-        if (user.getPassword() == null || user.getConfirmPassword() == null
-                || !user.getPassword().equals(user.getConfirmPassword()))
-            throw new Exception("Password & confirm password is required and must match");
-
-        auth.setUsername(user.getEmail());
-        auth.setPassword(user.getPassword());
-        auth.setConfirmPassword(user.getConfirmPassword());
-        auth.setStatus(Status.ACTIVE);
-
-        user.addAuth(auth);
+        if (user.getConfirmPassword() == null)
+            throw new Exception("/Confirm password is required");
 
         return em.merge(user);
 
+    }
+
+    public User login(User user) throws Exception {
+        if (user.getUsername() == null && user.getPassword() == null)
+            throw new Exception("invalid credentials");
+        List<User> userList = em.createQuery("FROM User c where c.username =:username " +
+                        "and c.password =:password", User.class)
+                .setParameter("username", user.getUsername())
+                .setParameter("password", user.getPassword())
+                .getResultList();
+
+        if (userList == null || userList.isEmpty() || userList.get(0) == null)
+            throw new Exception("invalid  credentials");
+
+        return userList.get(0);
     }
 }

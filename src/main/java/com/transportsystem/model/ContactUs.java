@@ -5,35 +5,25 @@ import org.apache.commons.lang3.StringUtils;
 import javax.persistence.*;
 
 
-    @Entity
-    @Table(name = "contact_us")
-    public class ContactUs extends BaseEntity{
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "id", nullable = false)
-        private Long id;
+@Entity
+@Table(name = "contact_us")
+public class ContactUs extends BaseEntity {
 
-        @Column(name = "contact_email")
-        private String contactEmail;
+    @Column(name = "contact_email")
+    private String contactEmail;
 
-        @Column(name = "phone_number")
-        private String phoneNumber;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-        @Column
-        private String message;
+    @Column
+    private String message;
 
-        @Transient
-        private boolean messageAvailable;
+    @Transient
+    private boolean messageAvailable;
 
-        public Long getId() {
-            return id;
-        }
 
-        public void setId(Long id) {
-            this.id = id;
-        }
 
-        public String getContactEmail() {
+    public String getContactEmail() {
         return contactEmail;
     }
 

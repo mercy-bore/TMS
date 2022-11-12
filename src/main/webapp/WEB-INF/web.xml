@@ -8,7 +8,4 @@
     <welcome-file>index.jsp
     </welcome-file>
   </welcome-file-list>
-  <listener>
-      <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class> 
-  </listener>
 </web-app>

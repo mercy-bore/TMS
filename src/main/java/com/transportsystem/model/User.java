@@ -1,24 +1,29 @@
 package com.transportsystem.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class User extends BaseEntity {
+    @Embedded
+    private Person person;
 
     @Column
     private String username;
     @Column
     private String firstName;
     @Column
-    private  String lastName;
-    @Transient
+    private String lastName;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    @Column
     private String password;
     @Transient
     private String confirmPassword;
@@ -26,16 +31,6 @@ public class User extends BaseEntity{
     private String phone;
     @Column
     private String email;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Auth> auths = new ArrayList<Auth>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 
     public String getFirstName() {
@@ -80,33 +75,27 @@ public class User extends BaseEntity{
     }
 
 
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-    public List<Auth> getAuths() {
-        return auths;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAuths(List<Auth> auths) {
-        this.auths = auths;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void addAuth(Auth auth){
-        auth.setUser(this);
-        getAuths().add(auth);
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "{" + " username='" + getUsername() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", password='" + getPassword() + "'" + ", confirmPassword='" + getConfirmPassword() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + "}";
+    }
+
+}
 
 

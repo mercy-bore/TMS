@@ -14,13 +14,16 @@
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 
-    <%
-            Customer customer = cc.list.getCustomer(Long.parseLong(request.getParameter("id")), (Connection) application.getAttribute("dbConnection"));
-            pageContext.setAttribute("customer", customer);
-     %>
-<div class="container-fluid">
+     <div class="container-fluid">
 <h2> Update Customer Details Form</h2>
 <form action="./updatecustomer" method="post">
+<% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
+     pageContext.setAttribute("id", a);
+%>
+   <c:set var="customer" value = "${cc.getCustomer(id)}" />
+
+
+
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                   <div class="form-floating mb-3">
                        <input type="text" class="form-control" id="floatingInput"placeholder="Id" name="id" value="${customer.id}">

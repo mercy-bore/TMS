@@ -26,7 +26,8 @@
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Clients</h1>
        <p><a href='./addcustomer.jsp'><button type="submit" class="btn btn-primary ">Add Client</button></a></p>
-</div> <table class="table">
+</div> 
+<table class="table">
    <thead>
      <tr>
      <th scope="col">Id</th>
@@ -38,7 +39,7 @@
     </tr>
    </thead>
 <tbody>
-    <c:forEach items="${cc.list}" var="customer">
+    <c:forEach items="${CustomerView.list}" var="customer">
   <tr>
         <td>${customer.id}</td>
         <td>${customer.firstName}</td>
@@ -51,7 +52,6 @@
             
         </tbody>
 </table>
-
 
 </div>
 </div>

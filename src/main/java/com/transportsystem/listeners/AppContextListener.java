@@ -1,12 +1,9 @@
 package com.transportsystem.listeners;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.sql.DataSource;
-import java.sql.Connection;
 
 @WebListener
 public class AppContextListener implements ServletContextListener {
@@ -15,7 +12,7 @@ public class AppContextListener implements ServletContextListener {
 // DataSource datasource;
 
 
-    public void contextInitialized(ServletContextEvent ctxe){
+    public void contextInitialized(ServletContextEvent ctxe) {
         System.out.println();
         System.out.println();
         System.out.print("Transport Management System ..... Firing up");

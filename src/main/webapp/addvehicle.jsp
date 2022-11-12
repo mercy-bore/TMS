@@ -39,7 +39,7 @@
     if (loginError != null && !loginError.equals("")) {
 
 %>
-    <span style="color:yellow"> ${applicationScope.addVehicleError} </span><br/>
+    <span style="color:red"> ${applicationScope.addVehicleError} </span><br/>
 
 <% } %>
 

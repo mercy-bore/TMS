@@ -8,7 +8,7 @@ import java.io.StringWriter;
 
 public class footertag extends SimpleTagSupport {
 
-    StringWriter stringWriter =  new StringWriter();
+    StringWriter stringWriter = new StringWriter();
 
     public void doTag() throws JspException, IOException {
         getJspBody().invoke(stringWriter);

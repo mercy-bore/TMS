@@ -4,6 +4,7 @@ package com.transportsystem.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 
@@ -13,6 +14,7 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "time_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeCreated = new Date();
+
     public Long getId() {
         return id;
     }

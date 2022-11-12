@@ -1,41 +1,61 @@
 package com.transportsystem.model;
 
-public class Customer  extends  BaseEntity{
-    Long id;
-    int pk =0;
-    String firstName;
-    String lastName;
-    String  email;
-    String phone;
-   
+import org.hibernate.annotations.Formula;
 
-    public Long getId() {
-        return id;
+import javax.persistence.*;
+
+@NamedQueries({
+    @NamedQuery(name = Customer.FIND_ALL, query = "SELECT c FROM Customer c"),
+    @NamedQuery(name = Customer.FIND_WITH_ID, query = "SELECT c FROM Customer c WHERE c.id=:Id"),
+    @NamedQuery(name = Customer.FIND_WITH_FIRST_NAME, query = "SELECT c FROM Customer c WHERE c.firstName=:FirstName")
+})
+@Entity
+@Table(name = "customers")
+public class Customer extends BaseEntity {
+
+    public static final String FIND_ALL = "Customer.findAll";
+    public static final String FIND_WITH_ID = "Customer.findWithId";
+    public static final String FIND_WITH_FIRST_NAME = "Customer.findWithFirstName";
+    @Embedded
+    private Person person;
+
+    public Person getPerson() {
+        return person;
     }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+
+
+
+    @Column
+    String firstName;
+    @Column
+    String lastName;
+    @Column
+    String email;
+    @Column
+    String phone;
+
+    @OneToOne
+	private Address address;
+    @Formula("(select count(c.id) from customers c where c.firstName='mercy')")
+    private int countName;
+
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone=" + phone + '\'' +
-                '}';
+        return "Customer{ firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", phone=" + phone + '\'' + '}';
     }
+public Address getAddress() {
+		return address;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getPk() {
-        return pk;
-    }
-
-    public void setPk(int pk) {
-        this.pk = pk;
-    }
-
+	public void setAddress(Address address) {
+		this.address = address;
+	}
     public String getFirstName() {
         return firstName;
     }
@@ -60,17 +80,21 @@ public class Customer  extends  BaseEntity{
         this.email = email;
     }
 
-    public String  getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) { this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-
-    public Customer() {
-        pk = pk + 1;
-        id = (long) pk;
+    public int getCountName() {
+        return countName;
     }
+
+    public void setCountName(int countName) {
+        this.countName = countName;
+    }
+
 
 }

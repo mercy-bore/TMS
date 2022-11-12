@@ -1,38 +1,32 @@
 package com.transportsystem.model;
 
-import javax.inject.Inject;
+import javax.persistence.*;
 
-public class Vehicle extends  BaseEntity {
-    private Long id;
+@NamedQueries({
+@NamedQuery(name = Vehicle.FIND_ALL, query = "SELECT v FROM Vehicle v"),
+@NamedQuery(name = Vehicle.FIND_WITH_ID, query = "SELECT v FROM Vehicle v WHERE v.id=:id"),
+@NamedQuery(name = Vehicle.FIND_WITH_PLATE_NO, query = "SELECT v FROM Vehicle v WHERE v.plateNo=:plateNo")
+})
+
+@Entity
+@Table(name = "vehicles")
+public class Vehicle extends BaseEntity {
+    public static final String FIND_ALL = "Vehicle.findAll";
+    public static final String FIND_WITH_ID = "Vehicle.findWithId";
+    public static final String FIND_WITH_PLATE_NO = "Vehicle.findWithPlateNo";
+
+    @Column
     private String type;
+    @Column
     private String plateNo;
+    @Column
     private String route;
+    @Column
     private String weight;
-
-    @Inject
-    public Vehicle() {
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        id = id;
-    }
-
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", plateNo='" + plateNo + '\'' +
-                ", route='" + route + '\'' +
-                ", weight='" + weight + '\'' +
-                '}';
+        return "Vehicle{type='" + type + '\'' + ", plateNo='" + plateNo + '\'' + ", route='" + route + '\'' + ", weight='" + weight + '\'' + '}';
     }
 
     public String getPlateNo() {
@@ -40,7 +34,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setPlateNo(String plateNo) {
-        plateNo = plateNo;
+        this.plateNo = plateNo;
     }
 
     public String getRoute() {
@@ -48,7 +42,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setRoute(String route) {
-        route = route;
+        this.route = route;
     }
 
     public String getWeight() {
@@ -56,7 +50,7 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setWeight(String weight) {
-        weight = weight;
+        this.weight = weight;
     }
 
     public String getType() {
@@ -64,6 +58,6 @@ public class Vehicle extends  BaseEntity {
     }
 
     public void setType(String type) {
-        type = type;
+        this.type = type;
     }
 }

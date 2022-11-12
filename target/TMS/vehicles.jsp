@@ -42,14 +42,14 @@
         </tr>
     </thead>
 <tbody>
-<c:forEach items="${vc.list}" var="vehicle">
+<c:forEach items="${VehicleView.list}" var="vehicle">
     <tr>
     <td scope="row">${vehicle.id}</td>
     <td scope="row">${vehicle.type}</td>
     <td scope="row">${vehicle.plateNo}</td>
     <td scope="row">${vehicle.weight}</td>
     <td scope="row">${vehicle.route}</td>
-    <td scope="row"> <a href="./updatevehicle.jsp?plateNo=${vehicle.plateNo}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?plateNo=${vehicle.plateNo}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+    <td scope="row"> <a href="./updatevehicle.jsp?id=${vehicle.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?id=${vehicle.id}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
     </tr>
     </c:forEach>
 </tbody>
