@@ -5,8 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-    @Embedded
-    private Person person;
+
 
     @Column
     private String username;
@@ -14,15 +13,6 @@ public class User extends BaseEntity {
     private String firstName;
     @Column
     private String lastName;
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     @Column
     private String password;
     @Transient
@@ -31,6 +21,9 @@ public class User extends BaseEntity {
     private String phone;
     @Column
     private String email;
+
+
+
 
 
     public String getFirstName() {

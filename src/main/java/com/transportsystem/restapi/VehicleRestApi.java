@@ -1,6 +1,6 @@
 package com.transportsystem.restapi;
 
-import com.transportsystem.controllers.VehicleBeanI;
+import com.transportsystem.bean.VehicleBeanI;
 import com.transportsystem.model.Vehicle;
 import com.transportsystem.rest.BaseRestApi;
 import com.transportsystem.rest.ResponseWrapper;

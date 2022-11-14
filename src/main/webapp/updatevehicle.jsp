@@ -16,10 +16,10 @@
 <div class="container-fluid">
 <h2> Update Vehicle Form</h2>
 <form action="./updatevehicle" method="post">
-    <% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
-     pageContext.setAttribute("id", a);
-    %>
-   <c:set var="vehicle" value = "${vc.getVehicle(id)}" />
+  <% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
+       pageContext.setAttribute("id", a);
+  %>
+     <c:set var="vehicle" value = "${vehicleBean.getVehicle(id)}" />
  <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
                        <input type="hidden" class="form-control" id="floatingInput"placeholder="Id" name="id" value="${vehicle.id}">

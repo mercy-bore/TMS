@@ -1,6 +1,6 @@
 package com.transportsystem.actions;
 
-import com.transportsystem.controllers.VehicleBeanI;
+import com.transportsystem.bean.VehicleBeanI;
 import com.transportsystem.model.Vehicle;
 
 import javax.ejb.EJB;

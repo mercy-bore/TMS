@@ -1,15 +1,18 @@
 package com.transportsystem.model;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = Driver.FIND_ALL, query = "SELECT d FROM Driver d"),
+        @NamedQuery(name = Driver.FIND_WITH_ID, query = "SELECT d FROM Driver d WHERE d.id=:id"),
+        @NamedQuery(name = Driver.FIND_WITH_FIRST_NAME, query = "SELECT d FROM Driver d WHERE d.firstName=:FirstNam")
+})
 @Entity
 @Table(name = "drivers")
 public class Driver extends  BaseEntity{
-    @Embedded
-    private Person person;
+    public static final String FIND_ALL = "Driver.findAll";
+    public static final String FIND_WITH_ID = "Driver.findWithId";
+    public static final String FIND_WITH_FIRST_NAME = "Driver.findWithFirstName";
     @Column
     String firstName;
     @Column
@@ -18,7 +21,7 @@ public class Driver extends  BaseEntity{
     String email;
     @Column
     String phone;
- 
+
 
     public String getFirstName() {
         return firstName;

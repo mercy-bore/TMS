@@ -1,6 +1,6 @@
 package com.transportsystem.view;
 
-import com.transportsystem.controllers.VehicleBeanI;
+import com.transportsystem.bean.VehicleBeanI;
 import com.transportsystem.model.Vehicle;
 
 import javax.ejb.EJB;
@@ -17,5 +17,8 @@ public class VehicleView implements Serializable {
     public List<Vehicle> getList() throws Exception {
         return vehicleBeanI.list();
     }
+    public Vehicle getVehicle(Long id) throws Exception {
+        return vehicleBeanI.getVehicle(id);
 
+    }
 }

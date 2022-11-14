@@ -1,4 +1,8 @@
 package com.transportsystem.restapi;
 
-public class ContactUsRestApi {
+
+import com.transportsystem.rest.BaseRestApi;
+
+public class ContactUsRestApi extends BaseRestApi {
+
 }

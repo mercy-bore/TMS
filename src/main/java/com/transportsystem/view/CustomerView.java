@@ -1,6 +1,6 @@
 package com.transportsystem.view;
 
-import com.transportsystem.controllers.CustomerBeanI;
+import com.transportsystem.bean.CustomerBeanI;
 import com.transportsystem.model.Customer;
 
 import javax.ejb.EJB;
@@ -17,5 +17,8 @@ public class CustomerView implements Serializable {
     public List<Customer> getList() throws Exception {
         return customerBeanI.list();
     }
+    public Customer getCustomer(Long id) throws Exception {
+        return customerBeanI.getCustomer(id);
 
+    }
 }

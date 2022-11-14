@@ -35,9 +35,16 @@
                     <div class="nav-item dropdown">
                         <a href="orders.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Order pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="orders.jsp" class="dropdown-item">View orders</a>
+                            <a href="orders.jsp" class="dropdown-item">View Orders</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                         <a href="drivers.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Driver pages</a>
+                         <div class="dropdown-menu bg-transparent border-0">
+                          <a href="drivers.jsp" class="dropdown-item">View Drivers</a>
+                           </div>
+                    </div>
+
                     <a href="contactus.jsp" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Send Message</a>
                     <a href="./logout" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Logout</a>
 

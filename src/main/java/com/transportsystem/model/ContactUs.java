@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "contact_us")
 public class ContactUs extends BaseEntity {

@@ -1,6 +1,6 @@
 package com.transportsystem.restapi;
 
-import com.transportsystem.controllers.CustomerBeanI;
+import com.transportsystem.bean.CustomerBeanI;
 import com.transportsystem.model.Customer;
 import com.transportsystem.rest.BaseRestApi;
 import com.transportsystem.rest.ResponseWrapper;
@@ -15,7 +15,12 @@ public class CustomerRestApi extends BaseRestApi {
 
     @EJB
     private CustomerBeanI customerBeanI;
-
+    @Path("/list")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response list()throws Exception {
+        return Response.status(Response.Status.OK).entity(customerBeanI.list()).build();
+    }
     @Path("/add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -32,18 +37,12 @@ public class CustomerRestApi extends BaseRestApi {
 
     }
 
-    @Path("/list/{id}")
+    @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomer(@PathParam("id") Long id)   throws Exception {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>The id is " + id);
-        return Response.status(Response.Status.OK).entity(customerBeanI.list()).build();
+        return Response.status(Response.Status.OK).entity(customerBeanI.getCustomer(id)).build();
     }
 
-    @Path("/list")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response list()throws Exception {
-        return Response.status(Response.Status.OK).entity(customerBeanI.list()).build();
-    }
+
 }

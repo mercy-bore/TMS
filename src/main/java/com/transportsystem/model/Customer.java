@@ -1,7 +1,5 @@
 package com.transportsystem.model;
 
-import org.hibernate.annotations.Formula;
-
 import javax.persistence.*;
 
 @NamedQueries({
@@ -16,20 +14,6 @@ public class Customer extends BaseEntity {
     public static final String FIND_ALL = "Customer.findAll";
     public static final String FIND_WITH_ID = "Customer.findWithId";
     public static final String FIND_WITH_FIRST_NAME = "Customer.findWithFirstName";
-    @Embedded
-    private Person person;
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-
-
-
     @Column
     String firstName;
     @Column
@@ -39,23 +23,11 @@ public class Customer extends BaseEntity {
     @Column
     String phone;
 
-    @OneToOne
-	private Address address;
-    @Formula("(select count(c.id) from customers c where c.firstName='mercy')")
-    private int countName;
-
-
     @Override
     public String toString() {
         return "Customer{ firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", phone=" + phone + '\'' + '}';
     }
-public Address getAddress() {
-		return address;
-	}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
     public String getFirstName() {
         return firstName;
     }
@@ -88,13 +60,7 @@ public Address getAddress() {
         this.phone = phone;
     }
 
-    public int getCountName() {
-        return countName;
-    }
 
-    public void setCountName(int countName) {
-        this.countName = countName;
-    }
 
 
 }

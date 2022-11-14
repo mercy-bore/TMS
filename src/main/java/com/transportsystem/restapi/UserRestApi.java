@@ -1,4 +1,17 @@
 package com.transportsystem.restapi;
 
-public class UserRestApi {
+
+import com.transportsystem.bean.UserBeanI;
+import com.transportsystem.rest.BaseRestApi;
+
+import javax.ejb.EJB;
+import javax.ws.rs.Path;
+
+@Path("/user")
+public class UserRestApi extends BaseRestApi {
+
+    @EJB
+    private UserBeanI userBeanI;
+
+
 }

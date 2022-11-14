@@ -16,9 +16,6 @@ public class Address extends BaseEntity {
 	@Column(name = "city")
 	private String city;
 
-	@OneToOne
-	private Customer customer;
-
 	public String getAddressLine1() {
 		return addressLine1;
 	}
@@ -43,12 +40,5 @@ public class Address extends BaseEntity {
 		this.city = city;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 }

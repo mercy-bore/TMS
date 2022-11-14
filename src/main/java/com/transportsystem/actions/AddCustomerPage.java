@@ -1,6 +1,6 @@
 package com.transportsystem.actions;
 
-import com.transportsystem.controllers.CustomerBeanI;
+import com.transportsystem.bean.CustomerBeanI;
 import com.transportsystem.model.Customer;
 import org.apache.commons.beanutils.BeanUtils;
 

@@ -1,14 +1,19 @@
 package com.transportsystem.model;
 
 import javax.persistence.*;
-
+@NamedQueries({
+        @NamedQuery(name = Order.FIND_ALL, query = "SELECT o FROM Order o "),
+        @NamedQuery(name = Order.FIND_WITH_ID, query = "SELECT o FROM Order o WHERE o.id=:Id"),
+        @NamedQuery(name = Order.FIND_WITH_NAME, query = "SELECT o FROM Order o WHERE o.name=:Name")
+})
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Vehicle vehicle;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Customer customer;
+    private  Customer customer;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Driver driver;
     @Column
@@ -19,9 +24,10 @@ public class Order extends BaseEntity {
     String destination;
     @Column
     String cargo;
-    @Column
-    String deliveryTime;
-    private int orderId;
+
+    public static final String FIND_ALL = "Order.findAll";
+    public static final String FIND_WITH_ID = "Order.findWithId";
+    public static final String FIND_WITH_NAME = "Order.findWithName";
 
     public Vehicle getVehicle() {
         return vehicle;
@@ -42,6 +48,11 @@ public class Order extends BaseEntity {
         this.name = name;
     }
 
+
+    public Driver getDriver() {
+        return driver;
+    }
+
     public Order(Customer customer){
         this.customer = customer;
     }
@@ -52,11 +63,6 @@ public class Order extends BaseEntity {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
@@ -85,16 +91,6 @@ public class Order extends BaseEntity {
         this.cargo = cargo;
     }
 
-    public String getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(String deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-
-
-
     public String getName() {
         return name;
     }
@@ -103,11 +99,4 @@ public class Order extends BaseEntity {
         this.name = name;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
 }

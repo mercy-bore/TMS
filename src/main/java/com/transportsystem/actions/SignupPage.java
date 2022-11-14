@@ -1,6 +1,6 @@
 package com.transportsystem.actions;
 
-import com.transportsystem.controllers.UserBeanI;
+import com.transportsystem.bean.UserBeanI;
 import com.transportsystem.model.User;
 import org.apache.commons.beanutils.BeanUtils;
 

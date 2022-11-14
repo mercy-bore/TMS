@@ -1,11 +1,14 @@
 package com.transportsystem.model;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NamedQueries({
 @NamedQuery(name = Vehicle.FIND_ALL, query = "SELECT v FROM Vehicle v"),
-@NamedQuery(name = Vehicle.FIND_WITH_ID, query = "SELECT v FROM Vehicle v WHERE v.id=:id"),
-@NamedQuery(name = Vehicle.FIND_WITH_PLATE_NO, query = "SELECT v FROM Vehicle v WHERE v.plateNo=:plateNo")
+@NamedQuery(name = Vehicle.FIND_WITH_ID, query = "SELECT v FROM Vehicle v WHERE v.id=:Id"),
+@NamedQuery(name = Vehicle.FIND_WITH_PLATE_NO, query = "SELECT v FROM Vehicle v WHERE v.plateNo=:PlateNo")
 })
 
 @Entity
@@ -23,10 +26,19 @@ public class Vehicle extends BaseEntity {
     private String route;
     @Column
     private String weight;
-
+    @OneToMany(mappedBy = "vehicle", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
     @Override
     public String toString() {
         return "Vehicle{type='" + type + '\'' + ", plateNo='" + plateNo + '\'' + ", route='" + route + '\'' + ", weight='" + weight + '\'' + '}';
+    }
+@JsonbTransient
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public String getPlateNo() {
