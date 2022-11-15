@@ -91,11 +91,10 @@ public class CustomerBean implements CustomerBeanI {
     }
 
     public void leftJoin() {
-        String hql = "select c.firstName from TMS.customers c left join TMS.orders o on o.customer_id=c.id;";
+        String hql = "select c.firstName from TMS.customers c left join TMS.orders o on o.customerId=c.id;";
         Query query = em.createQuery(hql);
         List<Object[]> list = query.getResultList();
         list.forEach(System.out::println);
-
     }
 
     public void crossJoin() {

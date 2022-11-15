@@ -12,6 +12,6 @@ public interface DriverBeanI {
     void update(Driver driver) throws Exception;
 
     List<Driver> list() throws  Exception;
-
+    List<Driver> getDriverCrossJoinedList();
     Driver getDriver(Long id) throws Exception;
 }

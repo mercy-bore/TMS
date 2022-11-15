@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
+
 @Stateless
 @Remote
 @Named("driverBean")
@@ -42,8 +44,8 @@ public class DriverBean implements DriverBeanI {
     }
 
     public void update(Driver driver) throws Exception {
-        if(StringUtils.isBlank(driver.getFirstName())){
-            throw new Exception ("First Name is required");
+        if (StringUtils.isBlank(driver.getFirstName())) {
+            throw new Exception("First Name is required");
         }
         if (StringUtils.isBlank(driver.getLastName())) {
             throw new Exception("Last Name is required");
@@ -53,7 +55,7 @@ public class DriverBean implements DriverBeanI {
             throw new Exception("Email is required");
 
         }
-        if (StringUtils.isBlank(driver.getPhone())){
+        if (StringUtils.isBlank(driver.getPhone())) {
             throw new Exception("Phone is required");
 
         }
@@ -69,8 +71,20 @@ public class DriverBean implements DriverBeanI {
         return em.find(Driver.class, id);
 
     }
-    public List<Driver> list() {
-        return  em.createNamedQuery(Driver.FIND_ALL, Driver.class).getResultList();
 
+    public List<Driver> list() {
+        return em.createNamedQuery(Driver.FIND_ALL, Driver.class).getResultList();
+
+    }
+
+    public List<Driver> getDriverCrossJoinedList() {
+        TypedQuery<Driver> query = em.createQuery("select c.firstName from Driver c  inner join Order o on o.driverId=c.id", Driver.class);
+        List<Driver> resultList = query.getResultList();
+        System.out.println("\n\n" + resultList + "\n\n");
+
+        return resultList;
+    }
+    public List<Driver> getDriverist() {
+        return em.createQuery("select c.firstName from Driver c  inner join Order o on o.driver_id=c.id", Driver.class).getResultList();
     }
 }

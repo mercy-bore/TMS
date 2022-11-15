@@ -1,33 +1,67 @@
 package com.transportsystem.model;
 
 import javax.persistence.*;
-@NamedQueries({
-        @NamedQuery(name = Order.FIND_ALL, query = "SELECT o FROM Order o "),
-        @NamedQuery(name = Order.FIND_WITH_ID, query = "SELECT o FROM Order o WHERE o.id=:Id"),
-        @NamedQuery(name = Order.FIND_WITH_NAME, query = "SELECT o FROM Order o WHERE o.name=:Name")
-})
+
+@NamedQueries({@NamedQuery(name = Order.FIND_ALL, query = "SELECT o FROM Order o "), @NamedQuery(name = Order.FIND_WITH_ID, query = "SELECT o FROM Order o WHERE o.id=:Id"), @NamedQuery(name = Order.FIND_WITH_NAME, query = "SELECT o FROM Order o WHERE o.cargo=:Cargo")})
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Vehicle vehicle;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private  Customer customer;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Driver driver;
-    @Column
-    String name;
+    public static final String FIND_ALL = "Order.findAll";
+    public static final String FIND_WITH_ID = "Order.findWithId";
+    public static final String FIND_WITH_NAME = "Order.findWithName";
     @Column
     String startLocation;
     @Column
     String destination;
     @Column
     String cargo;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Vehicle vehicle;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Customer customer;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Driver driver;
+    @Transient
+    private Long vehicleId;
+    @Transient
+    private Long customerId;
+    @Transient
+    private Long driverId;
 
-    public static final String FIND_ALL = "Order.findAll";
-    public static final String FIND_WITH_ID = "Order.findWithId";
-    public static final String FIND_WITH_NAME = "Order.findWithName";
+    public Order(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Order() {
+    }
+
+    public Order(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public Long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
+    }
 
     public Vehicle getVehicle() {
         return vehicle;
@@ -37,34 +71,20 @@ public class Order extends BaseEntity {
         this.vehicle = vehicle;
     }
 
-    public Order(Driver driver){
-        this.driver = driver;
-    }
-
-
-    public Order(){}
-
-    public Order(String name){
-        this.name = name;
-    }
-
-
     public Driver getDriver() {
         return driver;
     }
 
-    public Order(Customer customer){
-        this.customer = customer;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
+
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-    public void setDriver(Driver driver) {
-        this.driver = driver;
     }
 
     public String getStartLocation() {
@@ -90,13 +110,6 @@ public class Order extends BaseEntity {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }
+
+

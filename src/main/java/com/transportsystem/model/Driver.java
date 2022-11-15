@@ -1,6 +1,9 @@
 package com.transportsystem.model;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Driver.FIND_ALL, query = "SELECT d FROM Driver d"),
@@ -22,7 +25,20 @@ public class Driver extends  BaseEntity{
     @Column
     String phone;
 
+    @OneToMany(mappedBy = "driver", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
+
+    @JsonbTransient
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
     public String getFirstName() {
         return firstName;
     }

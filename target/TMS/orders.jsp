@@ -33,10 +33,10 @@
     <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Type</th>
-            <th scope="col">Plate No</th>
-            <th scope="col">Weight in KG</th>
-            <th scope="col">Route</th>
+            <th scope="col">Start Location</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Customer Id</th>
             <th scope="col"></th>
 
         </tr>
@@ -45,10 +45,11 @@
 <c:forEach items="${OrderView.list}" var="order">
     <tr>
     <td scope="row">${order.id}</td>
-    <td scope="row">${order.name}</td>
     <td scope="row">${order.startLocation}</td>
     <td scope="row">${order.destination}</td>
     <td scope="row">${order.cargo}</td>
+    <td scope="row">${order.customerId}</td>
+
     <td scope="row"> <a href="./updateorder.jsp?id=${order.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deleteorder?id=${order.id}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
     </tr>
     </c:forEach>
