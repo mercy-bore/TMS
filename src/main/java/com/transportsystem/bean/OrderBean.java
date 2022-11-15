@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -116,6 +117,9 @@ public class OrderBean implements OrderBeanI {
     }
 
     public List<Order> test3() {
-        return em.createQuery("SELECT o FROM Order o  right outer join Vehicle v", Order.class).getResultList();
+        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o  right outer join o.vehicle v", Order.class);
+        List<Order> resultList = query.getResultList();
+        System.out.println("\n\n" + resultList + "\n\n");
+        return resultList;
     }
 }
