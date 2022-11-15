@@ -41,9 +41,9 @@
                 <div class="form-floating mb-3">
                 <select class="form-control" name="vehicleId">
                      <option value="none" selected disabled hidden>Select a Vehicle</option>
-                         <c:forEach items="${orderBean.test3()}" var="vehicle">
-                               <option value="${vehicle.id}">
-                                 ${vehicle.plateNo}
+                         <c:forEach items="${orderBean.test3()}" var="order">
+                               <option value="${order.vehicle.id}">
+                                 ${order.vehicle.plateNo}
                                </option>
                          </c:forEach>
                 </select>
