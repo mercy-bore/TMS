@@ -19,6 +19,7 @@ import java.io.IOException;
 public class AddCustomerPage extends HttpServlet {
     @EJB
     CustomerBeanI customerBeanI;
+
     ServletContext servletCtx = null;
 
     public void init(ServletConfig config) throws ServletException {
@@ -43,34 +44,57 @@ public class AddCustomerPage extends HttpServlet {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-try {
+        try {
             customerBeanI.leftJoin();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
-        }try {
+        }
+        try {
             customerBeanI.crossJoin();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
-        }try {
+        }
+        try {
             customerBeanI.orderBy();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
-        }try {
+        }
+        try {
             customerBeanI.groupBy();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-try {
+        try {
             customerBeanI.limit();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-
+        try {
+            customerBeanI.limit();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }try {
+            customerBeanI.limit();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }try {
+            customerBeanI.limit();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }try {
+            customerBeanI.limit();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
 
         try {
             customerBeanI.add(customer);

@@ -85,6 +85,6 @@ public class VehicleBean implements VehicleBeanI {
         return resultList;
     }
     public List<Vehicle> getVehicleList() {
-        return em.createQuery("select c.plateNo  from Vehicle c inner join Order o on o.vehicleId=c.id", Vehicle.class).getResultList();
+        return em.createQuery("select c.plateNo  from Vehicle c left outer join Order o where o.vehicleId=c.id", Vehicle.class).getResultList();
     }
 }

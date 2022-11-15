@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -92,4 +93,29 @@ public class OrderBean implements OrderBeanI {
         return em.createQuery("FROM Order o", Order.class).getResultList();
     }
 
+    public List<Order> getVehicleList() {
+        return em.createQuery("select e  from Order o inner join o.vehicle", Order.class).getResultList();
+    }
+
+    public void orderBy() {
+        System.out.println("         test 1  ====================");
+        Query query = em.createQuery("SELECT c FROM Order c right outer join c.vehicle");
+        List<Customer> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+        System.out.println("         test 1  ====================");
+
+    }
+
+    public void test2() {
+        System.out.println("   $$$$$$      test 2  ====================");
+        Query query = em.createQuery("SELECT o FROM Order  inner join  o.vehicles where o.vehicles.id=o.id");
+        List<Customer> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
+        System.out.println("  $$$$$$$$       test 2  ====================");
+
+    }
+
+    public List<Order> test3() {
+        return em.createQuery("SELECT o FROM Order o  right outer join Vehicle v", Order.class).getResultList();
+    }
 }

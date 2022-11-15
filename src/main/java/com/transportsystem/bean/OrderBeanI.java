@@ -10,8 +10,9 @@ public interface OrderBeanI {
     void delete(Order order) throws Exception;
 
     void update(Order order) throws Exception;
+    void test2() throws  Exception;
 
-
+    List<Order> test3() throws  Exception;
     List<Order> list() throws Exception;
 
     Order getOrder(Long id) throws  Exception;

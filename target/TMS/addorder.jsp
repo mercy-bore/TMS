@@ -34,19 +34,14 @@
 
                 <div class="form-floating mb-3">
                 <select class="form-control" name="customerId">
-                    <option value="none" selected disabled hidden>Select a Client</option>
-                        <c:forEach items="${CustomerView.list}" var="customer">
-                            <option value="${customer.id}">
-                                  ${customer.firstName}
-                            </option>
-                        </c:forEach>
+
                 </select>
                     <label for="floatingInput">Customer</label>
                 </div>
                 <div class="form-floating mb-3">
                 <select class="form-control" name="vehicleId">
                      <option value="none" selected disabled hidden>Select a Vehicle</option>
-                         <c:forEach items="${vehicleBean.getVehicleList()}" var="vehicle">
+                         <c:forEach items="${orderBean.test3()}" var="vehicle">
                                <option value="${vehicle.id}">
                                  ${vehicle.plateNo}
                                </option>
