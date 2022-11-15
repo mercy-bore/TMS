@@ -37,11 +37,12 @@ public class AddOrderPage extends HttpServlet {
             System.out.println(ex.getMessage());
         }
         try {
+
             orderBeanI.add(order);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        res.sendRedirect("./vehicles.jsp");
+        res.sendRedirect("./orders.jsp");
 
     }
 }

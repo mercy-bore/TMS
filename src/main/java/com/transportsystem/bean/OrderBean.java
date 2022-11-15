@@ -47,7 +47,7 @@ public class OrderBean implements OrderBeanI {
 
         Driver driver = em.createQuery("FROM Driver d WHERE d.id = :driverId", Driver.class).setParameter("driverId", order.getDriverId()).getSingleResult();
         order.setDriver(driver);
-
+        System.out.println(order);
         em.merge(order);
 
     }
@@ -99,7 +99,7 @@ public class OrderBean implements OrderBeanI {
     }
 
     public void orderBy() {
-        System.out.println("         test 1  ====================");
+        System.out.println("  test 1  ====================");
         Query query = em.createQuery("SELECT c FROM Order c right outer join c.vehicle");
         List<Customer> resultList = query.getResultList();
         resultList.forEach(System.out::println);
@@ -107,17 +107,18 @@ public class OrderBean implements OrderBeanI {
 
     }
 
-    public void test2() {
-        System.out.println("   $$$$$$      test 2  ====================");
-        Query query = em.createQuery("SELECT o FROM Order  inner join  o.vehicles where o.vehicles.id=o.id");
-        List<Customer> resultList = query.getResultList();
-        resultList.forEach(System.out::println);
-        System.out.println("  $$$$$$$$       test 2  ====================");
 
+
+    public List<Order> test2() {
+        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o  join o.driver d where o.driver.id!=d.id ", Order.class);
+        List<Order> resultList = query.getResultList();
+        System.out.println("\n\n" + resultList + "\n\n");
+        return resultList;
     }
 
+
     public List<Order> test3() {
-        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o  right outer join o.vehicle v", Order.class);
+        TypedQuery<Order> query = em.createQuery("SELECT v FROM Vehicle as v left outer join Order as o where o.vehicle.id not in o", Order.class);
         List<Order> resultList = query.getResultList();
         System.out.println("\n\n" + resultList + "\n\n");
         return resultList;

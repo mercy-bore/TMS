@@ -77,14 +77,17 @@ public class VehicleBean implements VehicleBeanI {
 
     }
 
-    public List<Vehicle> getVehicleCrossJoinedList() {
-        TypedQuery<Vehicle> query = em.createQuery("select c.plateNo,  from Vehicle c inner join Order o on o.vehicle_id=c.id ", Vehicle.class);
-        List<Vehicle> resultList = query.getResultList();
-        System.out.println("\n\n" + resultList + "\n\n");
-
-        return resultList;
+    public List<Vehicle> getVehicleListWithoutOrder() {
+        List<Vehicle> vehicles= em.createQuery("select v from Vehicle v").getResultList();
+        for (Vehicle vehicle : vehicles){
+            if(vehicle.getOrders().size() > 1)
+                vehicles.remove(vehicle);
+        }
+        return vehicles;
     }
     public List<Vehicle> getVehicleList() {
-        return em.createQuery("select c.plateNo  from Vehicle c left outer join Order o where o.vehicleId=c.id", Vehicle.class).getResultList();
-    }
+        TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle as v left outer join Order as o where o.vehicle.id not in o", Vehicle.class);
+        List<Vehicle> resultList = query.getResultList();
+        System.out.println("\n\n" + resultList + "\n\n");
+        return resultList;    }
 }

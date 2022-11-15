@@ -25,30 +25,40 @@
                     <label for="floatingInput">Destination</label>
                  </div>
                  <div class="form-floating mb-3">
-                    <select class="form-control" name="driverId">
-                       <option value="none" selected disabled hidden>Select a Driver</option>
+                                 <select class="form-control" name="customerId">
+                                     <option value="none" selected disabled hidden>Select a Customer</option>
+                                          <c:forEach items="${CustomerView.list}" var="customer">
+                                                <option value="${customer.id}">
+                                                  ${customer.firstName}
+                                                </option>
+                                          </c:forEach>
+                                 </select>
+                                     <label for="floatingInput">Customer</label>
+                                 </div>
+                 <div class="form-floating mb-3">
+                                    <select class="form-control" name="driverId">
+                                       <option value="none" selected disabled hidden>Select a Driver</option>
+                                         <c:forEach items="${orderBean.test2()}" var="order">
+                                               <option value="${order.driver.id}">
+                                                 ${order.driver.firstName}
+                                               </option>
+                                         </c:forEach>
+                                    </select>
+                                    <label for="floatingInput">Driver</label>
+                                 </div>
 
-                    </select>
-                    <label for="floatingInput">Driver</label>
-                 </div>
 
-                <div class="form-floating mb-3">
-                <select class="form-control" name="customerId">
-
-                </select>
-                    <label for="floatingInput">Customer</label>
-                </div>
-                <div class="form-floating mb-3">
-                <select class="form-control" name="vehicleId">
-                     <option value="none" selected disabled hidden>Select a Vehicle</option>
-                         <c:forEach items="${orderBean.test3()}" var="order">
-                               <option value="${order.vehicle.id}">
-                                 ${order.vehicle.plateNo}
-                               </option>
-                         </c:forEach>
-                </select>
-                <label for="floatingInput">Vehicle</label>
-                </div>
+                                <div class="form-floating mb-3">
+                                <select class="form-control" name="vehicleId">
+                                     <option value="none" selected disabled hidden>Select a Vehicle</option>
+                                         <c:forEach items="${vehicleBean.getVehicleListWithoutOrder()}" var="vehicle">
+                                               <option value="${vehicle.id}">
+                                                 ${vehicle.id}
+                                               </option>
+                                         </c:forEach>
+                                </select>
+                                <label for="floatingInput">Vehicle</label>
+                                </div>
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
     </form>

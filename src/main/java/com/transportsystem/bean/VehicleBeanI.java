@@ -13,7 +13,7 @@ public interface VehicleBeanI {
 
 
     List<Vehicle> list() throws Exception;
-    List<Vehicle> getVehicleCrossJoinedList();
+    List<Vehicle> getVehicleListWithoutOrder();
     List<Vehicle> getVehicleList();
 
     Vehicle getVehicle(Long id) throws  Exception;
