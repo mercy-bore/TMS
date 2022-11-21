@@ -11,6 +11,7 @@ public interface CustomerBeanI {
 
     void update(Customer customer) throws Exception;
 
+
     void  innerJoin() throws Exception;
 
     void leftJoin() throws Exception;

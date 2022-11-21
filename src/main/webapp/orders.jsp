@@ -32,11 +32,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Client</th>
+            <th scope="col">Cargo</th>
             <th scope="col">Start Location</th>
             <th scope="col">Destination</th>
-            <th scope="col">Cargo</th>
-            <th scope="col">Customer Id</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
 
         </tr>
@@ -45,12 +46,13 @@
 <c:forEach items="${OrderView.list}" var="order">
     <tr>
     <td scope="row">${order.id}</td>
+    <td scope="row">${order.customer.firstName}</td>
+    <td scope="row">${order.cargo}</td>
     <td scope="row">${order.startLocation}</td>
     <td scope="row">${order.destination}</td>
-    <td scope="row">${order.cargo}</td>
-    <td scope="row">${order.customerId}</td>
+    <td scope="row">${order.status}</td>
 
-    <td scope="row"> <a href="./updateorder.jsp?id=${order.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deleteorder?id=${order.id}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+    <td scope="row"> <a href="./updateorder.jsp?id=${order.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>  </td>
     </tr>
     </c:forEach>
 </tbody>

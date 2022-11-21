@@ -9,6 +9,16 @@
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <div class="container-fluid">
+<div class="container-xxl position-relative bg-white d-flex p-0">
+        <jsp:include page="sidebar.jsp"/>
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+                <jsp:include page="navbar.jsp"/>
+            <!-- Navbar End -->
+            <div class="container-fluid pt-4 px-4">
+ <div class="col-sm-12 col-xl-12">
+ <div class="bg-light rounded h-100 p-4">
 <h2> Add New Driver Details Form</h2>
     <form action="./adddriver" method="post">
     <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
@@ -45,6 +55,10 @@
 <% } %>
 
 </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 </html>

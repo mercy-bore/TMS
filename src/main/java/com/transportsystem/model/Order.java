@@ -15,6 +15,10 @@ public class Order extends BaseEntity {
     String destination;
     @Column
     String cargo;
+    @Column
+    private String status;
+
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Vehicle vehicle;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,6 +31,13 @@ public class Order extends BaseEntity {
     private Long customerId;
     @Transient
     private Long driverId;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Order(Driver driver) {
         this.driver = driver;

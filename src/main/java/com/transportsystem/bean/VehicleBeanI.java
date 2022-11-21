@@ -1,7 +1,9 @@
 package com.transportsystem.bean;
 
+import com.itextpdf.text.DocumentException;
 import com.transportsystem.model.Vehicle;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface VehicleBeanI {
@@ -14,8 +16,11 @@ public interface VehicleBeanI {
 
     List<Vehicle> list() throws Exception;
     List<Vehicle> getVehicleListWithoutOrder();
-    List<Vehicle> getVehicleList();
+    List<Vehicle> getVehicleList() throws FileNotFoundException, DocumentException;
 
     Vehicle getVehicle(Long id) throws  Exception;
+    List<Vehicle> idleVehiclesList();
+    List<Vehicle> ActiveVehiclesList();
+
 
 }

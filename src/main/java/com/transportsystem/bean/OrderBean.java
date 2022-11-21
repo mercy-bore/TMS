@@ -90,6 +90,12 @@ public class OrderBean implements OrderBeanI {
 
     }
 
+    public List<Order> ActiveOrderList() {
+        return em.createQuery("From Order o where o.status =: Status", Order.class).setParameter("Status","active").getResultList();
+    }
+    public List<Order> DeliveredOrderList() {
+        return em.createQuery("From Order o where o.status =: Status", Order.class).setParameter("Status","delivered").getResultList();
+    }
     public List<Order> getOrderList() {
         return em.createQuery("FROM Order o", Order.class).getResultList();
     }

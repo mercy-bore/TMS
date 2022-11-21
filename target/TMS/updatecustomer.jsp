@@ -15,6 +15,16 @@
 
 
      <div class="container-fluid">
+     <div class="container-xxl position-relative bg-white d-flex p-0">
+             <jsp:include page="sidebar.jsp"/>
+             <!-- Content Start -->
+             <div class="content">
+                 <!-- Navbar Start -->
+                     <jsp:include page="navbar.jsp"/>
+                 <!-- Navbar End -->
+                 <div class="container-fluid pt-4 px-4">
+      <div class="col-sm-12 col-xl-12">
+      <div class="bg-light rounded h-100 p-4">
 <h2> Update Customer Details Form</h2>
 <form action="./updatecustomer" method="post">
 <% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
@@ -56,8 +66,11 @@
     <span style="color:red"> ${applicationScope.addCustomerError} </span><br/>
 
 <% } %>
-
     </div>
+    </div>
+    </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

@@ -32,7 +32,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col">Vehicle Id</th>
             <th scope="col">Type</th>
             <th scope="col">Plate No</th>
             <th scope="col">Weight in KG</th>

@@ -20,6 +20,11 @@ public class OrderView implements Serializable {
     }
     public Order getOrder(Long id) throws Exception {
         return orderBeanI.getOrder(id);
-
+    }
+    public List<Order> ActiveOrderList() throws Exception {
+        return orderBeanI.ActiveOrderList();
+    }
+    public List<Order> DeliveredOrderList() throws Exception {
+        return orderBeanI.DeliveredOrderList();
     }
 }

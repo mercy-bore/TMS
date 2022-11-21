@@ -1,8 +1,39 @@
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+  <display-name>EmailSendingWebApp</display-name>
 
-<web-app>
+  <!-- SMTP settings -->
+  <context-param>
+    <param-name>host</param-name>
+    <param-value>smtp.gmail.com</param-value>
+  </context-param>
+ <context-param>
+        <param-name>port</param-name>
+        <param-value>25</param-value>
+    </context-param>
+ 
+  <context-param>
+    <param-name>port</param-name>
+    <param-value>587</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>user</param-name>
+    <param-value>mercy.bore@student.moringaschool.com</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>pass</param-name>
+    <param-value>uegsbnfrdqwgjeyk</param-value>
+  </context-param>
+
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp

@@ -5,6 +5,7 @@ import com.transportsystem.model.Vehicle;
 import com.transportsystem.rest.BaseRestApi;
 import com.transportsystem.rest.ResponseWrapper;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -40,7 +41,7 @@ public class VehicleRestApi extends BaseRestApi {
         return Response.status(Response.Status.OK).entity(vehicleBeanI.list()).build();
 
     }
-
+    @RolesAllowed({"MERCY"})
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

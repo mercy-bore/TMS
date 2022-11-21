@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -86,5 +87,22 @@ public class DriverBean implements DriverBeanI {
     }
     public List<Driver> getDriverist() {
         return em.createQuery("select c.firstName from Driver c  inner join Order o on o.driver_id=c.id", Driver.class).getResultList();
+    } 
+    
+    public List<Driver> getDriverListWithoutOrder() {
+        List<Driver> drivers= em.createQuery("select v from Driver v").getResultList();
+        List<Driver> newList = new ArrayList<>();
+        for (Driver driver : drivers){
+            if(driver.getOrders().size() < 1){
+                newList.add(driver);
+        }
+    }   System.out.println(newList);
+        return newList;
+    }
+    public List<Driver> idleDriversList() {
+        return em.createQuery("From Driver d where d.status =: Status", Driver.class).setParameter("Status","").getResultList();
+    }
+    public List<Driver> ActiveDriversList() {
+        return em.createQuery("From Driver d where d.status =: Status", Driver.class).setParameter("Status","active").getResultList();
     }
 }

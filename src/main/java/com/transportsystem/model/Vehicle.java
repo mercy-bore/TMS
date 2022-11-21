@@ -22,9 +22,8 @@ public class Vehicle extends BaseEntity {
     private String route;
     @Column
     private String weight;
-
-
-    @Transient
+    @Column
+    private String status;
     @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
@@ -36,6 +35,14 @@ public class Vehicle extends BaseEntity {
     @JsonbTransient
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setOrders(List<Order> orders) {

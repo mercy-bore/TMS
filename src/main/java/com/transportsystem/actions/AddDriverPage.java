@@ -2,6 +2,7 @@ package com.transportsystem.actions;
 
 import com.transportsystem.bean.DriverBeanI;
 import com.transportsystem.model.Driver;
+import com.transportsystem.pdf.DriversList;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.ejb.EJB;
@@ -35,6 +36,14 @@ public class AddDriverPage extends HttpServlet {
             BeanUtils.populate(driver, req.getParameterMap());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }
+        try {
+            System.out.println("generating report =============");
+            DriversList.main(null);
+            System.out.println("==================== generated");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         try {
             driverBean.add(driver);

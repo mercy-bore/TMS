@@ -2,6 +2,7 @@ package com.transportsystem.bean;
 
 
 import com.transportsystem.model.User;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.ejb.*;
 import javax.persistence.EntityManager;
@@ -50,7 +51,29 @@ public class UserBean implements UserBeanI {
 
         if (userList == null || userList.isEmpty() || userList.get(0) == null)
             throw new Exception("invalid  credentials");
-
+        userList.get(0).setBearerToken(DigestUtils
+                .md5Hex(user.getUsername() + " SALT=CH10 " + user.getPassword()));
         return userList.get(0);
+    }
+    public boolean authMd5(String md5Hash) {
+
+        if (md5Hash == null)
+            return false;
+
+        List<User> auths = em.createQuery("FROM User a", User.class)
+                .getResultList();
+
+        if (auths == null || auths.isEmpty())
+            return false;
+
+        boolean authenticated = false;
+        for (User auth : auths) {
+            if (DigestUtils.md5Hex(auth.getUsername() + " SALT=CH10 " + auth.getPassword()).equals(md5Hash)) {
+                authenticated = true;
+                break;
+            }
+        }
+
+        return authenticated;
     }
 }

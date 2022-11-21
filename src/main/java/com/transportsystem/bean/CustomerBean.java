@@ -81,6 +81,8 @@ public class CustomerBean implements CustomerBeanI {
 
     }
 
+
+
     public void innerJoin() {
         String hql = "select c.firstName from TMS.customers c inner join TMS.orders o on o.customer_id=c.id;";
         Query query = em.createQuery(hql);

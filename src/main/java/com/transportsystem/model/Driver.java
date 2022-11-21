@@ -25,6 +25,10 @@ public class Driver extends  BaseEntity{
     @Column
     String phone;
 
+
+
+    @Column
+    private String status;
     @OneToMany(mappedBy = "driver", fetch =  FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
@@ -35,7 +39,13 @@ public class Driver extends  BaseEntity{
     }
 
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }

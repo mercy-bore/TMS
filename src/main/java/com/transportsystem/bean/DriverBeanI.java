@@ -13,5 +13,9 @@ public interface DriverBeanI {
 
     List<Driver> list() throws  Exception;
     List<Driver> getDriverCrossJoinedList();
+    List<Driver> getDriverListWithoutOrder();
+
     Driver getDriver(Long id) throws Exception;
+    List<Driver> idleDriversList();
+    List<Driver> ActiveDriversList();
 }

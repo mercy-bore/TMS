@@ -9,6 +9,16 @@
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <div class="container-fluid">
+<div class="container-xxl position-relative bg-white d-flex p-0">
+        <jsp:include page="sidebar.jsp"/>
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+                <jsp:include page="navbar.jsp"/>
+            <!-- Navbar End -->
+            <div class="container-fluid pt-4 px-4">
+ <div class="col-sm-12 col-xl-12">
+ <div class="bg-light rounded h-100 p-4">
 <h2> Add New Order Form</h2>
     <form action="./addorder" method="post">
     <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
@@ -25,6 +35,12 @@
                     <label for="floatingInput">Destination</label>
                  </div>
                  <div class="form-floating mb-3">
+                                   <select class="form-control" name="status">
+                                       <option value="active" selected>Active</option>
+                                       </select>
+                                       <label for="floatingInput">Status</label>
+                                  </div>
+                 <div class="form-floating mb-3">
                                  <select class="form-control" name="customerId">
                                      <option value="none" selected disabled hidden>Select a Customer</option>
                                           <c:forEach items="${CustomerView.list}" var="customer">
@@ -38,9 +54,9 @@
                  <div class="form-floating mb-3">
                                     <select class="form-control" name="driverId">
                                        <option value="none" selected disabled hidden>Select a Driver</option>
-                                         <c:forEach items="${orderBean.test2()}" var="order">
-                                               <option value="${order.driver.id}">
-                                                 ${order.driver.firstName}
+                                         <c:forEach items="${driverBean.getDriverListWithoutOrder()}" var="driver">
+                                               <option value="${driver.id}">
+                                                 ${driver.firstName}
                                                </option>
                                          </c:forEach>
                                     </select>
@@ -59,11 +75,10 @@
                                 </select>
                                 <label for="floatingInput">Vehicle</label>
                                 </div>
+
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-
-
+     <button type="submit" class="btn btn-success">Submit</button>
+</form>
 <%
     String loginError = (String) application.getAttribute("addVehicleError");
 
@@ -73,7 +88,9 @@
     <span style="color:red"> ${applicationScope.addVehicleError} </span><br/>
 
 <% } %>
-
+</div>
+</div>
+</div>
 </div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false" %>
 <%@ page import="com.transportsystem.model.*" %>
+<%@ page import="com.transportsystem.pdf.*" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
@@ -30,7 +31,7 @@
 <table class="table">
    <thead>
      <tr>
-     <th scope="col">Id</th>
+     <th scope="col">Client Id</th>
     <th scope="col">First Name</th>
     <th scope="col">Last Name</th>
     <th scope="col">Email</th>

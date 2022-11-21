@@ -17,6 +17,9 @@ public class User extends BaseEntity {
     private String password;
     @Transient
     private String confirmPassword;
+
+    @Transient
+    private String bearerToken;
     @Column
     private String phone;
     @Column
@@ -24,6 +27,14 @@ public class User extends BaseEntity {
 
 
 
+
+    public String getBearerToken() {
+        return bearerToken;
+    }
+
+    public void setBearerToken(String bearerToken) {
+        this.bearerToken = bearerToken;
+    }
 
 
     public String getFirstName() {

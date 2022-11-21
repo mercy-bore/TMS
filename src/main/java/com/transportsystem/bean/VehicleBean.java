@@ -1,5 +1,7 @@
 package com.transportsystem.bean;
 
+
+import com.itextpdf.text.DocumentException;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,8 +11,9 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Stateless
 @Remote
@@ -74,18 +77,25 @@ public class VehicleBean implements VehicleBeanI {
 
     public List<Vehicle> list() {
         return em.createNamedQuery(Vehicle.FIND_ALL, Vehicle.class).getResultList();
-
     }
-
     public List<Vehicle> getVehicleListWithoutOrder() {
         List<Vehicle> vehicles= em.createQuery("select v from Vehicle v").getResultList();
+        List<Vehicle> newList = new ArrayList<>();
         for (Vehicle vehicle : vehicles){
-            if(vehicle.getOrders().size() > 1)
-                vehicles.remove(vehicle);
+            if(vehicle.getOrders().size() < 1){
+                newList.add(vehicle);
         }
-        return vehicles;
+    }   System.out.println(newList);
+        return newList;
     }
-    public List<Vehicle> getVehicleList() {
+    public List<Vehicle> idleVehiclesList() {
+        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","").getResultList();
+    }
+
+    public List<Vehicle> ActiveVehiclesList() {
+        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","active").getResultList();
+    }
+    public List<Vehicle> getVehicleList() throws FileNotFoundException, DocumentException {
         TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle as v left outer join Order as o where o.vehicle.id not in o", Vehicle.class);
         List<Vehicle> resultList = query.getResultList();
         System.out.println("\n\n" + resultList + "\n\n");
