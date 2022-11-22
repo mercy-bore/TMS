@@ -26,7 +26,7 @@
  <div class="bg-light rounded h-100 p-4">
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Clients</h1>
-       <p><a href='./addcustomer.jsp'><button type="submit" class="btn btn-primary ">Add Client</button></a></p>
+       <p><a href='./addcustomer.jsp'><button type="submit" class="btn btn-primary ">Add Client</button></a>  |   <a href='./clientsreport'><button type="submit" class="btn btn-danger ">Clients Report</button></a></p>
 </div> 
 <table class="table">
    <thead>

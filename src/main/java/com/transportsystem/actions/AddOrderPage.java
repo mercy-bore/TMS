@@ -3,7 +3,6 @@ package com.transportsystem.actions;
 
 import com.transportsystem.bean.OrderBeanI;
 import com.transportsystem.model.Order;
-import com.transportsystem.pdf.OrdersList;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.ejb.EJB;
@@ -37,14 +36,7 @@ public class AddOrderPage extends HttpServlet {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        try {
-            System.out.println("generating report =============");
-            OrdersList.main(null);
-            System.out.println("==================== generated");
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         try {
 
             orderBeanI.add(order);

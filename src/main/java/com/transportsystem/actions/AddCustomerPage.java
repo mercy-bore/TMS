@@ -2,7 +2,6 @@ package com.transportsystem.actions;
 
 import com.transportsystem.bean.CustomerBeanI;
 import com.transportsystem.model.Customer;
-import com.transportsystem.pdf.ClientsList;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.ejb.EJB;
@@ -96,14 +95,7 @@ public class AddCustomerPage extends HttpServlet {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        try {
-            System.out.println("generating report =============");
-            ClientsList.main(null);
-            System.out.println("==================== generated");
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         try {
             customerBeanI.add(customer);
         } catch (Exception e) {

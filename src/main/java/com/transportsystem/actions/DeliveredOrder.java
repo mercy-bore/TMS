@@ -55,4 +55,25 @@ public class DeliveredOrder extends HttpServlet {
 
         resp.sendRedirect("./orders.jsp");
     }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter wr = resp.getWriter();
+        Order order = new Order();
+        try {
+            BeanUtils.populate(order, req.getParameterMap());
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+        order.setStatus("delivered");
+
+        try {
+            loanBean.update(order);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        resp.sendRedirect("./orders.jsp");
+    }
 }

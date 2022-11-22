@@ -27,7 +27,7 @@
  <div class="bg-light rounded h-100 p-4">
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Vehicles</h1>
-       <p><a href='./addvehicle.jsp'><button type="submit" class="btn btn-primary ">Add Vehicle</button></a></p>
+       <p><a href='./addvehicle.jsp'><button type="submit" class="btn btn-primary ">Add Vehicle</button></a> |   <a href='./vehiclesreport'><button type="submit" class="btn btn-danger ">Vehicles Report</button></a></p>
 </div>
 <table class="table">
     <thead>

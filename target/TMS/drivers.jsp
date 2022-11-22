@@ -25,7 +25,7 @@
  <div class="bg-light rounded h-100 p-4">
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Drivers</h1>
-       <p><a href='./adddriver.jsp'><button type="submit" class="btn btn-primary ">Add Driver</button></a></p>
+       <p><a href='./adddriver.jsp'><button type="submit" class="btn btn-primary ">Add Driver</button></a>  |   <a href='./driversreport'><button type="submit" class="btn btn-danger ">Drivers Report</button></a></p>
 </div>
 <table class="table">
    <thead>

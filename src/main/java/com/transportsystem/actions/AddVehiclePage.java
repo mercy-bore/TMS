@@ -2,7 +2,6 @@ package com.transportsystem.actions;
 
 import com.transportsystem.bean.VehicleBeanI;
 import com.transportsystem.model.Vehicle;
-import com.transportsystem.pdf.VehiclesList;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.ejb.EJB;
@@ -37,14 +36,7 @@ public class AddVehiclePage extends HttpServlet {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        try {
-            System.out.println("generating report =============");
-            VehiclesList.main(null);
-            System.out.println("==================== generated");
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         try {
             vehicleBeanI.add(vehicle);
         } catch (Exception e) {

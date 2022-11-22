@@ -2,6 +2,7 @@ package com.transportsystem.bean;
 
 
 import com.itextpdf.text.DocumentException;
+import com.transportsystem.model.Order;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,6 +15,7 @@ import javax.persistence.TypedQuery;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Stateless
 @Remote
@@ -78,16 +80,43 @@ public class VehicleBean implements VehicleBeanI {
     public List<Vehicle> list() {
         return em.createNamedQuery(Vehicle.FIND_ALL, Vehicle.class).getResultList();
     }
+
+
+
+
+
     public List<Vehicle> getVehicleListWithoutOrder() {
+        Order order = new Order();
         List<Vehicle> vehicles= em.createQuery("select v from Vehicle v").getResultList();
-        List<Vehicle> newList = new ArrayList<>();
+        List<Vehicle> newList = new ArrayList<>(); // store without order
         for (Vehicle vehicle : vehicles){
-            if(vehicle.getOrders().size() < 1){
+            // if orders are less than 1 && order status is delivered;... add to without order list
+            if(vehicle.getOrders().size() < 1 &&  Objects.equals(order.getStatus(), "delivered")){
                 newList.add(vehicle);
         }
     }   System.out.println(newList);
         return newList;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public List<Vehicle> idleVehiclesList() {
         return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","").getResultList();
     }
@@ -95,6 +124,7 @@ public class VehicleBean implements VehicleBeanI {
     public List<Vehicle> ActiveVehiclesList() {
         return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","active").getResultList();
     }
+
     public List<Vehicle> getVehicleList() throws FileNotFoundException, DocumentException {
         TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle as v left outer join Order as o where o.vehicle.id not in o", Vehicle.class);
         List<Vehicle> resultList = query.getResultList();
