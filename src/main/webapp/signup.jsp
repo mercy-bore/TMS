@@ -50,7 +50,7 @@
 
         </form>
 
-         <%
+                <%
                     String registerError = (String) application.getAttribute("registerError");
                     if (registerError != null && !registerError.equals("")) {
                 %>
