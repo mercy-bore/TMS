@@ -1,8 +1,10 @@
 package com.transportsystem.bean;
 
 import com.transportsystem.model.Driver;
+import com.transportsystem.model.Order;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -20,7 +22,10 @@ public class DriverBean implements DriverBeanI {
     @PersistenceContext
     EntityManager em;
 
-    public void add(Driver driver) throws Exception {
+    @EJB
+    OrderBeanI orderBean;
+
+    public void add(Driver driver) throws Exception  {
         if (driver == null || StringUtils.isBlank(driver.getFirstName()) || StringUtils.isBlank(driver.getLastName()))
             return;
         if (StringUtils.isBlank(driver.getFirstName())) {
@@ -85,24 +90,60 @@ public class DriverBean implements DriverBeanI {
 
         return resultList;
     }
-    public List<Driver> getDriverist() {
-        return em.createQuery("select c.firstName from Driver c  inner join Order o on o.driver_id=c.id", Driver.class).getResultList();
-    } 
-    
-    public List<Driver> getDriverListWithoutOrder() {
-        List<Driver> drivers= em.createQuery("select v from Driver v").getResultList();
-        List<Driver> newList = new ArrayList<>();
-        for (Driver driver : drivers){
-            if(driver.getOrders().size() < 1){
-                newList.add(driver);
+    public boolean checkIfDriverhasOrder( Driver driver){
+    List<Driver> drivers =  this.DriversWithOrderList();
+    for (Driver driver1 : drivers) {
+        if (driver1.getId() == driver.getId()) {
+        return true;
         }
-    }   System.out.println(newList);
+    }
+
+        return false;
+}
+    public List<Driver> getDriverList() {
+        return em.createQuery("select c.firstName from Driver c  inner join Order o on o.driver_id=c.id", Driver.class).getResultList();
+    }
+    public List<Driver> getDriverListWithoutOrder() {
+        List<Driver> drivers = this.list();
+        List<Driver> newList = new ArrayList<>();
+        for (Driver driver : drivers) {
+            if (!this.checkIfDriverhasOrder(driver) ) {
+                newList.add(driver);
+
+        }
+    }
+
+        System.out.println(newList);
         return newList;
     }
-    public List<Driver> idleDriversList() {
-        return em.createQuery("From Driver d where d.status =: Status", Driver.class).setParameter("Status","").getResultList();
-    }
+
+    public List<Driver> DriversWithOrderList() {
+        // with order
+        List<Driver> newList = new ArrayList<>();
+        List<Order> orders = orderBean.ActiveOrderList();
+        for(Order order: orders){
+            newList.add(order.getDriver());
+
+        }
+       
+
+        System.out.println(newList);
+        return newList;   
+     }
+        public List<Driver> DriversWithDeliveredOrderList() {
+        // with order
+        List<Driver> newList = new ArrayList<>();
+        List<Order> orders = orderBean.DeliveredOrderList();
+        for(Order order: orders){
+            newList.add(order.getDriver());
+
+        }
+       
+
+        System.out.println(newList);
+        return newList;   
+     }
     public List<Driver> ActiveDriversList() {
-        return em.createQuery("From Driver d where d.status =: Status", Driver.class).setParameter("Status","active").getResultList();
+        return em.createQuery("From Driver d where d.status =: Status", Driver.class).setParameter("Status", "active").getResultList();
     }
 }

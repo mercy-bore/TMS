@@ -99,7 +99,7 @@ public class AddCustomerPage extends HttpServlet {
         try {
             customerBeanI.add(customer);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("customerError" + e);
         }
 
         res.sendRedirect("./clients.jsp");

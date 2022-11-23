@@ -27,7 +27,7 @@
  <div class="bg-light rounded h-100 p-4">
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Vehicles</h1>
-       <p><a href='./addvehicle.jsp'><button type="submit" class="btn btn-primary ">Add Vehicle</button></a> |   <a href='./vehiclesreport'><button type="submit" class="btn btn-danger ">Vehicles Report</button></a></p>
+       <p><a href='./addvehicle.jsp'><button type="submit" class="btn btn-primary ">Add Vehicle</button></a> |   <a href='./vehiclesreport'><button type="submit" class="btn btn-danger " onclick="return confirmCreated()">Vehicles Report</button></a></p>
 </div>
 <table class="table">
     <thead>
@@ -49,7 +49,7 @@
     <td scope="row">${vehicle.plateNo}</td>
     <td scope="row">${vehicle.weight}</td>
     <td scope="row">${vehicle.route}</td>
-    <td scope="row"> <a href="./updatevehicle.jsp?id=${vehicle.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?id=${vehicle.id}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+    <td scope="row"> <a href="./updatevehicle.jsp?id=${vehicle.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deletevehicle?id=${vehicle.id}"><button type="submit" class="btn btn-danger" onclick="return confirmDeleted()">Delete</button></a></a> </td>
     </tr>
     </c:forEach>
 </tbody>
@@ -61,6 +61,13 @@
 </div>
 </div>
 </div>
-
+<script>
+    function confirmCreated(){
+        return confirm("Vehicles Report Generated Successfully!");
+    }
+    function confirmDeleted(){
+        return  confirm("Vehicle Details Deleted Successfully!")
+    }
+</script>
 <jsp:include page="javascriptlibs.jsp"/>
 </body></html>

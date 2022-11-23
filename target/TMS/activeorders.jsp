@@ -46,7 +46,7 @@
     <td scope="row">${order.customer.firstName}</td>
     <td scope="row">${order.cargo}</td>
     <td scope="row">${order.status}</td>
-    <td><a href="./deliverorder?id=${order.id}"><button type="submit" class="btn btn-danger">Set Delivered</button></a></a> </td>
+    <td><a href="./setdelivered.jsp?id=${order.id}"><button type="submit" class="btn btn-danger">Set Delivered</button></a></a> </td>
     </tr>
     </c:forEach>
 </tbody>

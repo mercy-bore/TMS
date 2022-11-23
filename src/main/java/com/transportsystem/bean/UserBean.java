@@ -3,6 +3,7 @@ package com.transportsystem.bean;
 
 import com.transportsystem.model.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.*;
 import javax.persistence.EntityManager;
@@ -20,29 +21,32 @@ public class UserBean implements UserBeanI {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
 
     public User register(User user) throws Exception {
-        if (user == null)
-            throw new Exception("Invalid details");
-        if (user.getFirstName() == null)
-            throw new Exception("First name is required");
-        if (user.getLastName() == null)
-            throw new Exception("Last name is required");
-        if (user.getEmail() == null)
-            throw new Exception("Email is required");
-        if (user.getPhone() == null)
+        if(user == null)
+        throw new Exception("Invalid details");
+         if(StringUtils.isBlank(user.getUsername()))
+        throw new Exception("Username is required");
+        if(StringUtils.isBlank(user.getFirstName()))
+        throw new Exception("First name is required");
+        if(StringUtils.isBlank(user.getLastName()))
+        throw new Exception("Last name is required");
+        if(StringUtils.isBlank(user.getEmail()))
+        throw new Exception("Email is required");
+        if(StringUtils.isBlank(user.getPhone()))
             throw new Exception("Phone is required");
-        if (user.getPassword() == null)
+        if(StringUtils.isBlank(user.getPassword()))
             throw new Exception("Password is required");
-
-        if (user.getConfirmPassword() == null)
-            throw new Exception("/Confirm password is required");
+        if(StringUtils.isBlank(user.getConfirmPassword()))
+            throw new Exception("Confirm password is required");
+        if(!user.getPassword().equals(user.getConfirmPassword()))
+        throw new Exception("Password and confirm password do not match");
 
         return em.merge(user);
 
     }
 
     public User login(User user) throws Exception {
-        if (user.getUsername() == null && user.getPassword() == null)
-            throw new Exception("invalid credentials");
+        if (StringUtils.isBlank(user.getUsername()) && StringUtils.isBlank(user.getPassword()))
+            throw new Exception("Invalid credentials.");
         List<User> userList = em.createQuery("FROM User c where c.username =:username " +
                         "and c.password =:password", User.class)
                 .setParameter("username", user.getUsername())
@@ -50,7 +54,7 @@ public class UserBean implements UserBeanI {
                 .getResultList();
 
         if (userList == null || userList.isEmpty() || userList.get(0) == null)
-            throw new Exception("invalid  credentials");
+            throw new Exception("Invalid  credentials.Try again.");
         userList.get(0).setBearerToken(DigestUtils
                 .md5Hex(user.getUsername() + " SALT=CH10 " + user.getPassword()));
         return userList.get(0);

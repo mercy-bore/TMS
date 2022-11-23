@@ -23,27 +23,27 @@
              <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating mb-3">
-                     <input type="text" class="form-control" id="floatingInput" name="firstName" placeholder="First Name">
+                     <input type="text" maxlength="10" class="form-control" id="floatingInput" name="firstName" placeholder="First Name">
                      <label for="floatingInput">First Name</label>
         </div>
         <div class="form-floating mb-3">
-                     <input type="text" class="form-control" id="floatingInput" name="lastName" placeholder="Last Name">
+                     <input type="text" maxlength="10" class="form-control" id="floatingInput" name="lastName" placeholder="Last Name">
                      <label for="floatingInput">Last Name</label>
                 </div>
         <div class="form-floating mb-3">
-                     <input type="text" class="form-control" id="floatingInput" name="phone" placeholder="Phone Number">
+                     <input type="tel" minlength="10" maxlength="12"class="form-control" id="floatingInput" name="phone" placeholder="Phone Number">
                      <label for="floatingInput">Phone Number</label>
                 </div>
         <div class="form-floating mb-3">
-                     <input type="email" class="form-control" id="floatingInput" name="email" placeholder="email">
+                     <input type="email"maxlength="40" class="form-control" id="floatingInput" name="email" placeholder="email">
                      <label for="floatingInput">Email</label>
                 </div>
         <div class="form-floating mb-3">
-                     <input type="password" class="form-control" id="floatingInput" name="password" placeholder="Password">
+                     <input type="password" minlength="8" maxlength="12" class="form-control" id="floatingInput" name="password" placeholder="Password">
                      <label for="floatingInput">Password</label>
                 </div>
         <div class="form-floating mb-3">
-                     <input type="password" class="form-control" id="floatingInput" name="confirmPassword" placeholder="Confirm Password">
+                     <input type="password" minlength="8" maxlength="12" class="form-control" id="floatingInput" name="confirmPassword" placeholder="Confirm Password">
                      <label for="floatingInput">Confirm password</label>
                 </div>
         <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>

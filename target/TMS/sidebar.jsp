@@ -28,12 +28,18 @@
                         <a href="vehicles.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Vehicle pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="vehicles.jsp" class="dropdown-item">View Vehicles</a>
+                             <a href="vehicleswithorders.jsp" class="dropdown-item">View Vehicles with Orders</a>
+                              <a href="vehicleswithoutorders.jsp" class="dropdown-item">View Vehicles without Orders</a>
+
                         </div>
                     </div>
                    <div class="nav-item dropdown">
                                            <a href="drivers.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Driver pages</a>
                                            <div class="dropdown-menu bg-transparent border-0">
                                             <a href="drivers.jsp" class="dropdown-item">View Drivers</a>
+                                            <a href="driverwithorder.jsp" class="dropdown-item">View Drivers with Orders</a>
+                                            <a href="driverswithoutorder.jsp" class="dropdown-item">View Drivers without Orders</a>
+
                                              </div>
                                       </div>
                     <div class="nav-item dropdown">

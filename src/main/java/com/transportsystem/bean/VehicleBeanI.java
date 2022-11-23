@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface VehicleBeanI {
     void add(Vehicle vehicle) throws Exception;
-
     void delete(Vehicle vehicle) throws Exception;
-
     void update(Vehicle vehicle) throws Exception;
-
-
     List<Vehicle> list() throws Exception;
+    boolean checkIfVehiclehasOrder(Vehicle vehicle) ;
+    List<Vehicle> removeVehicleWithOrder() throws Exception;
+    List<Vehicle> TryWithoutOrderList() throws Exception;
     List<Vehicle> getVehicleListWithoutOrder();
+    List<Vehicle> VehicleWithOrderList();
+    List<Vehicle> VehiclesWithDeliveredOrderList();
     List<Vehicle> getVehicleList() throws FileNotFoundException, DocumentException;
-
     Vehicle getVehicle(Long id) throws  Exception;
     List<Vehicle> idleVehiclesList();
     List<Vehicle> ActiveVehiclesList();

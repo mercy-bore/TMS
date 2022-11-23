@@ -36,15 +36,15 @@
                         <label for="floatingInput">Id</label>
                    </div>
                   <div class="form-floating mb-3">
-                       <input type="text" class="form-control" id="floatingInput" placeholder="Cargo" name="cargo" value="${order.cargo}">
+                       <input type="text"  maxlength="10" class="form-control" id="floatingInput" placeholder="Cargo" name="cargo" value="${order.cargo}">
                        <label for="floatingInput">Cargo</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Start Location" name="startLocation" value="${order.startLocation}">
+                    <input type="text"  maxlength="10" class="form-control" id="floatingInput" placeholder="Start Location" name="startLocation" value="${order.startLocation}">
                     <label for="floatingInput">Start Location</label>
                   </div>
                   <div class="form-floating mb-3">
-                     <input type="text" class="form-control" id="floatingInput" placeholder="Destination" name="destination" value="${order.destination}">
+                     <input type="text"  maxlength="40" class="form-control" id="floatingInput" placeholder="Destination" name="destination" value="${order.destination}">
                      <label for="floatingInput">Destination</label>
                   </div>
 
@@ -72,7 +72,7 @@
                            <label for="floatingInput">Vehicle</label>
                   </div>
      </div>
-     <button type="submit" class="btn btn-success">Submit</button>
+     <button type="submit" class="btn btn-success" onclick="return ConfirmAdd()">Submit</button>
 
   </form>
 
@@ -89,5 +89,10 @@
 </div>
 </div>
  </div>
+ <script>
+    function confirmAdd(){
+        return confirm("Do You Want To Update Order Details?");
+    }
+</script>
 <cft:Footer>
      </cft:Footer>

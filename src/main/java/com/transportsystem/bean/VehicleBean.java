@@ -6,6 +6,7 @@ import com.transportsystem.model.Order;
 import com.transportsystem.model.Vehicle;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +26,9 @@ public class VehicleBean implements VehicleBeanI {
     @PersistenceContext
     EntityManager em;
 
+
+    @EJB
+    OrderBeanI orderBean;
     public void add(Vehicle vehicle) throws Exception {
         if (vehicle == null || StringUtils.isBlank(vehicle.getPlateNo()) || StringUtils.isBlank(vehicle.getType()))
             return;
@@ -81,53 +86,106 @@ public class VehicleBean implements VehicleBeanI {
         return em.createNamedQuery(Vehicle.FIND_ALL, Vehicle.class).getResultList();
     }
 
-
-
-
-
-    public List<Vehicle> getVehicleListWithoutOrder() {
-        Order order = new Order();
-        List<Vehicle> vehicles= em.createQuery("select v from Vehicle v").getResultList();
-        List<Vehicle> newList = new ArrayList<>(); // store without order
-        for (Vehicle vehicle : vehicles){
-            // if orders are less than 1 && order status is delivered;... add to without order list
-            if(vehicle.getOrders().size() < 1 &&  Objects.equals(order.getStatus(), "delivered")){
-                newList.add(vehicle);
+    public boolean checkIfVehiclehasOrder( Vehicle vehicle){
+    List<Vehicle> vehicles =  this.VehicleWithOrderList();
+    for (Vehicle vehicle1 : vehicles) {
+        if (vehicle1.getId() == vehicle.getId()) {
+        return true;
         }
-    }   System.out.println(newList);
+    }
+
+        return false;
+}
+    
+    public List<Vehicle> removeVehicleWithOrder() {
+        Order order = new Order();
+        List<Vehicle> vehicles = em.createQuery("select v from Vehicle v").getResultList();
+        List<Vehicle> newList = new ArrayList<>(); // store without order
+        for (Vehicle vehicle : vehicles) {
+            // if orders are less than 1 && order status is delivered;... add to without order list ..
+            if (vehicle.getOrders().size() > 0) {
+                newList.add(vehicle);
+            }
+        }
+
+        System.out.println(newList);
+        return newList;
+    }
+    public List<Vehicle> TryWithoutOrderList() {
+        Order order = new Order();
+        Vehicle vehicle = new Vehicle();
+        List<Vehicle> vehicles = em.createQuery("select v from Vehicle v").getResultList();
+        List<Vehicle> newList = new ArrayList<>(); // store with order
+        Iterator<Vehicle> vehicles1 = vehicles.iterator();
+        while (vehicles1.hasNext()){
+            if (vehicle.getOrders().size() > 0 ) {
+                newList.add(vehicle);
+
+                if(Objects.equals(order.getStatus(), "delivered")){
+                    newList.remove(vehicle);
+                    vehicles.add(vehicle);
+                }
+            }
+
+        }
+
+        System.out.println(vehicles);
+        return vehicles;
+    }
+    public List<Vehicle> getVehicleListWithoutOrder() {
+        List<Vehicle> drivers = this.list();
+        List<Vehicle> newList = new ArrayList<>();
+        for (Vehicle driver : drivers) {
+            if (!this.checkIfVehiclehasOrder(driver) ) {
+                newList.add(driver);
+
+        }
+    }
+
+        System.out.println(newList);
         return newList;
     }
 
+    public List<Vehicle> VehicleWithOrderList() {
+        // with order
+        List<Vehicle> newList = new ArrayList<>();
+        List<Order> orders = orderBean.ActiveOrderList();
+        for(Order order: orders){
+            newList.add(order.getVehicle());
 
+        }
+       
 
+        System.out.println(newList);
+        return newList;   
+     }
+    public List<Vehicle> VehiclesWithDeliveredOrderList() {
+        // with order
+        List<Vehicle> newList = new ArrayList<>();
+        List<Order> orders = orderBean.DeliveredOrderList();
+        for(Order order: orders){
+            newList.add(order.getVehicle());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+    
+        System.out.println(newList);
+        return newList;   
+     }
+   
     public List<Vehicle> idleVehiclesList() {
-        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","").getResultList();
+        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status", "").getResultList();
     }
 
     public List<Vehicle> ActiveVehiclesList() {
-        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status","active").getResultList();
+        return em.createQuery("From Vehicle v where v.status =: Status", Vehicle.class).setParameter("Status", "active").getResultList();
     }
 
     public List<Vehicle> getVehicleList() throws FileNotFoundException, DocumentException {
         TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle as v left outer join Order as o where o.vehicle.id not in o", Vehicle.class);
         List<Vehicle> resultList = query.getResultList();
         System.out.println("\n\n" + resultList + "\n\n");
-        return resultList;    }
+        return resultList;
+    }
+
+
 }

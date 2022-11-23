@@ -25,6 +25,7 @@ public class CustomerBean implements CustomerBeanI {
         if (StringUtils.isBlank(customer.getFirstName())) {
             throw new Exception(" First Name is required");
 
+
         }
 
         if (StringUtils.isBlank(customer.getLastName())) {

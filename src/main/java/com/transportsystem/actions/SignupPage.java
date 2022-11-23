@@ -36,7 +36,11 @@ public class SignupPage extends HttpServlet {
             BeanUtils.populate(user, req.getParameterMap());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        
+    }
+    System.out.println(user);
+
+
         try {
             userBean.register(user);
             res.sendRedirect("./login.jsp");

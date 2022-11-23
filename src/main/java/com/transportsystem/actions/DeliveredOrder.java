@@ -50,7 +50,7 @@ public class DeliveredOrder extends HttpServlet {
         try {
             loanBean.update(order);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("there is an error " + e);
         }
 
         resp.sendRedirect("./orders.jsp");

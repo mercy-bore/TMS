@@ -36,24 +36,24 @@
                        <label for="floatingInput">Id</label>
                   </div>
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="First Name" name="firstName" value="${driver.firstName}">
+                      <input type="text"  maxlength="10" class="form-control" id="floatingInput"placeholder="First Name" name="firstName" value="${driver.firstName}">
                       <label for="floatingInput">First Name</label>
                  </div>
                  <div class="form-floating mb-3">
-                       <input type="text" class="form-control" id="floatingInput"placeholder="Last Name" name="lastName" value="${driver.lastName}">
+                       <input type="text" maxlength="10" class="form-control" id="floatingInput"placeholder="Last Name" name="lastName" value="${driver.lastName}">
                        <label for="floatingInput">Last Name</label>
                  </div>
                  <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput"placeholder="Email" name="email" value="${driver.email}">
+                        <input type="email" maxlength="40" class="form-control" id="floatingInput"placeholder="Email" name="email" value="${driver.email}">
                         <label for="floatingInput">Email</label>
                  </div>
                  <div class="form-floating mb-3">
-                         <input type="text" class="form-control" id="floatingInput"placeholder="Phone" name="phone" value="${driver.phone}">
+                         <input type="tel" minlength="10"  maxlength="13" class="form-control" id="floatingInput"placeholder="Phone" name="phone" value="${driver.phone}">
                          <label for="floatingInput"> Phone</label>
                  </div>
 
  </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" onclick="return confirmAdd()">Submit</button>
  </form>
 
 
@@ -71,5 +71,10 @@
 </div>
 </div>
 </div>
+<script>
+    function confirmAdd(){
+        return confirm("Do You Want To Update Driver Details!");
+    }
+</script>
 </body>
 </html>

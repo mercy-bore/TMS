@@ -23,15 +23,15 @@
     <form action="./addorder" method="post">
     <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="Cargo" name="cargo">
+                      <input type="text"  maxlength="40" class="form-control" id="floatingInput" placeholder="Cargo" name="cargo">
                       <label for="floatingInput">Cargo</label>
                  </div>
                  <div class="form-floating mb-3">
-                   <input type="text" class="form-control" id="floatingInput" placeholder="Start Location" name="startLocation">
+                   <input type="text"  maxlength="10" class="form-control" id="floatingInput" placeholder="Start Location" name="startLocation">
                    <label for="floatingInput">Start Location</label>
                  </div>
                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Destination" name="destination">
+                    <input type="text"  maxlength="10" class="form-control" id="floatingInput" placeholder="Destination" name="destination">
                     <label for="floatingInput">Destination</label>
                  </div>
                  <div class="form-floating mb-3">
@@ -77,7 +77,7 @@
                                 </div>
 
     </div>
-     <button type="submit" class="btn btn-success">Submit</button>
+     <button type="submit" class="btn btn-success" onclick="return confirmAdd()">Submit</button>
 </form>
 <%
     String loginError = (String) application.getAttribute("addVehicleError");
@@ -93,5 +93,10 @@
 </div>
 </div>
 </div>
+<script>
+    function confirmAdd(){
+        return confirm("Do You Want To Add Order Details");
+    }
+</script>
 </body>
 </html>

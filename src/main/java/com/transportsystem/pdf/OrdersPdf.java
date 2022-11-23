@@ -1,6 +1,7 @@
 package com.transportsystem.pdf;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfDate;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -17,6 +18,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
+import java.text.DateFormat;
+import  java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @WebServlet("/ordersreport")
 
@@ -64,7 +69,11 @@ public class OrdersPdf extends HttpServlet {
         }
         my_pdf_report.open();
         Font bold = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-        Paragraph paragraph = new Paragraph("Report for Current Orders List");
+                PdfDate date = new PdfDate();
+ Date date1 = Calendar.getInstance().getTime();
+        DateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        String today = formatter.format(date1);
+        Paragraph paragraph = new Paragraph("Report for Current Orders List as per " + today);
         paragraph.setFont(bold);
         paragraph.setSpacingAfter(8);
         paragraph.setAlignment(5);
@@ -185,8 +194,12 @@ public class OrdersPdf extends HttpServlet {
             throw new RuntimeException(e);
         }
         my_pdf_report.open();
+                PdfDate date = new PdfDate();
+ Date date1 = Calendar.getInstance().getTime();
+        DateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        String today = formatter.format(date1);
         Font bold = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-        Paragraph paragraph = new Paragraph("Report for Current Orders List");
+        Paragraph paragraph = new Paragraph("Report for Current Orders List as per " + today);
         paragraph.setFont(bold);
         paragraph.setSpacingAfter(8);
         paragraph.setAlignment(5);

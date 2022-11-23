@@ -25,7 +25,7 @@
  <div class="bg-light rounded h-100 p-4">
 <div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
        <h1 class="mb-0">Drivers</h1>
-       <p><a href='./adddriver.jsp'><button type="submit" class="btn btn-primary ">Add Driver</button></a>  |   <a href='./driversreport'><button type="submit" class="btn btn-danger ">Drivers Report</button></a></p>
+       <p><a href='./adddriver.jsp'><button type="submit" class="btn btn-primary ">Add Driver</button></a>  |   <a href='./driversreport'><button type="submit" class="btn btn-danger" onclick="return confirmCreated()">Drivers Report</button></a></p>
 </div>
 <table class="table">
    <thead>
@@ -46,7 +46,7 @@
         <td>${driver.lastName}</td>
         <td>${driver.email}</td>
         <td>${driver.phone}</td>
-        <td><a href="./updatedriver.jsp?id=${driver.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletedriver?id=${driver.id}"><button type="submit" class="btn btn-danger">Delete</button></a> </td>
+        <td><a href="./updatedriver.jsp?id=${driver.id}"><button type="submit" class="btn btn-success">Edit</button></a>   | <a href="./deletedriver?id=${driver.id}"><button type="submit" class="btn btn-danger" onclick="return confirmDeleted()">Delete</button></a> </td>
    </tr>
     </c:forEach>
 
@@ -59,7 +59,14 @@
 </div>
 </div>
 </div>
-
+<script>
+    function confirmCreated(){
+        return confirm("Driver Reports Generated Successfully!");
+    }
+    function confirmDeleted(){
+        return confirm("Driver details Deleted Successfully!")
+    }
+</script>
 <jsp:include page="javascriptlibs.jsp"/>
 </body>
 </html>

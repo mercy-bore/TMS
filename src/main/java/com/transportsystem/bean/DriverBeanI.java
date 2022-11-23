@@ -14,8 +14,14 @@ public interface DriverBeanI {
     List<Driver> list() throws  Exception;
     List<Driver> getDriverCrossJoinedList();
     List<Driver> getDriverListWithoutOrder();
-
-    Driver getDriver(Long id) throws Exception;
-    List<Driver> idleDriversList();
+    boolean checkIfDriverhasOrder(Driver driver);
+    Driver getDriver(Long id) ;
+    List<Driver> DriversWithOrderList();
+    List<Driver> getDriverList();
+    List<Driver> DriversWithDeliveredOrderList();
     List<Driver> ActiveDriversList();
+
+    
+
+
 }

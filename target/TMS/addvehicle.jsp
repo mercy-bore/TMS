@@ -23,23 +23,23 @@
     <form action="./addvehicle" method="post">
     <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="Vehicle Type" name="type">
+                      <input type="text"  maxlength="10" class="form-control" id="floatingInput"placeholder="Vehicle Type" name="type">
                       <label for="floatingInput">Type</label>
                  </div>
                  <div class="form-floating mb-3">
-                   <input type="text" class="form-control" id="floatingInput" placeholder="Plate Number" name="plateNo">
+                   <input type="text"  maxlength="7" class="form-control" id="floatingInput" placeholder="Plate Number" name="plateNo">
                    <label for="floatingInput">Plate No</label>
                  </div>
                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput"placeholder="Weight in KG" name="weight">
+                    <input type="text"  maxlength="6" class="form-control" id="floatingInput"placeholder="Weight in KG" name="weight">
                     <label for="floatingInput">Weight</label>
                  </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput"placeholder="Route" name="route">
+                    <input type="text" maxlength="10" class="form-control" id="floatingInput"placeholder="Route" name="route">
                     <label for="floatingInput">Route</label>
                  </div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" onclick="return confirmAdd()">Submit</button>
     </form>
 
 
@@ -59,5 +59,10 @@
 </div>
 </div>
 </div>
+<script>
+    function confirmAdd(){
+        return confirm("New Vehicle Added Successfully!");
+    }
+</script>
 </body>
 </html>

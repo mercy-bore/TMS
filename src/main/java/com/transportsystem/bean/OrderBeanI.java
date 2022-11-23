@@ -11,8 +11,8 @@ public interface OrderBeanI {
 
     void update(Order order) throws Exception;
 
-    List<Order>ActiveOrderList() throws  Exception;
-    List<Order>DeliveredOrderList() throws  Exception;
+    List<Order>ActiveOrderList() ;
+    List<Order>DeliveredOrderList() ;
 
     List<Order>test2() throws  Exception;
 

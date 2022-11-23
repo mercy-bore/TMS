@@ -36,23 +36,23 @@
                        <label for="floatingInput">Id</label>
                  </div>
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput"placeholder="Type" name="type" value="${vehicle.type}">
+                      <input type="text"  maxlength="40"class="form-control" id="floatingInput"placeholder="Type" name="type" value="${vehicle.type}">
                       <label for="floatingInput">Type</label>
                  </div><tr>
                  <div class="form-floating mb-3">
-                       <input type="text" class="form-control" id="floatingInput"placeholder="Plate No" name="plateNo" value="${vehicle.plateNo}">
+                       <input type="text" maxlength="7" class="form-control" id="floatingInput"placeholder="Plate No" name="plateNo" value="${vehicle.plateNo}">
                        <label for="floatingInput">Plate No</label>
                  </div>
                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput"placeholder="Weight" name="weight" value="${vehicle.weight}">
+                    <input type="text" maxlength="10" class="form-control" id="floatingInput"placeholder="Weight" name="weight" value="${vehicle.weight}">
                     <label for="floatingInput">Weight</label>
                  </div>
                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput"placeholder="Route" name="route" value="${vehicle.route}">
+                    <input type="text"  maxlength="10" class="form-control" id="floatingInput"placeholder="Route" name="route" value="${vehicle.route}">
                     <label for="floatingInput">Route</label>
                  </div>
  </div>
-     <button type="submit" class="btn btn-success">Submit</button>
+     <button type="submit" class="btn btn-success" onclick="return confirmAdd()">Submit</button>
 
   </form>
 
@@ -69,5 +69,10 @@
  </div>
  </div>
  </div>
+ <script>
+    function confirmAdd(){
+        return confirm("Do You Want To Update Vehicle Details?");
+    }
+</script>
 <cft:Footer> 
      </cft:Footer>

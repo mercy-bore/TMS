@@ -24,15 +24,15 @@
     <form action="./EmailSendingServlet" method="post" enctype="multipart/form-data">
     <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="Recipient" name="recipient">
+                      <input type="email"  maxlength="40" class="form-control" id="floatingInput" placeholder="Recipient" name="recipient">
                       <label for="floatingInput">Recipient</label>
                  </div>
                  <div class="form-floating mb-3">
-                   <input type="text" class="form-control" id="floatingInput" placeholder="Subject" name="subject">
+                   <input type="text" maxlength="20" class="form-control" id="floatingInput" placeholder="Subject" name="subject">
                    <label for="floatingInput">Subject</label>
                  </div>
                  <div class="form-floating mb-3">
-                 <textarea type="text" rows="10" class="form-control" id="floatingInput"placeholder="Content" name="content"></textarea>
+                 <textarea type="text"  maxlength="256" rows="10" class="form-control" id="floatingInput"placeholder="Content" name="content"></textarea>
                     <label for="floatingInput">Content</label>
                  </div>
                  <div class="form-floating mb-3">

@@ -1,4 +1,5 @@
 <%@ page isELIgnored="false" %>
+<%@ page import="com.transportsystem.controllers.*" %>
 <%@ page import="com.transportsystem.model.*" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
@@ -10,7 +11,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cht" uri="WEB-INF/tlds/header.tld" %>
 <%@ taglib prefix="cft" uri="WEB-INF/tlds/footer.tld" %>
-
 <cht:Header applicationLabel="${applicationScope.applicationLabel}" />
 
 <div class="container-fluid">
@@ -22,45 +22,70 @@
                 <jsp:include page="navbar.jsp"/>
             <!-- Navbar End -->
             <div class="container-fluid pt-4 px-4">
-<br/>
  <div class="col-sm-12 col-xl-12">
  <div class="bg-light rounded h-100 p-4">
-<div class="d-flex align-items-center justify-content-between mb-2 col-sm-12 col-xl-12">
-       <h1 class="mb-0">Delivered Orders</h1>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Order Id</th>
-            <th scope="col">Client</th>
-            <th scope="col">Cargo</th>
-            <th scope="col">Status</th>
-            <th scope="col"></th>
+<h2> Set Delivered Form</h2>
+<form action="./updateorder" method="post">
+   <% Long a = Long.valueOf(Integer.parseInt(request.getParameter("id")));
+        pageContext.setAttribute("id", a);
+   %>
+      <c:set var="order" value = "${orderBean.getOrder(id)}" />
+ <div class="bg-light rounded h-100 col-sm-12 col-xl-6">
+  <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput"placeholder="Id" name="id" value="${order.id}">
+                        <label for="floatingInput">Id</label>
+                   </div>
+                  <div class="form-floating mb-3">
+                       <input type="text" class="form-control" id="floatingInput" placeholder="Cargo" name="cargo" value="${order.cargo}">
+                       <label for="floatingInput">Cargo</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Start Location" name="startLocation" value="${order.startLocation}">
+                    <label for="floatingInput">Start Location</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                     <input type="text" class="form-control" id="floatingInput" placeholder="Destination" name="destination" value="${order.destination}">
+                     <label for="floatingInput">Destination</label>
+                  </div>
 
-        </tr>
-    </thead>
-<tbody>
-<jsp:useBean id = "orderView"  class = "view.OrderView" />
+                  <div class="form-floating mb-3">
+                     <select class="form-control" name="status">
+                         <option value="delivered" selected>Delivered</option>
+                              </select>
+                       <label for="floatingInput">Status</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="floatingInput" placeholder="Customer" name="customerId" value="${order.customer.id}">
+                             <option value="none" selected disabled hidden>Customer Id</option>
+                         <label for="floatingInput">Customer</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="floatingInput" placeholder="Driver" name="driverId" value="${order.driver.id}">
+                        <option value="none" selected disabled hidden>Driver Id</option>
+                         <label for="floatingInput">Driver</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="floatingInput" placeholder="Vehicle" name="vehicleId" value="${order.vehicle.id}">
+                         <option value="none" selected disabled hidden>Vehicle Id</option>
+                           <label for="floatingInput">Vehicle</label>
+                  </div>
+     </div>
+     <button type="submit" class="btn btn-success">Submit</button>
 
-   <c:set var="order" value = "${orderView.getOrder(id)}" />    <tr>
-    <td scope="row">${order.id}</td>
-    <td scope="row">${order.customer.firstName}</td>
-    <td scope="row">${order.cargo}</td>
-    <td scope="row">${order.status}</td>
-    <td scope="row"> <a href="./updateorder.jsp?id=${order.id}"><button type="submit" class="btn btn-success">Edit</button></a></a>   | <a href="./deleteorder?id=${order.id}"><button type="submit" class="btn btn-danger">Delete</button></a></a> </td>
+  </form>
 
-    <td scope="row"> <a href="./setactive.jsp?id=${order.id}"><button type="submit" class="btn btn-success">Active</button></a></td>
-    </tr>
-    </c:forEach>
-</tbody>
-</table>
 
+ <%
+     String customerError = (String) application.getAttribute("addVehicleError");
+     if (customerError != null && !customerError.equals("")) {
+ %>
+     <span style="color:red"> ${applicationScope.addVehicleError} </span><br/>
+ <% } %>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-
-<jsp:include page="javascriptlibs.jsp"/>
-</body></html>
+ </div>
+<cft:Footer>
+     </cft:Footer>
